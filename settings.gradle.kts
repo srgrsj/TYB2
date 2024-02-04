@@ -15,3 +15,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "TYB2"
 include(":app")
+include(":data")
+include(":presentation")
+include(":domain")
