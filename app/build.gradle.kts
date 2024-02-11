@@ -1,6 +1,11 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-kapt")
+    id("com.google.gms.google-services")
+    id("com.google.dagger.hilt.android")
+    id("kotlin-parcelize")
+    id("com.google.firebase.crashlytics")
 }
 
 android {
@@ -68,4 +73,41 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+
+    //Time picker
+//    implementation("com.github.commandiron:WheelPickerCompose:1.1.11")
+
+    //Videos
+    implementation("io.sanghun:compose-video:1.1.1")
+    implementation("com.google.android.exoplayer:exoplayer:2.18.7")
+    implementation("com.google.android.exoplayer:extension-mediasession:2.18.7")
+
+    //Gson
+    implementation("com.google.code.gson:gson:2.10.1")
+
+    // Ktor
+    implementation("io.ktor:ktor-client-android:2.2.4")
+    implementation("io.ktor:ktor-client-core:2.2.4")
+    implementation("io.ktor:ktor-client-json:2.2.4")
+    implementation("io.ktor:ktor-client-serialization:2.2.4")
+    implementation("io.ktor:ktor-client-serialization-jvm:2.2.4")
+
+    // OpenAI
+    implementation("com.aallam.openai:openai-client:3.0.0")
+
+    // FireBase
+    implementation("com.google.firebase:firebase-storage-ktx:20.1.0")
+    implementation("com.google.firebase:firebase-database-ktx:20.1.0")
+    implementation("com.google.firebase:firebase-auth-ktx:21.3.0")
+    implementation("com.google.firebase:firebase-crashlytics-ktx:18.3.2")
+    implementation("com.google.firebase:firebase-analytics-ktx:21.2.0")
+
+    //Hilt
+    implementation("com.google.dagger:hilt-android:2.48")
+    kapt("com.google.dagger:hilt-compiler:2.48")
+    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
 }
+
+//kapt {
+//    correctErrorTypes true
+//}
