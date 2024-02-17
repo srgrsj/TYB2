@@ -105,7 +105,20 @@ dependencies {
     //Hilt
     implementation("com.google.dagger:hilt-android:2.48")
     kapt("com.google.dagger:hilt-compiler:2.48")
-    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
+    implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
+
+    //Coil
+    implementation("io.coil-kt:coil-compose:2.2.2")
+    implementation("io.coil-kt:coil-svg:2.2.2")
+
+    //Shapes
+    implementation("androidx.graphics:graphics-shapes:1.0.0-alpha04")
+
+    //AnimatedNavigation
+    implementation("com.google.accompanist:accompanist-navigation-animation:0.16.1")
+
+    //Preview
+    implementation("androidx.compose.ui:ui-tooling-preview:1.6.1")
 }
 
 //kapt {

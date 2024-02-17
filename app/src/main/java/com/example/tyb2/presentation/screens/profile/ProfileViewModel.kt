@@ -1,4 +1,4 @@
-package com.example.tyb2.presentation.screens.account
+package com.example.tyb2.presentation.screens.profile
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -9,7 +9,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class AccountScreenViewModel @Inject constructor(
+class ProfileViewModel @Inject constructor(
     private val userUseCase: UserUseCase,
 
     ) : ViewModel() {

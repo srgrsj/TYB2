@@ -19,3 +19,5 @@ data class Workout(
 enum class WorkoutGenerationType {
     AUTHOR, USER, GPT
 }
+
+

@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-open class ScreensUsingWorkoutViewModel @Inject constructor(
+open class WorkoutsViewModel @Inject constructor(
     private val workoutUseCase: WorkoutUseCase
 ) : ViewModel() {
     var workoutToDelete: Workout? = null

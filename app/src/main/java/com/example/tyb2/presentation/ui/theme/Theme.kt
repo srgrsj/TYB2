@@ -21,6 +21,8 @@ private val DarkColorScheme = darkColorScheme(
     secondary = secondaryDark,
     onPrimary = onPrimaryDark,
     onSecondary = onSecondaryDark,
+    background = backgroundDark,
+    onBackground = onBackgroundDark
 )
 
 val lightColorScheme = lightColorScheme(
@@ -28,6 +30,8 @@ val lightColorScheme = lightColorScheme(
     secondary = secondary,
     onPrimary = onPrimary,
     onSecondary = onSecondary,
+    background = background,
+    onBackground = onBackground
 
 //    tertiary =
 
@@ -47,7 +51,7 @@ private val LightColorScheme = lightColorScheme
 fun TYB2Theme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
+    dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
@@ -58,13 +62,15 @@ fun TYB2Theme(
 
         darkTheme -> DarkColorScheme
         else -> LightColorScheme
+//        else -> DarkColorScheme
     }
     val view = LocalView.current
     if (!view.isInEditMode) {
         SideEffect {
             val window = (view.context as Activity).window
             window.statusBarColor = colorScheme.primary.toArgb()
-            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = darkTheme
+            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = !darkTheme
+
         }
     }
 

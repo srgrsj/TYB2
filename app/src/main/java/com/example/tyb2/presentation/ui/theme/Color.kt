@@ -2,21 +2,26 @@ package com.example.tyb2.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val Purple80 = Color(0xFFD0BCFF)
-val PurpleGrey80 = Color(0xFFCCC2DC)
-val Pink80 = Color(0xFFEFB8C8)
-
-val Purple40 = Color(0xFF6650a4)
-val PurpleGrey40 = Color(0xFF625b71)
-val Pink40 = Color(0xFF7D5260)
-
-
-val onPrimary = Color(0xFF9CECE3)
-val primary = Color(0xFF14151A)
+val primary = Color(0xFFF8F8F8)
+val onPrimary = Color(0xFF171717)
 val secondary = Color(0xFF343948)
 val onSecondary = Color(0xFFD5D6DA)
+//val background = Color(0xFFEFEEF4)
+val background = Color(0xFFefeef5)
+val onBackground = Color(0xFFF8F8F8)
 
-val onPrimaryDark = Color(0xFF9CECE3)
-val primaryDark = Color(0xFF14151A)
-val secondaryDark = Color(0xFF343948)
+
+val primaryDark = Color(0xFF171717)
+val onPrimaryDark = Color(0xFFF8F8F8)
+val secondaryDark = Color(0xFF626663)
 val onSecondaryDark = Color(0xFFD5D6DA)
+val backgroundDark = Color(0xFF000000)
+val onBackgroundDark = Color(0xFF171717)
+
+
+val redColor = Color(0XFFF75757)
+val purpleColor = Color(0XFF9A6CE0)
+val greenColor = Color(0XFF57BB84)
+val blueColor = Color(0XFF7DC3F2)
+val orangeColor = Color(0XFFF9B65D)
+val yellowColor = Color(0XFFF5EB52)
