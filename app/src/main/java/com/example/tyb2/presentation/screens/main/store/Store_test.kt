@@ -35,6 +35,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.Wallpapers
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.example.tyb2.R
 import com.example.tyb2.presentation.ui.theme.blueColor
 import com.example.tyb2.presentation.ui.theme.greenColor
 import com.example.tyb2.presentation.ui.theme.orangeColor
@@ -224,64 +225,64 @@ fun MusclesBoxSlim(
 
 fun checkMuscleGroup(musclesGroup: MusclesGroup): MusclesType {
     var backgroundColor: Color = Color.Black
-    var image: Int = 12
+    var image: Int = R.drawable.muscles_thoracic
 
         when(musclesGroup) {
             MusclesGroup.THORACIC -> {
                 backgroundColor = redColor
-//                image =
+                image = R.drawable.muscles_thoracic
             }
-
             MusclesGroup.BACK_WIDE -> {
                 backgroundColor = blueColor
+                image = R.drawable.muscles_back_wide
             }
-
             MusclesGroup.BACK_TRAPEZOID -> {
                 backgroundColor = blueColor
+                image = R.drawable.muscles_back_trapezoid
             }
-
             MusclesGroup.ARM_BICEPS -> {
                 backgroundColor = orangeColor
+                image = R.drawable.muscles_arm_biceps
             }
-
             MusclesGroup.ARM_FOREARM -> {
                 backgroundColor = orangeColor
+                image = R.drawable.muscles_arm_forearm
             }
-
             MusclesGroup.ARM_TRICEPS -> {
                 backgroundColor = orangeColor
+                image = R.drawable.muscles_arm_triceps
             }
-
             MusclesGroup.BRACHIAL_BACK -> {
                 backgroundColor = yellowColor
+                image = R.drawable.muscles_brachial_back
             }
-
             MusclesGroup.BRACHIAL_FRONT -> {
                 backgroundColor = yellowColor
+                image = R.drawable.muscles_brachial_front
             }
-
             MusclesGroup.CORE_LATERAL_ABDOMINAL -> {
                 backgroundColor = purpleColor
+                image = R.drawable.muscles_core_lateral_abdominal
             }
-
             MusclesGroup.CORE_LUMBAR -> {
                 backgroundColor = purpleColor
+                image = R.drawable.muscles_core_lumbar
             }
-
             MusclesGroup.CORE_STRAIGHT -> {
                 backgroundColor = purpleColor
+                image = R.drawable.muscles_core_straight
             }
-
             MusclesGroup.LEG_CALF -> {
                 backgroundColor = greenColor
+                image = R.drawable.muscles_leg_calf
             }
-
             MusclesGroup.LEG_QUADRICEPS -> {
                 backgroundColor = greenColor
+                image = R.drawable.muscles_leg_quadriceps
             }
-
             MusclesGroup.LEG_THIGHS -> {
                 backgroundColor = greenColor
+                image = R.drawable.muscles_leg_thighs
             }
         }
     return MusclesType(backgroundColor, image)

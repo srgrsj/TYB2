@@ -109,26 +109,13 @@ fun WorkoutCard(
                     .width(96.dp)
                     .background(MaterialTheme.colorScheme.onPrimary)
             ) {
-
                 Image(
-                    painter = painterResource(id = R.drawable.bottom_field_main_screen_icon),
+                    painter = painterResource(id = R.drawable.muscles_thoracic),
                     contentDescription = "",
                     modifier = Modifier
-                        .padding(
-                            top = 15.dp
-                        )
+                        .padding(top = 15.dp)
+                        .scale(0.5f)
                 )
-
-//                Image(
-//                    painter = painterResource(id = R.drawable.breast),
-//                    contentDescription = "",
-//                    modifier = Modifier
-//                        .scale(4.5f)
-//                        .padding(
-//                            top = 20.dp,
-//                            start = 8.dp
-//                        )
-//                )
 
 
                 Column(
