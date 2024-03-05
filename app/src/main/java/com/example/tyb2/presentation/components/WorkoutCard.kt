@@ -111,7 +111,7 @@ fun WorkoutCard(
             ) {
 
                 Image(
-                    painter = painterResource(id = R.drawable.muscle),
+                    painter = painterResource(id = R.drawable.bottom_field_main_screen_icon),
                     contentDescription = "",
                     modifier = Modifier
                         .padding(

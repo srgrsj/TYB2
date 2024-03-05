@@ -2,12 +2,12 @@ package com.example.tyb2.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
+
 val primary = Color(0xFFF8F8F8)
 val onPrimary = Color(0xFF171717)
-val secondary = Color(0xFF343948)
-val onSecondary = Color(0xFFD5D6DA)
-//val background = Color(0xFFEFEEF4)
-val background = Color(0xFFefeef5)
+val secondary = Color(0xFFD5D6DA)
+val onSecondary = Color(0xFF343948)
+val background = Color(0xFFEFEEF4)
 val onBackground = Color(0xFFF8F8F8)
 
 

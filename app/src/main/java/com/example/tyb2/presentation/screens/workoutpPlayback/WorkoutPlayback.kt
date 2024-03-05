@@ -42,7 +42,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -54,52 +53,58 @@ import com.example.tyb2.domain.workout.model.WorkoutGenerationType
 import com.example.tyb2.presentation.components.ExerciseCard
 import com.example.tyb2.presentation.ui.theme.Typography
 
-@PreviewLightDark
 @Composable
-fun ShedevroWorkout() {
+fun ShedevroWorkout(
+    navController: NavController
+) {
     WorkoutPlayback(
+        navController = navController,
         workout = Workout(
-            "Workout",
-            "some description",
-            4365273,
-            false,
-            WorkoutGenerationType.USER,
-            listOf(
-                Exercise(
-                    "Exercise1",
-                    "some description",
-                    52,
-                    52,
-                    15000,
-                    15000,
-                    ExerciseType.REPETITION,
-                ),
-                Exercise(
-                    "Exercise2",
-                    "some description",
-                    52,
-                    52,
-                    15000,
-                    15000,
-                    ExerciseType.REPETITION,
-                ),
-                Exercise(
-                    "Exercise2",
-                    "some description",
-                    52,
-                    52,
-                    15000,
-                    15000,
-                    ExerciseType.REPETITION,
-                )
-            )
+            title = "Title",
+            description = "Description"
         )
+//        workout = Workout(
+//            "Workout",
+//            "some description",
+//            4365273,
+//            false,
+//            WorkoutGenerationType.USER,
+//            listOf(
+//                Exercise(
+//                    "Exercise1",
+//                    "some description",
+//                    52,
+//                    52,
+//                    15000,
+//                    15000,
+//                    ExerciseType.REPETITION,
+//                ),
+//                Exercise(
+//                    "Exercise2",
+//                    "some description",
+//                    52,
+//                    52,
+//                    15000,
+//                    15000,
+//                    ExerciseType.REPETITION,
+//                ),
+//                Exercise(
+//                    "Exercise2",
+//                    "some description",
+//                    52,
+//                    52,
+//                    15000,
+//                    15000,
+//                    ExerciseType.REPETITION,
+//                )
+//            )
+//        )
     )
 }
 
 @Composable
 fun WorkoutPlayback(
-    navController: NavController? = null,
+    navController: NavController,
     workout: Workout
 ) {
     var isOnPause by remember {
@@ -227,7 +232,6 @@ fun WorkoutPlayback(
                             .background(MaterialTheme.colorScheme.primary)
 
                     ) {}
-
                     Box(
                         modifier = Modifier
                             .padding(top = 40.dp)
@@ -244,7 +248,6 @@ fun WorkoutPlayback(
                             .background(MaterialTheme.colorScheme.primary)
 
                     ) {}
-
                     Box(
                         modifier = Modifier
                             .padding(top = 60.dp)
@@ -262,18 +265,14 @@ fun WorkoutPlayback(
 
                     ) {}
                 }
-
                 Image(
-                    painter = painterResource(id = R.drawable.muscle),
+                    painter = painterResource(id = R.drawable.icon_pause),
                     contentDescription = "",
                     modifier = Modifier
                         .scale(2f)
                         .padding(start = 20.dp)
                 )
-
             }
-
-
             Box(
                 contentAlignment = Alignment.BottomCenter,
                 modifier = Modifier
@@ -286,7 +285,6 @@ fun WorkoutPlayback(
                         durationMillis = 500
                     )
                 )
-
                 Box(
                     contentAlignment = Alignment.Center,
                     modifier = Modifier
@@ -305,11 +303,10 @@ fun WorkoutPlayback(
                         ) {
                             isOnPause = !isOnPause
                         }
-
                 ) {
                     if (isOnPause) {
                         Icon(
-                            painter = painterResource(id = R.drawable.baseline_play_arrow_24),
+                            painter = painterResource(id = R.drawable.icon_play),
                             contentDescription = "",
                             tint = MaterialTheme.colorScheme.onPrimary,
                             modifier = Modifier
@@ -317,19 +314,16 @@ fun WorkoutPlayback(
                         )
                     } else {
                         Icon(
-                            painter = painterResource(id = R.drawable.baseline_pause_24),
+                            painter = painterResource(id = R.drawable.icon_pause),
                             contentDescription = "",
                             tint = MaterialTheme.colorScheme.onPrimary,
                             modifier = Modifier
                                 .scale(2f)
                         )
                     }
-
                 }
-
             }
         }
-
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -338,8 +332,6 @@ fun WorkoutPlayback(
                 Spacer(modifier = Modifier.height(10.dp))
                 ExerciseCard(exercise = it)
             }
-
         }
-
     }
 }
