@@ -17,6 +17,11 @@ import com.example.tyb2.presentation.components.Screen
 import com.example.tyb2.presentation.screens.activity.ActivityScreen
 import com.example.tyb2.presentation.screens.main.MainScreen
 import com.example.tyb2.presentation.screens.profile.ProfileScreen
+import com.example.tyb2.presentation.screens.profile.achievements.AchievementsScreen
+import com.example.tyb2.presentation.screens.profile.body_features.BodyFeaturesScreen
+import com.example.tyb2.presentation.screens.profile.calendar.CalendarScreen
+import com.example.tyb2.presentation.screens.profile.profile_settings.ProfileSettingsScreen
+import com.example.tyb2.presentation.screens.profile.settings.SettingsScreen
 
 @Composable
 fun NavGraph(
@@ -29,13 +34,29 @@ fun NavGraph(
         exitTransition = { ExitTransition.None },
     ) {
         composable(Screen.Main.route) {
-            MainScreen(navController)
-        }
-        composable(Screen.Activity.route) {
+//            MainScreen(navController)
             ProfileScreen(navController)
         }
-        composable(Screen.Profile.route) {
+        composable(Screen.Activity.route) {
             ActivityScreen(navController)
+        }
+        composable(Screen.Profile.route) {
+            ProfileScreen(navController)
+        }
+        composable(Screen.ACHIEVEMENT_ROUTE) {
+            AchievementsScreen(navController)
+        }
+        composable(Screen.BODY_FEATURES_ROUTE) {
+            BodyFeaturesScreen(navController)
+        }
+        composable(Screen.CALENDAR_ROUTE) {
+            CalendarScreen(navController)
+        }
+        composable(Screen.PROFILE_SETTINGS) {
+            ProfileSettingsScreen(navController)
+        }
+        composable(Screen.SETTINGS) {
+            SettingsScreen(navController)
         }
     }
 }

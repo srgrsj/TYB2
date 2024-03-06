@@ -266,7 +266,7 @@ fun WorkoutPlayback(
                     ) {}
                 }
                 Image(
-                    painter = painterResource(id = R.drawable.icon_pause),
+                    painter = painterResource(id = R.drawable.muscles_thoracic),
                     contentDescription = "",
                     modifier = Modifier
                         .scale(2f)

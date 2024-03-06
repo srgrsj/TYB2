@@ -37,13 +37,16 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
 import com.example.tyb2.R
 import com.example.tyb2.presentation.components.BottomNavigationBar
 import com.example.tyb2.presentation.components.Bubbles
+import com.example.tyb2.presentation.components.Screen
 import com.example.tyb2.presentation.components.curves.Curve1
 import com.example.tyb2.presentation.components.curves.Curve2
 import com.example.tyb2.presentation.components.curves.Curve3
@@ -62,11 +65,11 @@ fun ProfileScreen(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .padding(bottom = 46.dp)
+            .padding(bottom = 52.dp)
     ) {
         Curve1(
             color = MaterialTheme.colorScheme.onPrimary,
-            scaleFactor = 4f,
+            scaleFactor = 3f,
             x = 30.dp,
             y = 750.dp,
             angle = 70f,
@@ -74,7 +77,7 @@ fun ProfileScreen(
         )
         Curve2(
             color = MaterialTheme.colorScheme.onPrimary,
-            scaleFactor = 5f,
+            scaleFactor = 3f,
             x = 100.dp,
             y = 250.dp,
             angle = -70f,
@@ -90,7 +93,7 @@ fun ProfileScreen(
         )
         Curve1(
             color = MaterialTheme.colorScheme.onPrimary,
-            scaleFactor = 5f,
+            scaleFactor = 3f,
             x = -280.dp,
             y = -280.dp,
             angle = 180f,
@@ -145,7 +148,7 @@ fun ProfileScreen(
                     //                contentScale = ContentScale.Fit
                     //            )
                     Image(
-                        painter = painterResource(id = R.drawable.collection_icon),
+                        painter = painterResource(id = R.drawable.pic),
                         contentDescription = "Avatar",
                         contentScale = ContentScale.Crop,
                         modifier = Modifier
@@ -175,10 +178,10 @@ fun ProfileScreen(
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
                     ProfileNavigationRow(
-                        icon = R.drawable.collection_icon,
+                        icon = R.drawable.icon_achievements,
                         title = "Достижения"
                     ) {
-                        //TODO Навигацияя
+                        navController.navigate(Screen.ACHIEVEMENT_ROUTE)
                     }
                     Box(
                         modifier = Modifier
@@ -194,16 +197,16 @@ fun ProfileScreen(
                             verticalArrangement = Arrangement.spacedBy(2.dp)
                         ) {
                             ProfileNavigationRow(
-                                icon = R.drawable.collection_icon,
+                                icon = R.drawable.icon_body_features,
                                 title = "Особенности тела"
                             ) {
-                                //TODO Навигация
+                                navController.navigate(Screen.BODY_FEATURES_ROUTE)
                             }
                             ProfileNavigationRow(
-                                icon = R.drawable.collection_icon,
+                                icon = R.drawable.icon_calendar,
                                 title = "Календарь тренировок"
                             ) {
-                                //TODO Навигация
+                                navController.navigate(Screen.CALENDAR_ROUTE)
                             }
                         }
                     }
@@ -221,16 +224,16 @@ fun ProfileScreen(
                             verticalArrangement = Arrangement.spacedBy(2.dp)
                         ) {
                             ProfileNavigationRow(
-                                icon = R.drawable.collection_icon,
+                                icon = R.drawable.icon_settings,
                                 title = "Настройки приложения"
                             ) {
-                                //TODO Навигация
+                                navController.navigate(Screen.SETTINGS)
                             }
                             ProfileNavigationRow(
-                                icon = R.drawable.collection_icon,
+                                icon = R.drawable.bottom_profile_screen_icon,
                                 title = "Параметры профиля"
                             ) {
-                                //TODO Навигация
+                                navController.navigate(Screen.PROFILE_SETTINGS)
                             }
                         }
                     }
@@ -240,27 +243,28 @@ fun ProfileScreen(
                 modifier = Modifier
                     .fillMaxSize()
             ) {
-                Box(modifier = Modifier.offset(340.dp, 32.dp)) {
-                    Bubbles(color = greenColor, size = 128.dp)
+                Box(modifier = Modifier.offset(340.dp, 52.dp)) {
+                    Bubbles(color = greenColor, size = 108.dp)
                 }
-                Box(modifier = Modifier.offset(288.dp, 108.dp)) {
-                    Bubbles(color = redColor, size = 168.dp)
+                Box(modifier = Modifier.offset(288.dp, 128.dp)) {
+                    Bubbles(color = redColor, size = 148.dp)
                 }
-                Box(modifier = Modifier.offset(-30.dp, 32.dp)) {
-                    Bubbles(color = orangeColor, size = 92.dp)
+                Box(modifier = Modifier.offset(-30.dp, 52.dp)) {
+                    Bubbles(color = orangeColor, size = 72.dp)
                 }
-                Box(modifier = Modifier.offset(-58.dp, 78.dp)) {
-                    Bubbles(color = purpleColor, size = 192.dp)
+                Box(modifier = Modifier.offset(-58.dp, 98.dp)) {
+                    Bubbles(color = purpleColor, size = 172.dp)
                 }
-                Box(modifier = Modifier.offset(92.dp, 120.dp)) {
-                    Bubbles(color = blueColor, size = 192.dp)
+                Box(modifier = Modifier.offset(92.dp, 140.dp)) {
+                    Bubbles(color = blueColor, size = 172.dp)
                 }
-                Box(modifier = Modifier.offset(220.dp, 120.dp)) {
-                    Bubbles(color = yellowColor, size = 148.dp)
+                Box(modifier = Modifier.offset(220.dp, 140.dp)) {
+                    Bubbles(color = yellowColor, size = 128.dp)
                 }
             }
         }
     }
+
 }
 
 
@@ -290,7 +294,7 @@ fun ProfileNavigationRow(
                 contentDescription = null,
                 modifier = Modifier
                     .clip(shape = CircleShape)
-                    .size(28.dp),
+                    .size(24.dp),
                 tint = MaterialTheme.colorScheme.onPrimary
             )
             Text(
@@ -302,51 +306,14 @@ fun ProfileNavigationRow(
             Spacer(modifier = Modifier.weight(1f))
             Icon(
                 painterResource(
-                    id = R.drawable.collection_icon
+                    id = R.drawable.icon_right_arrow
                 ),
                 contentDescription = null,
                 modifier = Modifier
                     .clip(shape = CircleShape)
-                    .size(28.dp),
+                    .size(24.dp),
                 tint = MaterialTheme.colorScheme.onPrimary
             )
         }
     }
-}
-
-@Composable
-fun PhotoSelectorButton() {
-    var selectedImage by remember {
-        mutableStateOf<Uri?>(null)
-    }
-
-    val singlePhotoPickerLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.PickVisualMedia(),
-        onResult = { uri -> selectedImage = uri }
-    )
-
-
-    fun launchPhotoPicker() {
-        singlePhotoPickerLauncher.launch(
-            PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
-        )
-    }
-    Button(onClick = {
-        launchPhotoPicker()
-    }) {
-        Text(
-            text = "Select a picture"
-        )
-    }
-    ImageLayoutView(selectedImage = selectedImage)
-}
-
-@Composable
-fun ImageLayoutView(selectedImage: Uri?) {
-    AsyncImage(
-        model = selectedImage,
-        contentDescription = null,
-        modifier = Modifier.fillMaxWidth(),
-        contentScale = ContentScale.Fit
-    )
 }
