@@ -32,5 +32,6 @@ sealed class Screen(
         const val CALENDAR_ROUTE = "calendar_screen"
         const val PROFILE_SETTINGS = "profile_settings_screen"
         const val SETTINGS = "settings_screen"
+        const val STORE = "store_screen"
     }
 }

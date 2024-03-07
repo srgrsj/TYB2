@@ -16,6 +16,7 @@ import com.example.tyb2.R
 import com.example.tyb2.presentation.components.Screen
 import com.example.tyb2.presentation.screens.activity.ActivityScreen
 import com.example.tyb2.presentation.screens.main.MainScreen
+import com.example.tyb2.presentation.screens.main.store.StoreScreen
 import com.example.tyb2.presentation.screens.profile.ProfileScreen
 import com.example.tyb2.presentation.screens.profile.achievements.AchievementsScreen
 import com.example.tyb2.presentation.screens.profile.body_features.BodyFeaturesScreen
@@ -34,8 +35,8 @@ fun NavGraph(
         exitTransition = { ExitTransition.None },
     ) {
         composable(Screen.Main.route) {
-//            MainScreen(navController)
-            ProfileScreen(navController)
+            MainScreen(navController)
+//            ProfileScreen(navController)
         }
         composable(Screen.Activity.route) {
             ActivityScreen(navController)
@@ -57,6 +58,9 @@ fun NavGraph(
         }
         composable(Screen.SETTINGS) {
             SettingsScreen(navController)
+        }
+        composable(Screen.STORE){
+            StoreScreen()
         }
     }
 }

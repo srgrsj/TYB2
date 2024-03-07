@@ -113,8 +113,8 @@ fun WorkoutCard(
                     painter = painterResource(id = R.drawable.muscles_thoracic),
                     contentDescription = "",
                     modifier = Modifier
-                        .padding(top = 15.dp)
-                        .scale(0.5f)
+                        .padding(top = 30.dp, start = 5.dp)
+                        .scale(1.5f)
                 )
 
 
