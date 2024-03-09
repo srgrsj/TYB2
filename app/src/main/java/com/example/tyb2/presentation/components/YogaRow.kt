@@ -2,6 +2,7 @@ package com.example.tyb2.presentation.components
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -44,26 +45,26 @@ fun YogaRow() {
         val color = colors[colorIndex]
         Box(
             modifier = Modifier
-                .fillMaxSize(),
+                .fillMaxSize()
+                .height(56.dp),
             contentAlignment = Alignment.Center
         ) {
-            Button(onClick = {
-                //    TODO() Navigation
-            }) {
-                Card(
-                    modifier = Modifier
-                        .padding(horizontal = 8.dp),
-                    shape = RoundedCornerShape(10.dp),
-                    colors = CardDefaults.cardColors(
-                        containerColor = color
-                    )
+            Card(
+                modifier = Modifier
+                    .height(56.dp)
+                    .padding(horizontal = 8.dp),
+                shape = RoundedCornerShape(10.dp),
+                colors = CardDefaults.cardColors(
+                    containerColor = color
+                )
+            ) {
+                Box(
+                    modifier = Modifier.fillMaxSize().clickable {
+                        // TODO() Navigation to yoga
+                    },
+                    contentAlignment = Alignment.Center
                 ) {
-                    Box(
-                        modifier = Modifier.fillMaxSize(),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Text(text = "Page $colorIndex", color = redColor)
-                    }
+                    Text(text = "Page $colorIndex", color = redColor)
                 }
             }
         }
