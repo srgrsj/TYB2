@@ -1,7 +1,5 @@
 package com.example.tyb2.presentation.screens.main
 
-import android.annotation.SuppressLint
-import android.content.res.Configuration
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.VectorConverter
 import androidx.compose.animation.core.animateFloat
@@ -47,16 +45,13 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.drawscope.translate
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.Wallpapers
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.tyb2.R
 import com.example.tyb2.presentation.components.Screen
-import com.example.tyb2.presentation.components.TestShedevroCard
-import com.example.tyb2.presentation.screens.main.store.StoreViewModel
+import com.example.tyb2.presentation.components.workoutCards.TestShedevroCard
 import com.example.tyb2.presentation.ui.theme.Typography
 import com.example.tyb2.presentation.ui.theme.blueColor
 import com.example.tyb2.presentation.ui.theme.greenColor

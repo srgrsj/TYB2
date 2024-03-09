@@ -84,6 +84,13 @@ val Typography = Typography(
         fontWeight = FontWeight.ExtraBold,
         fontSize = 32.sp,
         letterSpacing = 0.5.sp
+    ),
+
+    headlineMedium = TextStyle(
+        fontFamily = robotoFamily,
+        fontWeight = FontWeight.ExtraBold,
+        fontSize = 28.sp,
+        letterSpacing = 0.5.sp
     )
 
 
