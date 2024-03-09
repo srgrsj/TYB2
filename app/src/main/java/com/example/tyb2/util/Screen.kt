@@ -1,4 +1,4 @@
-package com.example.tyb2.presentation.components
+package com.example.tyb2.util
 
 import com.example.tyb2.R
 
@@ -33,5 +33,8 @@ sealed class Screen(
         const val PROFILE_SETTINGS = "profile_settings_screen"
         const val SETTINGS = "settings_screen"
         const val STORE = "store_screen"
+        const val SIGN_UP = "sign_up_screen"
+        const val SIGN_IN = "sign_in_screen"
+        const val ONBOARDING = "onboarding_screen"
     }
 }

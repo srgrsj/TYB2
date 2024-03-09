@@ -50,7 +50,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.tyb2.R
-import com.example.tyb2.presentation.components.Screen
+import com.example.tyb2.util.Screen
 import com.example.tyb2.presentation.components.workoutCards.TestShedevroCard
 import com.example.tyb2.presentation.ui.theme.Typography
 import com.example.tyb2.presentation.ui.theme.blueColor

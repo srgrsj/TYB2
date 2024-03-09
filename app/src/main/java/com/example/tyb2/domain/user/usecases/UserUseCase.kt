@@ -4,5 +4,7 @@ data class UserUseCase(
     val addUserUseCase: AddUserUseCase,
     val userSignInUseCase: UserSignInUseCase,
     val userSignUpUseCase: UserSignUpUseCase,
-    val userSignOutUseCase: UserSignOutUseCase
+    val userSignOutUseCase: UserSignOutUseCase,
+    val readOnboardingIsShow: ReadOnboardingIsShow,
+    val saveOnboardingIsShow: SaveOnboardingIsShow
 )

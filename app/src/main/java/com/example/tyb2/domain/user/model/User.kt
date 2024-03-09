@@ -6,5 +6,5 @@ data class User(
     val email: String,
     val id: String = UUID.randomUUID().toString()
 //    val avatar:
-
+//    val categories:
 )

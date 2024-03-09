@@ -29,7 +29,7 @@ import com.example.tyb2.presentation.ui.theme.redColor
 @Composable
 fun Modifier.animatedBorder(
     brushColors: List<Color>,
-    backgroundColor: Color,
+    backgroundColor: Color = Color.Transparent,
     shape: Shape = RectangleShape,
     borderWidth: Dp = 1.dp,
     animationDurationInMillis: Int = 1000,

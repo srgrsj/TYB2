@@ -14,5 +14,4 @@ class DataModule {
     @Singleton
     @Provides
     fun provideDatabase() = Firebase.database.reference
-
 }

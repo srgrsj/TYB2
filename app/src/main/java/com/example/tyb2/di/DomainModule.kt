@@ -8,6 +8,8 @@ import com.example.tyb2.domain.exercise.usecase.DeleteExerciseUseCase
 import com.example.tyb2.domain.exercise.usecase.ExerciseUseCase
 import com.example.tyb2.domain.exercise.usecase.GetExercisesUseCase
 import com.example.tyb2.domain.user.usecases.AddUserUseCase
+import com.example.tyb2.domain.user.usecases.ReadOnboardingIsShow
+import com.example.tyb2.domain.user.usecases.SaveOnboardingIsShow
 import com.example.tyb2.domain.user.usecases.UserSignInUseCase
 import com.example.tyb2.domain.user.usecases.UserSignOutUseCase
 import com.example.tyb2.domain.user.usecases.UserSignUpUseCase
@@ -48,6 +50,8 @@ class DomainModule {
             addUserUseCase = AddUserUseCase(userRepositoryFirebaseImpl),
             userSignInUseCase = UserSignInUseCase(userRepositoryFirebaseImpl),
             userSignOutUseCase = UserSignOutUseCase(userRepositoryFirebaseImpl),
-            userSignUpUseCase = UserSignUpUseCase(userRepositoryFirebaseImpl)
+            userSignUpUseCase = UserSignUpUseCase(userRepositoryFirebaseImpl),
+            readOnboardingIsShow = ReadOnboardingIsShow(userRepositoryFirebaseImpl),
+            saveOnboardingIsShow = SaveOnboardingIsShow(userRepositoryFirebaseImpl)
         )
 }

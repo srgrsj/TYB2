@@ -11,4 +11,6 @@ interface UserRepository {
     fun loginUser(email: String, password: String): Flow<Resource<AuthResult>>
     fun registerUser(email: String, password: String): Flow<Resource<AuthResult>>
     fun singOutUser()
+    suspend fun saveOnboardingIsShow()
+    fun readOnboardingIsShow(): Flow<Boolean>
 }
