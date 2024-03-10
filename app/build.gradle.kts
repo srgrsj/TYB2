@@ -125,6 +125,13 @@ dependencies {
 
     // DataStore
     implementation("androidx.datastore:datastore-preferences:1.0.0")
+
+    // Glance
+    implementation("androidx.glance:glance-appwidget:1.0.0")
+    implementation("androidx.glance:glance-material3:1.0.0")
+
+    //Google Health
+    implementation("com.google.android.libraries.healthdata:health-data-api:1.0.0-alpha01")
 }
 
 //kapt {

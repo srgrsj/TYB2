@@ -61,7 +61,7 @@ import com.example.tyb2.presentation.ui.theme.yellowColor
 @Preview
 @Composable
 fun StorePreview() {
-    StoreScreen()
+//    StoreScreen()
 }
 
 @Composable
