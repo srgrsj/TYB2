@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.ButtonDefaults
@@ -32,7 +31,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -40,16 +39,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
 import com.example.tyb2.R
 import com.example.tyb2.presentation.components.Bubbles
 import com.example.tyb2.presentation.components.animations.AnimatedFieldBrush
 import com.example.tyb2.presentation.components.animations.animatedBorder
 import com.example.tyb2.presentation.components.curves.Curve4
-import com.example.tyb2.presentation.ui.theme.TYB2Theme
 import com.example.tyb2.presentation.ui.theme.blueColor
 import com.example.tyb2.presentation.ui.theme.greenColor
 import com.example.tyb2.presentation.ui.theme.orangeColor
@@ -57,14 +55,15 @@ import com.example.tyb2.presentation.ui.theme.purpleColor
 import com.example.tyb2.presentation.ui.theme.redColor
 import com.example.tyb2.presentation.ui.theme.robotoFamily
 import com.example.tyb2.presentation.ui.theme.yellowColor
+import com.example.tyb2.util.Screen
 
 
 // Вход
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun SignInScreen(
-//    navController: NavHostController,
-    logInViewModel: LogInViewModel = hiltViewModel()
+    navController: NavHostController,
+    signInViewModel: SignInViewModel = hiltViewModel()
 ) {
     // TODO error color(if authorization failed)
     var passwordVisible by remember { mutableStateOf(false) }
@@ -96,15 +95,8 @@ fun SignInScreen(
                 Spacer(modifier = Modifier.size(256.dp))
                 OutlinedTextField(
                     value = userEmail,
-                    onValueChange = {userEmail = it},
+                    onValueChange = { userEmail = it },
                     textStyle = MaterialTheme.typography.bodyMedium,
-                    label = {
-                        Text(
-                            text = stringResource(id = R.string.enter_email),
-                            style = MaterialTheme.typography.labelSmall,
-                            color = MaterialTheme.colorScheme.primary
-                        )
-                    },
                     placeholder = {
                         Text(
                             text = "Email",
@@ -112,11 +104,7 @@ fun SignInScreen(
                             color = MaterialTheme.colorScheme.primary.copy(0.5f)
                         )
                     },
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
-                    shape = RoundedCornerShape(10.dp),
                     colors = OutlinedTextFieldDefaults.colors(
-                        focusedLabelColor = MaterialTheme.colorScheme.onPrimary,
-                        unfocusedLabelColor = MaterialTheme.colorScheme.primary,
                         focusedContainerColor = MaterialTheme.colorScheme.onPrimary,
                         unfocusedContainerColor = MaterialTheme.colorScheme.onPrimary,
                         focusedTextColor = MaterialTheme.colorScheme.primary,
@@ -124,21 +112,16 @@ fun SignInScreen(
                         focusedBorderColor = MaterialTheme.colorScheme.primary,
                         unfocusedBorderColor = MaterialTheme.colorScheme.background,
                     ),
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
+                    shape = RoundedCornerShape(10.dp),
                     modifier = Modifier
                         .width(320.dp)
                 )
                 Spacer(modifier = Modifier.size(8.dp))
                 OutlinedTextField(
                     value = userPassword,
-                    onValueChange = {userPassword = it},
+                    onValueChange = { userPassword = it },
                     textStyle = MaterialTheme.typography.bodyMedium,
-                    label = {
-                        Text(
-                            text = stringResource(id = R.string.enter_password),
-                            style = MaterialTheme.typography.labelSmall,
-                            color = MaterialTheme.colorScheme.primary
-                        )
-                    },
                     placeholder = {
                         Text(
                             text = "Password",
@@ -165,8 +148,6 @@ fun SignInScreen(
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
                     shape = RoundedCornerShape(10.dp),
                     colors = OutlinedTextFieldDefaults.colors(
-                        focusedLabelColor = MaterialTheme.colorScheme.onPrimary,
-                        unfocusedLabelColor = MaterialTheme.colorScheme.primary,
                         focusedContainerColor = MaterialTheme.colorScheme.onPrimary,
                         unfocusedContainerColor = MaterialTheme.colorScheme.onPrimary,
                         focusedTextColor = MaterialTheme.colorScheme.primary,
@@ -192,7 +173,7 @@ fun SignInScreen(
                         .animatedBorder(
                             brushColors = listOf(redColor, purpleColor),
 
-                        )
+                            )
                 ) {
                     Text(
                         text = "Log in",
@@ -212,7 +193,7 @@ fun SignInScreen(
                         style = MaterialTheme.typography.bodyMedium
                     )
                     TextButton(onClick = {
-                        //TODO navigate to SignUpScreen
+                        navController.navigate(Screen.SIGN_UP)
                     }) {
                         Text(
                             text = "Register",
@@ -251,20 +232,16 @@ fun SignInScreen(
                 Box(modifier = Modifier.offset(220.dp, 90.dp)) {
                     Bubbles(color = yellowColor, size = 128.dp)
                 }
-                Box(modifier = Modifier
-                    .size(64.dp)
-                    .clip(CircleShape)
-                    .background(MaterialTheme.colorScheme.onPrimary))
             }
         }
     }
 }
 
 
-@Preview
-@Composable
-fun PreviewLogIn() {
-    TYB2Theme {
-        SignInScreen()
-    }
-}
+//@Preview
+//@Composable
+//fun PreviewLogIn() {
+//    TYB2Theme {
+//        SignInScreen()
+//    }
+//}

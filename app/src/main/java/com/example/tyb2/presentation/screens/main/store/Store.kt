@@ -3,13 +3,14 @@ package com.example.tyb2.presentation.screens.main.store
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,6 +18,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
+import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
@@ -39,10 +42,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import com.example.tyb2.R
-import com.example.tyb2.presentation.components.workoutCards.TestShedevroCardBig
-import com.example.tyb2.presentation.components.workoutCards.TestShedevroCardMid
-import com.example.tyb2.presentation.components.workoutCards.TestShedevroCardSlim
+import com.example.tyb2.domain.workout.model.Workout
+import com.example.tyb2.presentation.components.workoutCards.BigWorkoutCard
+import com.example.tyb2.presentation.components.workoutCards.MidWorkoutCard
+import com.example.tyb2.presentation.components.workoutCards.SlimWorkoutCard
 import com.example.tyb2.presentation.ui.theme.Typography
 import com.example.tyb2.presentation.ui.theme.blueColor
 import com.example.tyb2.presentation.ui.theme.greenColor
@@ -60,8 +66,8 @@ fun StorePreview() {
 
 @Composable
 fun StoreScreen(
-//    navController: NavController,
-//    viewModel: StoreViewModel = hiltViewModel(),
+    navController: NavController,
+    viewModel: StoreViewModel = hiltViewModel(),
 ) {
     var isRedSelected by remember { mutableStateOf(false) }
     var isOrangeSelected by remember { mutableStateOf(false) }
@@ -75,7 +81,6 @@ fun StoreScreen(
         modifier = Modifier
             .fillMaxSize()
             .padding(bottom = 52.dp)
-            .verticalScroll(rememberScrollState())
     ) {
 
         Box(
@@ -116,9 +121,20 @@ fun StoreScreen(
             }
         }
 
+        var isFilterBoxOpen by remember {
+            mutableStateOf(true)
+        }
+        val filterBoxHeight by animateDpAsState(
+            targetValue = if (isFilterBoxOpen) 270.dp else 0.dp,
+            label = "",
+            animationSpec = tween(
+                durationMillis = 500
+            )
+
+        )
         Box(
             modifier = Modifier
-                .height(240.dp)
+                .height(filterBoxHeight)
                 .width(350.dp)
         ) {
             Column(
@@ -307,21 +323,96 @@ fun StoreScreen(
         }
 
         Row(
-            horizontalArrangement = Arrangement.SpaceAround,
-            modifier = Modifier.fillMaxWidth()
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Start,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 5.dp)
+                .clickable {
+                    isFilterBoxOpen = !isFilterBoxOpen
+                }
         ) {
-            TestShedevroCardBig()
-            TestShedevroCardMid()
-        }
-        Spacer(modifier = Modifier.height(20.dp))
-        Row(
-            horizontalArrangement = Arrangement.SpaceAround,
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            TestShedevroCardBig()
-            TestShedevroCardSlim()
+
+            Text(
+                text = "Фильтр",
+                color = MaterialTheme.colorScheme.onPrimary,
+                style = TextStyle(
+                    fontFamily = robotoFamily,
+                    fontWeight = FontWeight.ExtraBold,
+                    fontSize = 32.sp,
+                    letterSpacing = 0.5.sp
+                )
+            )
+
+            Icon(
+                painter = painterResource(id = R.drawable.icon_sort),
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.onPrimary,
+                modifier = Modifier
+                    .scale(1.2f)
+                    .padding(start = 5.dp)
+            )
+
         }
 
+        GridPad(
+            listOf(
+                Workout("Title"),
+                Workout("Title"),
+                Workout("Title"),
+                Workout("Title"),
+                Workout("Title"),
+                Workout("Title"),
+                Workout("Title"),
+                Workout("Title"),
+                Workout("Title"),
+                Workout("Title"),
+                Workout("Title"),
+                Workout("Title"),
+                Workout("Title"),
+                Workout("Title"),
+                Workout("Title"),
+                Workout("Title"),
+                Workout("Title"),
+            )
+        )
+
+
+    }
+}
+
+
+@Composable
+fun GridPad(
+    workoutsList: List<Workout>
+) {
+    LazyVerticalStaggeredGrid(
+        columns = StaggeredGridCells.Fixed(2),
+//        modifier = Modifier.fillMaxSize(),
+        contentPadding = PaddingValues(
+            horizontal = 4.dp,
+            vertical = 12.dp
+        ),
+        verticalItemSpacing = 8.dp,
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+    ) {
+        items(workoutsList.size) { index ->
+            when {
+                (index % 6 == 0) or (index % 6 == 4) -> {
+                    MidWorkoutCard(workout = workoutsList[index])
+                }
+
+                (index % 6 == 1) or (index % 6 == 2) -> {
+                    //? Большая карточка
+                    BigWorkoutCard(workout = workoutsList[index])
+                }
+
+                (index % 6 == 5) or (index % 6 == 3) -> {
+                    //? Маленькая карточка
+                    SlimWorkoutCard(workout = workoutsList[index])
+                }
+            }
+        }
     }
 }
 
@@ -337,8 +428,8 @@ fun SelectableCircle(
         animationSpec = spring(
             dampingRatio = Spring.DampingRatioNoBouncy,
             stiffness = Spring.StiffnessMedium,
-            
-        )
+
+            )
     )
 
     Box(
@@ -355,3 +446,5 @@ fun SelectableCircle(
 
     ) {}
 }
+
+
