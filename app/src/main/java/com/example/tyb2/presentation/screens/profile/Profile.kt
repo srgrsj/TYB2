@@ -1,5 +1,7 @@
 package com.example.tyb2.presentation.screens.profile
 
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -16,12 +18,18 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -32,8 +40,8 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.tyb2.R
+import com.example.tyb2.data.user.AccountData
 import com.example.tyb2.presentation.components.Bubbles
-import com.example.tyb2.util.Screen
 import com.example.tyb2.presentation.components.curves.Curve1
 import com.example.tyb2.presentation.components.curves.Curve2
 import com.example.tyb2.presentation.components.curves.Curve3
@@ -43,12 +51,14 @@ import com.example.tyb2.presentation.ui.theme.orangeColor
 import com.example.tyb2.presentation.ui.theme.purpleColor
 import com.example.tyb2.presentation.ui.theme.redColor
 import com.example.tyb2.presentation.ui.theme.yellowColor
+import com.example.tyb2.util.Screen
 
 @Composable
 fun ProfileScreen(
     navController: NavHostController,
     viewModel: ProfileViewModel = hiltViewModel()
 ) {
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -143,9 +153,9 @@ fun ProfileScreen(
                             .clip(CircleShape)
                     )
                     Text(
-                        text = "Profile name",
-// !                      color = MaterialTheme.colorScheme.onPrimary,
-                        color = Color.Black,
+                        text = AccountData.EMAIL.toString(),
+                        color = MaterialTheme.colorScheme.onPrimary,
+//                        color = Color.Black,
                         style = MaterialTheme.typography.labelLarge
                     )
                 }
@@ -154,7 +164,7 @@ fun ProfileScreen(
                 modifier = Modifier
                     .background(color = Color.Transparent)
                     .fillMaxWidth()
-                    .fillMaxHeight(0.72f)
+                    .fillMaxHeight(0.85f)
                     .padding(start = 12.dp, end = 12.dp, top = 12.dp),
                 contentAlignment = Alignment.TopCenter
             ) {
@@ -224,6 +234,54 @@ fun ProfileScreen(
                             }
                         }
                     }
+
+                    Button(
+                        colors = ButtonDefaults.buttonColors(
+//            containerColor = redColor
+                            containerColor = MaterialTheme.colorScheme.onBackground
+                        ),
+                        shape = RoundedCornerShape(10.dp),
+                        onClick = {
+                            viewModel.singOutUser()
+                            navController.navigate(Screen.SIGN_IN)
+
+                        },
+                        modifier = Modifier
+                            .height(58.dp)
+                    ) {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxSize(),
+                            horizontalArrangement = Arrangement.Start,
+                            verticalAlignment = Alignment.CenterVertically,
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.ExitToApp,
+                                contentDescription = null,
+                                modifier = Modifier
+                                    .clip(shape = CircleShape)
+                                    .size(24.dp),
+                                tint = MaterialTheme.colorScheme.onPrimary
+                            )
+                            Text(
+                                text = "Выход",
+                                color = MaterialTheme.colorScheme.onPrimary,
+                                style = MaterialTheme.typography.bodyLarge,
+                                modifier = Modifier.padding(horizontal = 12.dp)
+                            )
+                            Spacer(modifier = Modifier.weight(1f))
+                            Icon(
+                                painterResource(
+                                    id = R.drawable.icon_right_arrow
+                                ),
+                                contentDescription = null,
+                                modifier = Modifier
+                                    .clip(shape = CircleShape)
+                                    .size(24.dp),
+                                tint = MaterialTheme.colorScheme.onPrimary
+                            )
+                        }
+                    }
                 }
             }
             Box(
@@ -263,6 +321,7 @@ fun ProfileNavigationRow(
 ) {
     Button(
         colors = ButtonDefaults.buttonColors(
+//            containerColor = redColor
             containerColor = MaterialTheme.colorScheme.onBackground
         ),
         shape = RoundedCornerShape(10.dp),

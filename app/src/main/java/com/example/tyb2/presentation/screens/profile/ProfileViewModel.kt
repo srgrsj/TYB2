@@ -16,7 +16,7 @@ class ProfileViewModel @Inject constructor(
     fun singOutUser() = viewModelScope.launch {
         userUseCase.userSignOutUseCase()
 
-        AccountData.EMAIL = ""
-        AccountData.ID = ""
+        AccountData.EMAIL = null
+        AccountData.ID = null
     }
 }

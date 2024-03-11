@@ -1,6 +1,10 @@
-package com.example.tyb2.presentation.screens.initial
+package com.example.tyb2.presentation.screens.initial.auth.signIn
 
 import android.annotation.SuppressLint
+import android.widget.Toast
+import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -8,6 +12,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
@@ -17,6 +22,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -27,16 +33,19 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -50,8 +59,6 @@ import androidx.navigation.NavHostController
 import com.example.tyb2.R
 import com.example.tyb2.presentation.components.Bubbles
 import com.example.tyb2.presentation.components.animations.AnimatedFieldBrush
-import com.example.tyb2.presentation.components.animations.animatedBorder
-import com.example.tyb2.presentation.components.curves.Curve2
 import com.example.tyb2.presentation.components.curves.Curve3
 import com.example.tyb2.presentation.components.curves.Curve4
 import com.example.tyb2.presentation.ui.theme.TYB2Theme
@@ -63,19 +70,49 @@ import com.example.tyb2.presentation.ui.theme.redColor
 import com.example.tyb2.presentation.ui.theme.robotoFamily
 import com.example.tyb2.presentation.ui.theme.yellowColor
 import com.example.tyb2.util.Screen
+import kotlinx.coroutines.launch
 
 
 // Вход
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun SignInScreen(
-//    navController: NavHostController,
-//    signInViewModel: SignInViewModel = hiltViewModel()
+    navController: NavHostController,
+    viewModel: SignInViewModel = hiltViewModel()
 ) {
     // TODO error color(if authorization failed)
     var passwordVisible by remember { mutableStateOf(false) }
     var userEmail by remember { mutableStateOf("") }
     var userPassword by remember { mutableStateOf("") }
+
+    val state = viewModel.signInState.collectAsState(initial = null)
+    val context = LocalContext.current
+    val scope = rememberCoroutineScope()
+    val keyboardController = LocalSoftwareKeyboardController.current
+
+
+    LaunchedEffect(key1 = state.value?.isSuccess) {
+        scope.launch {
+            if (state.value?.isSuccess?.isNotEmpty() == true) {
+                val success = state.value?.isSuccess
+
+                Toast.makeText(context, "$success", Toast.LENGTH_LONG).show()
+
+                navController.navigate(Screen.Main.route)
+            }
+        }
+    }
+
+    LaunchedEffect(key1 = state.value?.isError) {
+        scope.launch {
+            if (state.value?.isError?.isNotEmpty() == true) {
+                val error = state.value?.isError
+
+                Toast.makeText(context, error, Toast.LENGTH_LONG).show()
+
+            }
+        }
+    }
 
     Scaffold(
         modifier = Modifier.fillMaxSize()
@@ -86,6 +123,29 @@ fun SignInScreen(
                 .background(MaterialTheme.colorScheme.background),
             contentAlignment = Alignment.Center
         ) {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+            ) {
+                Box(modifier = Modifier.offset(340.dp, 322.dp)) {
+                    Bubbles(color = greenColor, size = 108.dp)
+                }
+                Box(modifier = Modifier.offset(288.dp, 728.dp)) {
+                    Bubbles(color = redColor, size = 148.dp)
+                }
+                Box(modifier = Modifier.offset(350.dp, 282.dp)) {
+                    Bubbles(color = orangeColor, size = 72.dp)
+                }
+                Box(modifier = Modifier.offset(-58.dp, 688.dp)) {
+                    Bubbles(color = purpleColor, size = 172.dp)
+                }
+                Box(modifier = Modifier.offset(-80.dp, 328.dp)) {
+                    Bubbles(color = blueColor, size = 172.dp)
+                }
+                Box(modifier = Modifier.offset(320.dp, 664.dp)) {
+                    Bubbles(color = yellowColor, size = 128.dp)
+                }
+            }
             Curve4(
                 color = MaterialTheme.colorScheme.onPrimary,
                 scaleFactor = 4.8f,
@@ -131,29 +191,7 @@ fun SignInScreen(
                     .size(64.dp)
                     .background(MaterialTheme.colorScheme.onPrimary))
             }
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-            ) {
-                Box(modifier = Modifier.offset(340.dp, 522.dp)) {
-                    Bubbles(color = greenColor, size = 108.dp)
-                }
-                Box(modifier = Modifier.offset(288.dp, 528.dp)) {
-                    Bubbles(color = redColor, size = 148.dp)
-                }
-                Box(modifier = Modifier.offset(-30.dp, 522.dp)) {
-                    Bubbles(color = orangeColor, size = 72.dp)
-                }
-                Box(modifier = Modifier.offset(-58.dp, 528.dp)) {
-                    Bubbles(color = purpleColor, size = 172.dp)
-                }
-                Box(modifier = Modifier.offset(92.dp, 528.dp)) {
-                    Bubbles(color = blueColor, size = 172.dp)
-                }
-                Box(modifier = Modifier.offset(220.dp, 524.dp)) {
-                    Bubbles(color = yellowColor, size = 128.dp)
-                }
-            }
+
             Column(
                 modifier = Modifier
                     .fillMaxSize()
@@ -270,7 +308,7 @@ fun SignInScreen(
                 Spacer(modifier = Modifier.size(8.dp))
                 OutlinedButton(
                     onClick = {
-                        // TODO Log In logic
+                        viewModel.loginUser(email = userEmail, password = userPassword)
                     },
                     colors = ButtonDefaults.buttonColors(
                         containerColor = MaterialTheme.colorScheme.onPrimary
@@ -287,6 +325,18 @@ fun SignInScreen(
                     )
                 }
                 Spacer(modifier = Modifier.height(4.dp))
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    if (state.value?.isLoading == true) {
+                        CircularProgressIndicator(
+                            color = MaterialTheme.colorScheme.onPrimary
+                        )
+                        Spacer(modifier = Modifier.height(4.dp))
+                    }
+                }
                 Row(
                     modifier = Modifier.width(256.dp),
                     horizontalArrangement = Arrangement.Center,
@@ -316,14 +366,5 @@ fun SignInScreen(
                 }
             }
         }
-    }
-}
-
-
-@Preview
-@Composable
-fun PreviewLogIn() {
-    TYB2Theme {
-        SignInScreen()
     }
 }
