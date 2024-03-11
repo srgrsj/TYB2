@@ -58,5 +58,5 @@ fun Modifier.animatedBorder(
             }
             drawContent()
         }
-//        .background(color = MaterialTheme.colorScheme., shape = shape)
+        .background(color = backgroundColor, shape = shape)
 }

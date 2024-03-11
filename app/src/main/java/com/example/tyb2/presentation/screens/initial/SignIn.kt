@@ -10,8 +10,10 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.ButtonDefaults
@@ -31,6 +33,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -39,6 +42,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -47,7 +51,10 @@ import com.example.tyb2.R
 import com.example.tyb2.presentation.components.Bubbles
 import com.example.tyb2.presentation.components.animations.AnimatedFieldBrush
 import com.example.tyb2.presentation.components.animations.animatedBorder
+import com.example.tyb2.presentation.components.curves.Curve2
+import com.example.tyb2.presentation.components.curves.Curve3
 import com.example.tyb2.presentation.components.curves.Curve4
+import com.example.tyb2.presentation.ui.theme.TYB2Theme
 import com.example.tyb2.presentation.ui.theme.blueColor
 import com.example.tyb2.presentation.ui.theme.greenColor
 import com.example.tyb2.presentation.ui.theme.orangeColor
@@ -62,8 +69,8 @@ import com.example.tyb2.util.Screen
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun SignInScreen(
-    navController: NavHostController,
-    signInViewModel: SignInViewModel = hiltViewModel()
+//    navController: NavHostController,
+//    signInViewModel: SignInViewModel = hiltViewModel()
 ) {
     // TODO error color(if authorization failed)
     var passwordVisible by remember { mutableStateOf(false) }
@@ -80,19 +87,80 @@ fun SignInScreen(
             contentAlignment = Alignment.Center
         ) {
             Curve4(
-                color = purpleColor,
-                scaleFactor = 3f,
-                x = 150.dp,
-                y = -20.dp,
+                color = MaterialTheme.colorScheme.onPrimary,
+                scaleFactor = 4.8f,
+                x = 0.dp,
+                y = 0.dp,
                 weight = 16f
             )
+            Curve3(
+                color = MaterialTheme.colorScheme.onPrimary,
+                scaleFactor = 2f,
+                x = 280.dp,
+                y = -460.dp,
+                angle = -90f,
+                weight = 16f
+            )
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .offset(x = 10.dp, y = 80.dp)
+            ) {
+                Box(modifier = Modifier
+                    .clip(CircleShape)
+                    .size(128.dp)
+                    .background(MaterialTheme.colorScheme.onPrimary))
+            }
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .offset(x = 64.dp, y = 340.dp)
+            ) {
+                Box(modifier = Modifier
+                    .clip(CircleShape)
+                    .size(92.dp)
+                    .background(MaterialTheme.colorScheme.onPrimary))
+            }
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .offset(x = 256.dp, y = 44.dp)
+            ) {
+                Box(modifier = Modifier
+                    .clip(CircleShape)
+                    .size(64.dp)
+                    .background(MaterialTheme.colorScheme.onPrimary))
+            }
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+            ) {
+                Box(modifier = Modifier.offset(340.dp, 522.dp)) {
+                    Bubbles(color = greenColor, size = 108.dp)
+                }
+                Box(modifier = Modifier.offset(288.dp, 528.dp)) {
+                    Bubbles(color = redColor, size = 148.dp)
+                }
+                Box(modifier = Modifier.offset(-30.dp, 522.dp)) {
+                    Bubbles(color = orangeColor, size = 72.dp)
+                }
+                Box(modifier = Modifier.offset(-58.dp, 528.dp)) {
+                    Bubbles(color = purpleColor, size = 172.dp)
+                }
+                Box(modifier = Modifier.offset(92.dp, 528.dp)) {
+                    Bubbles(color = blueColor, size = 172.dp)
+                }
+                Box(modifier = Modifier.offset(220.dp, 524.dp)) {
+                    Bubbles(color = yellowColor, size = 128.dp)
+                }
+            }
             Column(
                 modifier = Modifier
-                    .fillMaxSize(),
+                    .fillMaxSize()
+                    .padding(bottom = 64.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center,
+                verticalArrangement = Arrangement.Bottom,
             ) {
-                Spacer(modifier = Modifier.size(256.dp))
                 OutlinedTextField(
                     value = userEmail,
                     onValueChange = { userEmail = it },
@@ -109,8 +177,8 @@ fun SignInScreen(
                         unfocusedContainerColor = MaterialTheme.colorScheme.onPrimary,
                         focusedTextColor = MaterialTheme.colorScheme.primary,
                         unfocusedTextColor = MaterialTheme.colorScheme.primary,
-                        focusedBorderColor = MaterialTheme.colorScheme.primary,
-                        unfocusedBorderColor = MaterialTheme.colorScheme.background,
+                        focusedBorderColor = MaterialTheme.colorScheme.onPrimary,
+                        unfocusedBorderColor = MaterialTheme.colorScheme.onPrimary,
                     ),
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
                     shape = RoundedCornerShape(10.dp),
@@ -152,12 +220,53 @@ fun SignInScreen(
                         unfocusedContainerColor = MaterialTheme.colorScheme.onPrimary,
                         focusedTextColor = MaterialTheme.colorScheme.primary,
                         unfocusedTextColor = MaterialTheme.colorScheme.primary,
-                        focusedBorderColor = MaterialTheme.colorScheme.primary,
-                        unfocusedBorderColor = MaterialTheme.colorScheme.background,
+                        focusedBorderColor = MaterialTheme.colorScheme.onPrimary,
+                        unfocusedBorderColor = MaterialTheme.colorScheme.onPrimary,
                     ),
                     modifier = Modifier
                         .width(320.dp)
                 )
+                Spacer(modifier = Modifier.size(8.dp))
+                OutlinedButton(
+                    onClick = {
+                        // TODO google auth
+                    },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = MaterialTheme.colorScheme.onPrimary
+                    ),
+                    shape = RoundedCornerShape(10.dp),
+                    modifier = Modifier
+                        .width(320.dp)
+                        .height(52.dp)
+                ) {
+                    Row(
+                        modifier = Modifier.fillMaxSize(),
+                        horizontalArrangement = Arrangement.Start,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Box(
+                            modifier = Modifier.fillMaxSize(),
+                            contentAlignment = Alignment.CenterStart
+                        ) {
+                            Icon(
+                                painter = painterResource(id = R.drawable.icon_google),
+                                contentDescription = null,
+                                modifier = Modifier,
+                                tint = MaterialTheme.colorScheme.primary
+                            )
+                            Box(
+                                modifier = Modifier.fillMaxSize(),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Text(
+                                    text = "Log in with Google",
+                                    color = MaterialTheme.colorScheme.primary,
+                                    style = MaterialTheme.typography.bodyMedium
+                                )
+                            }
+                        }
+                    }
+                }
                 Spacer(modifier = Modifier.size(8.dp))
                 OutlinedButton(
                     onClick = {
@@ -170,10 +279,6 @@ fun SignInScreen(
                     modifier = Modifier
                         .width(256.dp)
                         .height(52.dp)
-                        .animatedBorder(
-                            brushColors = listOf(redColor, purpleColor),
-
-                            )
                 ) {
                     Text(
                         text = "Log in",
@@ -181,7 +286,7 @@ fun SignInScreen(
                         style = MaterialTheme.typography.bodyMedium
                     )
                 }
-                Spacer(modifier = Modifier.height(8.dp))
+                Spacer(modifier = Modifier.height(4.dp))
                 Row(
                     modifier = Modifier.width(256.dp),
                     horizontalArrangement = Arrangement.Center,
@@ -193,7 +298,7 @@ fun SignInScreen(
                         style = MaterialTheme.typography.bodyMedium
                     )
                     TextButton(onClick = {
-                        navController.navigate(Screen.SIGN_UP)
+//                        TODO navController.navigate(Screen.SIGN_UP)
                     }) {
                         Text(
                             text = "Register",
@@ -210,38 +315,15 @@ fun SignInScreen(
                     }
                 }
             }
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-            ) {
-                Box(modifier = Modifier.offset(340.dp, 2.dp)) {
-                    Bubbles(color = greenColor, size = 108.dp)
-                }
-                Box(modifier = Modifier.offset(288.dp, 78.dp)) {
-                    Bubbles(color = redColor, size = 148.dp)
-                }
-                Box(modifier = Modifier.offset(-30.dp, 2.dp)) {
-                    Bubbles(color = orangeColor, size = 72.dp)
-                }
-                Box(modifier = Modifier.offset(-58.dp, 48.dp)) {
-                    Bubbles(color = purpleColor, size = 172.dp)
-                }
-                Box(modifier = Modifier.offset(92.dp, 90.dp)) {
-                    Bubbles(color = blueColor, size = 172.dp)
-                }
-                Box(modifier = Modifier.offset(220.dp, 90.dp)) {
-                    Bubbles(color = yellowColor, size = 128.dp)
-                }
-            }
         }
     }
 }
 
 
-//@Preview
-//@Composable
-//fun PreviewLogIn() {
-//    TYB2Theme {
-//        SignInScreen()
-//    }
-//}
+@Preview
+@Composable
+fun PreviewLogIn() {
+    TYB2Theme {
+        SignInScreen()
+    }
+}

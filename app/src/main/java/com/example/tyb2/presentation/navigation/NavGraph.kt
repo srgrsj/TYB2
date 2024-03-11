@@ -1,5 +1,6 @@
 package com.example.tyb2.presentation.navigation
 
+import android.annotation.SuppressLint
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
 import androidx.compose.runtime.Composable
@@ -20,6 +21,7 @@ import com.example.tyb2.presentation.screens.profile.profile_settings.ProfileSet
 import com.example.tyb2.presentation.screens.profile.settings.SettingsScreen
 import com.example.tyb2.util.Screen
 
+@SuppressLint("SuspiciousIndentation")
 @Composable
 fun NavGraph(
     navController: NavHostController
@@ -60,7 +62,7 @@ fun NavGraph(
                 StoreScreen(navController)
             }
             composable(Screen.SIGN_IN) {
-                SignInScreen(navController)
+//                SignInScreen(navController)
             }
             composable(Screen.SIGN_UP) {
                 SignUpScreen(navController)

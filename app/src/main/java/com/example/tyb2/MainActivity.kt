@@ -28,7 +28,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             TYB2Theme {
-                Application()
+//                Application()
+                SignInScreen()
             }
         }
     }

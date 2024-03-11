@@ -28,41 +28,41 @@ fun Curve4(
             .rotate(angle)
     ) {
         val path = Path().apply {
-            moveTo(145.624f, 335.649f)
+            moveTo(145.624f * scaleFactor, 335.649f * scaleFactor)
             cubicTo(
-                138.91f, 334.306f,
-                131.537f, 326.263f,
-                126.228f, 322.392f
+                138.91f * scaleFactor, 334.306f * scaleFactor,
+                131.537f * scaleFactor, 326.263f * scaleFactor,
+                126.228f * scaleFactor, 322.392f * scaleFactor
             )
             cubicTo(
-                106.256f, 307.829f,
-                84.1401f, 296.209f,
-                64.8508f, 280.777f
+                106.256f * scaleFactor, 307.829f * scaleFactor,
+                84.1401f * scaleFactor, 296.209f * scaleFactor,
+                64.8508f * scaleFactor, 280.777f * scaleFactor
             )
             cubicTo(
-                48.6707f, 267.833f,
-                31.7654f, 253.622f,
-                18.4492f, 237.69f
+                48.6707f * scaleFactor, 267.833f * scaleFactor,
+                31.7654f * scaleFactor, 253.622f * scaleFactor,
+                18.4492f * scaleFactor, 237.69f * scaleFactor
             )
             cubicTo(
-                7.16398f, 224.188f,
-                22.296f, 208.568f,
-                30.8475f, 197.549f
+                7.16398f * scaleFactor, 224.188f * scaleFactor,
+                22.296f * scaleFactor, 208.568f * scaleFactor,
+                30.8475f * scaleFactor, 197.549f * scaleFactor
             )
             cubicTo(
-                54.5037f, 167.069f,
-                91.2194f, 121.689f,
-                88.1743f, 80.0724f
+                54.5037f * scaleFactor, 167.069f * scaleFactor,
+                91.2194f * scaleFactor, 121.689f * scaleFactor,
+                88.1743f * scaleFactor, 80.0724f * scaleFactor
             )
             cubicTo(
-                85.8452f, 48.2422f,
-                48.9417f, 30.4618f,
-                24.2187f, 17.9582f
+                85.8452f * scaleFactor, 48.2422f * scaleFactor,
+                48.9417f * scaleFactor, 30.4618f * scaleFactor,
+                24.2187f * scaleFactor, 17.9582f * scaleFactor
             )
             cubicTo(
-                16.8707f, 14.242f,
-                5.88179f, 9.76357f,
-                2f, 2f
+                16.8707f * scaleFactor, 14.242f * scaleFactor,
+                5.88179f * scaleFactor, 9.76357f * scaleFactor,
+                2f * scaleFactor, 2f * scaleFactor
             )
         }
         drawPath(

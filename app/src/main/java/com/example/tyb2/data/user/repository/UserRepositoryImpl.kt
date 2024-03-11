@@ -38,7 +38,6 @@ class UserRepositoryFirebaseImpl
 ) : UserRepository {
     private val userDatabaseReference =
         databaseReference.child("users")
-//    TODO вынести database name в константы
 
     override suspend fun insertUser(user: User) {
         user.id.let { userDatabaseReference.child(it).setValue(user) }
