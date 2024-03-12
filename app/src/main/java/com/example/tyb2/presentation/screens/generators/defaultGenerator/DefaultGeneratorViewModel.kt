@@ -5,6 +5,7 @@ import com.example.tyb2.domain.exercise.usecase.ExerciseUseCase
 import com.example.tyb2.domain.exersice.model.Exercise
 import com.example.tyb2.domain.workout.usecases.WorkoutUseCase
 import com.example.tyb2.presentation.screens.generators.GeneratorsScreenViewModel
+import com.example.tyb2.util.Muscle
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -13,10 +14,14 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class DefaultGeneratorScreenViewModel @Inject constructor(
+class DefaultGeneratorViewModel @Inject constructor(
     private val exerciseUseCase: ExerciseUseCase,
     workoutUseCase: WorkoutUseCase
 ) : GeneratorsScreenViewModel(workoutUseCase) {
+
+    private var _muscleList = MutableStateFlow(listOf<Muscle>())
+    val muscleList: StateFlow<List<Muscle>> = _muscleList.asStateFlow()
+
 
     private var _exerciseList = MutableStateFlow(listOf<Exercise>())
     val exerciseList: StateFlow<List<Exercise>> = _exerciseList.asStateFlow()

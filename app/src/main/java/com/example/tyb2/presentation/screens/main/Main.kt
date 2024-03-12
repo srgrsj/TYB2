@@ -44,6 +44,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.drawscope.translate
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -205,8 +206,8 @@ fun MainScreen(
                     },
                     trailingIcon = {
                         Icon(
-                            imageVector = Icons.Filled.Search,
-                            contentDescription = "",
+                            painter = painterResource(id = R.drawable.icon_search),
+                            contentDescription = null,
                             tint = MaterialTheme.colorScheme.primary
                         )
                     },

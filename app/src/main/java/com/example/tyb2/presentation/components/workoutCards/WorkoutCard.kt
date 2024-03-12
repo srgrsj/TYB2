@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -28,10 +29,10 @@ import com.example.tyb2.R
 import com.example.tyb2.domain.exersice.model.Exercise
 import com.example.tyb2.domain.exersice.model.ExerciseType
 import com.example.tyb2.domain.workout.model.Workout
-import com.example.tyb2.domain.workout.model.WorkoutGenerationType
 import com.example.tyb2.presentation.ui.theme.Typography
-import com.example.tyb2.presentation.ui.theme.redColor
 import com.example.tyb2.util.DateTimeUtils
+import com.example.tyb2.util.Muscle
+import com.example.tyb2.util.MuscleStuff
 
 @Preview
 @Composable
@@ -41,9 +42,9 @@ fun TestShedevroCard() {
             "Workout",
             "some description",
             4365273,
+            listOf(Muscle.LEG_QUADRICEPS, Muscle.BRACHIAL_FRONT, Muscle.BREAST),
             false,
-            WorkoutGenerationType.USER,
-            listOf(
+            exerciseList = listOf(
                 Exercise(
                     "Exercise1",
                     "some description",
@@ -81,6 +82,8 @@ fun TestShedevroCard() {
 fun WorkoutCard(
     workout: Workout
 ) {
+
+    val muscleList = workout.muscles!!.toMutableSet()
 
     Card(
         modifier = Modifier
@@ -192,30 +195,32 @@ fun WorkoutCard(
                     horizontalArrangement = Arrangement.Absolute.Left
                 ) {
 
-                    Box(
-                        modifier = Modifier
-                            .padding(
-                                top = 4.dp,
-                                start = 24.dp
-                            )
-                            .clip(RoundedCornerShape(10.dp))
-                            .background(redColor)
-                            .height(15.dp)
-                            .width(15.dp)
+                    Spacer(modifier = Modifier.width(20.dp))
 
+                    muscleList.forEach {
+                        Box(
+                            modifier = Modifier
+                                .padding(
+                                    top = 4.dp,
+                                    start = 4.dp
+                                )
+                                .clip(RoundedCornerShape(10.dp))
+                                .background(MuscleStuff.defineColor(MuscleStuff.defineGroup(it)))
+                                .height(15.dp)
+                                .width(15.dp)
+                        )
 
-                    )
-
-                    Text(
-                        text = "Breast",
-                        style = Typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onPrimary,
-                        modifier = Modifier
-                            .padding(
-                                top = 4.dp,
-                                start = 4.dp
-                            )
-                    )
+                        Text(
+                            text = MuscleStuff.defineTitle(MuscleStuff.defineGroup(it)),
+                            style = Typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onPrimary,
+                            modifier = Modifier
+                                .padding(
+                                    top = 4.dp,
+                                    start = 4.dp
+                                )
+                        )
+                    }
                 }
 
                 Text(

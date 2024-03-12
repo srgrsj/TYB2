@@ -46,10 +46,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.tyb2.R
-import com.example.tyb2.domain.exersice.model.Exercise
-import com.example.tyb2.domain.exersice.model.ExerciseType
 import com.example.tyb2.domain.workout.model.Workout
-import com.example.tyb2.domain.workout.model.WorkoutGenerationType
 import com.example.tyb2.presentation.components.ExerciseCard
 import com.example.tyb2.presentation.ui.theme.Typography
 
@@ -328,7 +325,7 @@ fun WorkoutPlayback(
             modifier = Modifier
                 .fillMaxSize()
         ) {
-            workout.exerciseList.forEach {
+            workout.exerciseList!!.forEach {
                 Spacer(modifier = Modifier.height(10.dp))
                 ExerciseCard(exercise = it)
             }

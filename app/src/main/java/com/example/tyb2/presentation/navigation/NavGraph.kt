@@ -9,6 +9,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.tyb2.data.user.AccountData
 import com.example.tyb2.presentation.screens.activity.ActivityScreen
+import com.example.tyb2.presentation.screens.generators.defaultGenerator.DefaultGenerator
 import com.example.tyb2.presentation.screens.initial.auth.signIn.SignInScreen
 import com.example.tyb2.presentation.screens.initial.auth.signUp.SignUpScreen
 import com.example.tyb2.presentation.screens.main.MainScreen
@@ -66,6 +67,9 @@ fun NavGraph(
             }
             composable(Screen.SIGN_UP) {
                 SignUpScreen(navController)
+            }
+            composable(Screen.DEFAULT_GENERATOR) {
+                DefaultGenerator()
             }
         }
 }

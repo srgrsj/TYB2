@@ -1,7 +1,6 @@
 package com.example.tyb2.presentation.screens.main
 
 import com.example.tyb2.domain.workout.model.Workout
-import com.example.tyb2.domain.workout.readyWorkoutsData.ReadyWorkouts
 import com.example.tyb2.domain.workout.usecases.WorkoutUseCase
 import android.content.Context
 import androidx.lifecycle.ViewModel
@@ -30,17 +29,17 @@ open class WorkoutsViewModel @Inject constructor(
         saveWorkoutsFromRealtimeDatabaseToWorkoutList()
     }
 
-    fun getReadyWorkouts(context: Context) {
-        val updatedReadyWorkoutList = mutableListOf<Workout>()
-
-        ReadyWorkouts.values().forEach {
-            updatedReadyWorkoutList.add(it.getLocalizedWorkout(context))
-        }
-
-        viewModelScope.launch {
-            _readyWorkoutList.emit(updatedReadyWorkoutList)
-        }
-    }
+//    fun getReadyWorkouts(context: Context) {
+//        val updatedReadyWorkoutList = mutableListOf<Workout>()
+//
+//        ReadyWorkouts.values().forEach {
+//            updatedReadyWorkoutList.add(it.getLocalizedWorkout(context))
+//        }
+//
+//        viewModelScope.launch {
+//            _readyWorkoutList.emit(updatedReadyWorkoutList)
+//        }
+//    }
 
     private fun saveWorkoutsFromRealtimeDatabaseToWorkoutList() {
 

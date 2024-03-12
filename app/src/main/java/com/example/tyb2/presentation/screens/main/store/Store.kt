@@ -357,23 +357,6 @@ fun StoreScreen(
 
         GridPad(
             listOf(
-                Workout("Title"),
-                Workout("Title"),
-                Workout("Title"),
-                Workout("Title"),
-                Workout("Title"),
-                Workout("Title"),
-                Workout("Title"),
-                Workout("Title"),
-                Workout("Title"),
-                Workout("Title"),
-                Workout("Title"),
-                Workout("Title"),
-                Workout("Title"),
-                Workout("Title"),
-                Workout("Title"),
-                Workout("Title"),
-                Workout("Title"),
             )
         )
 

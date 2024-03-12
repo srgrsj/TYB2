@@ -31,7 +31,7 @@ import com.example.tyb2.R
 import com.example.tyb2.domain.exersice.model.Exercise
 import com.example.tyb2.domain.exersice.model.ExerciseType
 import com.example.tyb2.domain.workout.model.Workout
-import com.example.tyb2.domain.workout.model.WorkoutGenerationType
+import com.example.tyb2.domain.workout.model.WorkoutSource
 import com.example.tyb2.presentation.ui.theme.Typography
 import com.example.tyb2.presentation.ui.theme.redColor
 
@@ -43,9 +43,8 @@ fun TestShedevroCardBig() {
             "Workout",
             "some description",
             4365273,
-            false,
-            WorkoutGenerationType.USER,
-            listOf(
+            workoutGenerationType = WorkoutSource.USER,
+            exerciseList = listOf(
                 Exercise(
                     "Exercise1",
                     "some description",

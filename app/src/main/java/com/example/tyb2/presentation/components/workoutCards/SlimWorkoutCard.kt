@@ -4,7 +4,6 @@ package com.example.tyb2.presentation.components.workoutCards
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -33,52 +32,52 @@ import com.example.tyb2.R
 import com.example.tyb2.domain.exersice.model.Exercise
 import com.example.tyb2.domain.exersice.model.ExerciseType
 import com.example.tyb2.domain.workout.model.Workout
-import com.example.tyb2.domain.workout.model.WorkoutGenerationType
+import com.example.tyb2.domain.workout.model.WorkoutSource
 import com.example.tyb2.presentation.ui.theme.Typography
 import com.example.tyb2.presentation.ui.theme.redColor
 
-@Preview
-@Composable
-fun TestShedevroCardSlim() {
-    SlimWorkoutCard(
-        workout = Workout(
-            "Workout",
-            "some description",
-            4365273,
-            false,
-            WorkoutGenerationType.USER,
-            listOf(
-                Exercise(
-                    "Exercise1",
-                    "some description",
-                    52,
-                    52,
-                    15,
-                    15,
-                    ExerciseType.REPETITION,
-                ),
-                Exercise(
-                    "Exercise2",
-                    "some description",
-                    52,
-                    52,
-                    15,
-                    15,
-                    ExerciseType.REPETITION,
-                ),
-                Exercise(
-                    "Exercise2",
-                    "some description",
-                    52,
-                    52,
-                    15,
-                    15,
-                    ExerciseType.REPETITION,
-                )
-            )
-        )
-    )
-}
+//@Preview
+//@Composable
+//fun TestShedevroCardSlim() {
+//    SlimWorkoutCard(
+//        workout = Workout(
+//            "Workout",
+//            "some description",
+//            4365273,
+//            false,
+//            WorkoutSource.USER,
+//            listOf(
+//                Exercise(
+//                    "Exercise1",
+//                    "some description",
+//                    52,
+//                    52,
+//                    15,
+//                    15,
+//                    ExerciseType.REPETITION,
+//                ),
+//                Exercise(
+//                    "Exercise2",
+//                    "some description",
+//                    52,
+//                    52,
+//                    15,
+//                    15,
+//                    ExerciseType.REPETITION,
+//                ),
+//                Exercise(
+//                    "Exercise2",
+//                    "some description",
+//                    52,
+//                    52,
+//                    15,
+//                    15,
+//                    ExerciseType.REPETITION,
+//                )
+//            )
+//        )
+//    )
+//}
 
 
 @Composable
