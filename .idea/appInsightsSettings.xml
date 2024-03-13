@@ -9,10 +9,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.example.tyb2" />
+                  <option name="mobileSdkAppId" value="1:361587871130:android:6e1c3e7a5d74c4e5673e23" />
+                  <option name="projectId" value="sportapp-74f15" />
+                  <option name="projectNumber" value="361587871130" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />
