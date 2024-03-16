@@ -67,7 +67,7 @@ fun NavGraph(
                 SignInScreen(navController)
             }
             composable(Screen.SIGN_UP) {
-                SignUpScreen(navController)
+//                SignUpScreen(navController)
             }
             composable(Screen.DEFAULT_GENERATOR) {
                 DefaultGenerator()

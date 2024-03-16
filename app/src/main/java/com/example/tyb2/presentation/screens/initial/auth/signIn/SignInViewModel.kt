@@ -41,6 +41,5 @@ class SignInViewModel @Inject constructor(
         }
         AccountData.ID = Firebase.auth.currentUser?.uid
         AccountData.EMAIL = Firebase.auth.currentUser?.email
-
     }
 }
