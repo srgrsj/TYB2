@@ -107,7 +107,7 @@ fun ProfileScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .fillMaxHeight(0.35f)
-                    .padding(top = 44.dp),
+                    .padding(top = 32.dp),
                 contentAlignment = Alignment.TopCenter
             ) {
                 Box(
@@ -136,7 +136,7 @@ fun ProfileScreen(
                 Column(
                     modifier = Modifier.fillMaxSize(),
                     horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     //            AsyncImage(
                     //                model = ,
@@ -164,7 +164,7 @@ fun ProfileScreen(
                 modifier = Modifier
                     .background(color = Color.Transparent)
                     .fillMaxWidth()
-                    .fillMaxHeight(0.85f)
+                    .fillMaxHeight(1f)
                     .padding(start = 12.dp, end = 12.dp, top = 12.dp),
                 contentAlignment = Alignment.TopCenter
             ) {
@@ -172,7 +172,7 @@ fun ProfileScreen(
                     modifier = Modifier
                         .fillMaxSize(),
                     horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     ProfileNavigationRow(
                         icon = R.drawable.icon_achievements,

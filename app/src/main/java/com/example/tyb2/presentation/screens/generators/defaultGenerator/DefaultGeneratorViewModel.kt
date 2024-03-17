@@ -1,5 +1,6 @@
 package com.example.tyb2.presentation.screens.generators.defaultGenerator
 
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.example.tyb2.domain.exercise.usecase.ExerciseUseCase
 import com.example.tyb2.domain.exersice.model.Exercise
@@ -20,11 +21,27 @@ class DefaultGeneratorViewModel @Inject constructor(
 ) : GeneratorsScreenViewModel(workoutUseCase) {
 
     private var _muscleList = MutableStateFlow(listOf<Muscle>())
-    val muscleList: StateFlow<List<Muscle>> = _muscleList.asStateFlow()
+    private val muscleList: StateFlow<List<Muscle>> = _muscleList.asStateFlow()
+
+    fun saveMuscleToMuscleList(muscle: Muscle) {
+        val mList = muscleList.value.toMutableList()
+        mList.add(muscle)
+        viewModelScope.launch {
+            _muscleList.emit(mList)
+        }
+    }
 
 
     private var _exerciseList = MutableStateFlow(listOf<Exercise>())
-    val exerciseList: StateFlow<List<Exercise>> = _exerciseList.asStateFlow()
+    private val exerciseList: StateFlow<List<Exercise>> = _exerciseList.asStateFlow()
+
+    fun saveExerciseToExerciseList(exercise: Exercise) {
+        val eList = exerciseList.value.toMutableList()
+        eList.add(exercise)
+        viewModelScope.launch {
+            _exerciseList.emit(eList)
+        }
+    }
 
     //Exercise
     private val _showAddExerciseDialog = MutableStateFlow(false)
@@ -36,14 +53,6 @@ class DefaultGeneratorViewModel @Inject constructor(
 
     fun hideAddExerciseAlertDialog() {
         _showAddExerciseDialog.value = false
-    }
-
-    fun saveExerciseToExerciseList(exercise: Exercise) {
-        val eList = exerciseList.value.toMutableList()
-        eList.add(exercise)
-        viewModelScope.launch {
-            _exerciseList.emit(eList)
-        }
     }
 
     fun deleteExerciseFromExerciseList(exercise: Exercise) {

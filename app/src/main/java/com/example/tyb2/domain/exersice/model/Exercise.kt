@@ -1,6 +1,7 @@
 package com.example.tyb2.domain.exersice.model
 
 import android.os.Parcelable
+import com.example.tyb2.util.Muscle
 import kotlinx.parcelize.Parcelize
 import java.util.UUID
 
@@ -14,6 +15,7 @@ data class Exercise(
     var durationOfRest: Long? = null,
     var exerciseType: ExerciseType? = null,
     var demonstration: String? = null,
+    var muscleList: List<Muscle>? = null,
     val id: String = UUID.randomUUID().toString()
 ) : Parcelable
 

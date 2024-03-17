@@ -50,7 +50,6 @@ class UserRepositoryFirebaseImpl
     private val userDatabaseReference =
         databaseReference.child("users")
 
-//    private val auth = Firebase.auth
 
     override suspend fun insertUser(user: User) {
         user.id.let { userDatabaseReference.child(it).setValue(user) }

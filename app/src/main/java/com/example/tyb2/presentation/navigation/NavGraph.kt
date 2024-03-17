@@ -40,7 +40,7 @@ fun NavGraph(
 //            ProfileScreen(navController)
             }
             composable(Screen.Activity.route) {
-//                ActivityScreen(navController)
+                ActivityScreen(navController)
             }
             composable(Screen.Profile.route) {
                 ProfileScreen(navController)
@@ -67,10 +67,10 @@ fun NavGraph(
                 SignInScreen(navController)
             }
             composable(Screen.SIGN_UP) {
-//                SignUpScreen(navController)
+                SignUpScreen(navController)
             }
             composable(Screen.DEFAULT_GENERATOR) {
-                DefaultGenerator()
+                DefaultGenerator(navController)
             }
         }
 }

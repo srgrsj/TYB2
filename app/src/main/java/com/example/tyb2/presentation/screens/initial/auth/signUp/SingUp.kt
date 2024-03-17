@@ -76,8 +76,8 @@ import kotlinx.coroutines.launch
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun SignUpScreen(
-//    navController: NavHostController,
-//    viewModel: SignUpViewModel = hiltViewModel()
+    navController: NavHostController,
+    viewModel: SignUpViewModel = hiltViewModel()
 ) {
     // TODO error color(if authorization failed)
     var passwordVisible by remember { mutableStateOf(false) }
@@ -405,10 +405,10 @@ fun SignUpScreen(
     }
 }
 
-@Preview
-@Composable
-private fun PreviewSignUp() {
-    TYB2Theme {
-        SignUpScreen()
-    }
-}
+//@Preview
+//@Composable
+//private fun PreviewSignUp() {
+//    TYB2Theme {
+//        SignUpScreen()
+//    }
+//}
