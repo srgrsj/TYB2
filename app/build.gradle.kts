@@ -55,6 +55,7 @@ android {
 }
 
 dependencies {
+    implementation("com.google.android.gms:play-services-auth:21.0.0")
     val nav_version = "2.7.7"
 
     implementation("androidx.navigation:navigation-compose:$nav_version")

@@ -31,6 +31,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             TYB2Theme {
                 Application()
+                //TIME CODE : 25m0
             }
         }
     }

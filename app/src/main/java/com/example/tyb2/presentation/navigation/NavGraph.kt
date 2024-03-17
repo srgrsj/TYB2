@@ -40,7 +40,7 @@ fun NavGraph(
 //            ProfileScreen(navController)
             }
             composable(Screen.Activity.route) {
-                ActivityScreen(navController)
+//                ActivityScreen(navController)
             }
             composable(Screen.Profile.route) {
                 ProfileScreen(navController)

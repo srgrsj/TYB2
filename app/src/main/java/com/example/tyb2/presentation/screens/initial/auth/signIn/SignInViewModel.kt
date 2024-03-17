@@ -3,8 +3,9 @@ package com.example.tyb2.presentation.screens.initial.auth.signIn
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tyb2.data.user.AccountData
+import com.example.tyb2.domain.user.model.SignInResult
 import com.example.tyb2.domain.user.usecases.UserUseCase
-import com.example.tyb2.presentation.screens.initial.auth.SignInState
+import com.example.tyb2.util.SignInState
 import com.example.tyb2.util.Resource
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -41,5 +42,15 @@ class SignInViewModel @Inject constructor(
         }
         AccountData.ID = Firebase.auth.currentUser?.uid
         AccountData.EMAIL = Firebase.auth.currentUser?.email
+    }
+    fun onSignInResult(result: SignInResult) {
+        viewModelScope.launch {
+            _signInState.send(
+                SignInState(
+                isLoading = result.user != null,
+                isError = result.errorMessage
+            )
+            )
+        }
     }
 }
