@@ -1,6 +1,8 @@
 package com.example.tyb2.presentation.navigation
 
 import android.annotation.SuppressLint
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
 import androidx.compose.runtime.Composable
@@ -22,6 +24,7 @@ import com.example.tyb2.presentation.screens.profile.profile_settings.ProfileSet
 import com.example.tyb2.presentation.screens.profile.settings.SettingsScreen
 import com.example.tyb2.util.Screen
 
+@RequiresApi(Build.VERSION_CODES.O)
 @SuppressLint("SuspiciousIndentation")
 @Composable
 fun NavGraph(
