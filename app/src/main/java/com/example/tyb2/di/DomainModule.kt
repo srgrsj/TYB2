@@ -8,6 +8,9 @@ import com.example.tyb2.domain.exercise.usecase.DeleteExerciseUseCase
 import com.example.tyb2.domain.exercise.usecase.ExerciseUseCase
 import com.example.tyb2.domain.exercise.usecase.GetExercisesUseCase
 import com.example.tyb2.domain.user.usecases.AddUserUseCase
+import com.example.tyb2.domain.user.usecases.ContinueWithGoogleUseCase
+import com.example.tyb2.domain.user.usecases.ContinueWithGoogleFromIntentUseCase
+import com.example.tyb2.domain.user.usecases.GetSignedInUserUseCase
 import com.example.tyb2.domain.user.usecases.ReadOnboardingIsShow
 import com.example.tyb2.domain.user.usecases.SaveOnboardingIsShow
 import com.example.tyb2.domain.user.usecases.UserSignInUseCase
@@ -52,6 +55,9 @@ class DomainModule {
             userSignOutUseCase = UserSignOutUseCase(userRepositoryFirebaseImpl),
             userSignUpUseCase = UserSignUpUseCase(userRepositoryFirebaseImpl),
             readOnboardingIsShow = ReadOnboardingIsShow(userRepositoryFirebaseImpl),
-            saveOnboardingIsShow = SaveOnboardingIsShow(userRepositoryFirebaseImpl)
+            saveOnboardingIsShow = SaveOnboardingIsShow(userRepositoryFirebaseImpl),
+            getSignedInUserUseCase = GetSignedInUserUseCase(userRepositoryFirebaseImpl),
+            continueWithGoogleUseCase = ContinueWithGoogleUseCase(userRepositoryFirebaseImpl),
+            continueWithGoogleFromIntentUseCase = ContinueWithGoogleFromIntentUseCase(userRepositoryFirebaseImpl)
         )
 }

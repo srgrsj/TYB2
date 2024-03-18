@@ -1,7 +1,10 @@
 package com.example.tyb2.presentation.screens.initial.auth.signIn
 
 import android.annotation.SuppressLint
+import android.app.Activity.RESULT_OK
 import android.widget.Toast
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -90,6 +93,20 @@ fun SignInScreen(
     val scope = rememberCoroutineScope()
     val keyboardController = LocalSoftwareKeyboardController.current
 
+//    val launcher = rememberLauncherForActivityResult(
+//        contract = ActivityResultContracts.StartIntentSenderForResult(),
+//        onResult = { result ->
+//            if(result.resultCode == RESULT_OK) {
+//                //TODO with intent
+//                lifecycleScope.launch {
+//                    val signInResult = googleAuthUiClient.signInWithIntent(
+//                        intent = result.data ?: return@launch
+//                    )
+//                    viewModel.onSignInResult(signInResult)
+//                }
+//            }
+//        }
+//    )
 
     LaunchedEffect(key1 = state.value?.isSuccess) {
         scope.launch {

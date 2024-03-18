@@ -29,7 +29,9 @@ import com.example.tyb2.presentation.ui.theme.yellowColor
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun YogaRow() {
+fun YogaRow(
+    onClickYoga: () -> Unit
+) {
     val colors = listOf(redColor, greenColor, blueColor, purpleColor, orangeColor, yellowColor)
     val pagerState =
         rememberPagerState(pageCount = { Int.MAX_VALUE }, initialPage = Int.MAX_VALUE / 2)
@@ -60,6 +62,7 @@ fun YogaRow() {
             ) {
                 Box(
                     modifier = Modifier.fillMaxSize().clickable {
+                        onClickYoga()
                         // TODO() Navigation to yoga
                     },
                     contentAlignment = Alignment.Center

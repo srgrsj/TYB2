@@ -18,6 +18,7 @@ import com.example.tyb2.util.Constants
 import com.example.tyb2.util.Resource
 import com.google.android.gms.auth.api.identity.BeginSignInRequest
 import com.google.android.gms.auth.api.identity.BeginSignInRequest.GoogleIdTokenRequestOptions
+import com.google.android.gms.auth.api.identity.Identity
 import com.google.android.gms.auth.api.identity.SignInClient
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
@@ -45,8 +46,7 @@ class UserRepositoryFirebaseImpl
     private val firebaseAuth: FirebaseAuth,
     databaseReference: DatabaseReference,
 ) : UserRepository {
-    private lateinit var signInClient : SignInClient
-//    private val signInClient: SignInClient
+    private var signInClient : SignInClient = Identity.getSignInClient(context)
     private val userDatabaseReference =
         databaseReference.child("users")
 
@@ -87,71 +87,67 @@ class UserRepositoryFirebaseImpl
             it[TYBKeys.ONBOARDING_IS_SHOW] = false
         }
     }
-
     override fun readOnboardingIsShow(): Flow<Boolean> =
         context.TYBDatastore.data.map {
             it[TYBKeys.ONBOARDING_IS_SHOW] ?: true
         }
 
-    //TODO provide this usecase
-//    override suspend fun continueWithGoogle(): IntentSender? {
-//        val result = try {
-//            signInClient.beginSignIn(
-//                buildSignInRequest()
-//            ).await()
-//        } catch (e: Exception) {
-//            e.printStackTrace()
-//            if (e is CancellationException) throw e
-//            null
-//        }
-//        return result?.pendingIntent?.intentSender
-//    }
-//    //TODO provide this usecase
-//    fun getSignedInUser(): User? = firebaseAuth.currentUser?.run {
-//        User(
-//            id = uid,
-//            email = email.toString()
-//        )
-//    }
-//    //TODO provide this usecase
-//    suspend fun getContinueWithGoogleFromIntent(intent: Intent): SignInResult {
-//        val credential = signInClient.getSignInCredentialFromIntent(intent)
-//        val googleIdToken = credential.googleIdToken
-//        val googleCredentials = GoogleAuthProvider.getCredential(
-//            googleIdToken, null
-//        )
-//        return try {
-//            val user = firebaseAuth.signInWithCredential(googleCredentials).await().user
-//            SignInResult(
-//                user = user?.run {
-//                    User(
-//                        email = email.toString(),
-//                        id = uid
-//                    )
-//                },
-//                errorMessage = null
-//            )
-//        } catch (e: Exception) {
-//            e.printStackTrace()
-//            if (e is CancellationException) throw e
-//            SignInResult(
-//                user = null,
-//                errorMessage = e.message
-//            )
-//        }
-//    }
-//
-//    private fun buildSignInRequest(): BeginSignInRequest {
-//        return BeginSignInRequest.Builder()
-//            .setGoogleIdTokenRequestOptions(
-//                GoogleIdTokenRequestOptions.builder()
-//                    .setSupported(true)
-//                    .setFilterByAuthorizedAccounts(false)
-//                    .setServerClientId(context.getString(R.string.web_client_id))
-//                    .build()
-//            ).setAutoSelectEnabled(true)
-//            .build()
-//    }
+    override suspend fun continueWithGoogle(): IntentSender? {
+        val result = try {
+            signInClient.beginSignIn(
+                buildSignInRequest()
+            ).await()
+        } catch (e: Exception) {
+            e.printStackTrace()
+            if (e is CancellationException) throw e
+            null
+        }
+        return result?.pendingIntent?.intentSender
+    }
+    override fun getSignedInUser(): User? = firebaseAuth.currentUser?.run {
+        User(
+            id = uid,
+            email = email.toString()
+        )
+    }
+    override suspend fun getContinueWithGoogleFromIntent(intent: Intent): SignInResult {
+        val credential = signInClient.getSignInCredentialFromIntent(intent)
+        val googleIdToken = credential.googleIdToken
+        val googleCredentials = GoogleAuthProvider.getCredential(
+            googleIdToken, null
+        )
+        return try {
+            val user = firebaseAuth.signInWithCredential(googleCredentials).await().user
+            SignInResult(
+                user = user?.run {
+                    User(
+                        email = email.toString(),
+                        id = uid
+                    )
+                },
+                errorMessage = null
+            )
+        } catch (e: Exception) {
+            e.printStackTrace()
+            if (e is CancellationException) throw e
+            SignInResult(
+                user = null,
+                errorMessage = e.message
+            )
+        }
+    }
+
+    private fun buildSignInRequest(): BeginSignInRequest {
+        return BeginSignInRequest.Builder()
+            .setGoogleIdTokenRequestOptions(
+                GoogleIdTokenRequestOptions.builder()
+                    .setSupported(true)
+                    .setFilterByAuthorizedAccounts(false)
+                    .setServerClientId(context.getString(R.string.web_client_id))
+                    .build()
+            ).setAutoSelectEnabled(true)
+            .build()
+    }
 
     private fun updateProfilePicture() {
         //TODO
