@@ -5,6 +5,7 @@ import android.content.IntentSender
 import com.example.tyb2.domain.user.model.SignInResult
 import com.example.tyb2.domain.user.model.User
 import com.example.tyb2.util.Resource
+import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.AuthResult
 
 import kotlinx.coroutines.flow.Flow
@@ -16,7 +17,6 @@ interface UserRepository {
     fun singOutUser()
     suspend fun saveOnboardingIsShow()
     fun readOnboardingIsShow(): Flow<Boolean>
-    suspend fun continueWithGoogle(): IntentSender?
-    suspend fun getContinueWithGoogleFromIntent(intent: Intent): SignInResult
+    suspend fun continueWithGoogle(credential: AuthCredential): Flow<Resource<AuthResult>>
     fun getSignedInUser(): User?
 }

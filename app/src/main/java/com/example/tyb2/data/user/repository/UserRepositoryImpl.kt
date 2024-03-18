@@ -20,6 +20,7 @@ import com.google.android.gms.auth.api.identity.BeginSignInRequest
 import com.google.android.gms.auth.api.identity.BeginSignInRequest.GoogleIdTokenRequestOptions
 import com.google.android.gms.auth.api.identity.Identity
 import com.google.android.gms.auth.api.identity.SignInClient
+import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
@@ -92,61 +93,20 @@ class UserRepositoryFirebaseImpl
             it[TYBKeys.ONBOARDING_IS_SHOW] ?: true
         }
 
-    override suspend fun continueWithGoogle(): IntentSender? {
-        val result = try {
-            signInClient.beginSignIn(
-                buildSignInRequest()
-            ).await()
-        } catch (e: Exception) {
-            e.printStackTrace()
-            if (e is CancellationException) throw e
-            null
+    override suspend fun continueWithGoogle(credential: AuthCredential): Flow<Resource<AuthResult>> {
+        return flow {
+            emit(Resource.Loading())
+            val result = firebaseAuth.signInWithCredential(credential).await()
+            emit(Resource.Success(result))
+        }.catch {
+            emit(Resource.Error(it.message.toString()))
         }
-        return result?.pendingIntent?.intentSender
     }
     override fun getSignedInUser(): User? = firebaseAuth.currentUser?.run {
         User(
             id = uid,
             email = email.toString()
         )
-    }
-    override suspend fun getContinueWithGoogleFromIntent(intent: Intent): SignInResult {
-        val credential = signInClient.getSignInCredentialFromIntent(intent)
-        val googleIdToken = credential.googleIdToken
-        val googleCredentials = GoogleAuthProvider.getCredential(
-            googleIdToken, null
-        )
-        return try {
-            val user = firebaseAuth.signInWithCredential(googleCredentials).await().user
-            SignInResult(
-                user = user?.run {
-                    User(
-                        email = email.toString(),
-                        id = uid
-                    )
-                },
-                errorMessage = null
-            )
-        } catch (e: Exception) {
-            e.printStackTrace()
-            if (e is CancellationException) throw e
-            SignInResult(
-                user = null,
-                errorMessage = e.message
-            )
-        }
-    }
-
-    private fun buildSignInRequest(): BeginSignInRequest {
-        return BeginSignInRequest.Builder()
-            .setGoogleIdTokenRequestOptions(
-                GoogleIdTokenRequestOptions.builder()
-                    .setSupported(true)
-                    .setFilterByAuthorizedAccounts(false)
-                    .setServerClientId(context.getString(R.string.web_client_id))
-                    .build()
-            ).setAutoSelectEnabled(true)
-            .build()
     }
 
     private fun updateProfilePicture() {

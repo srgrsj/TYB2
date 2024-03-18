@@ -73,10 +73,13 @@ import com.example.tyb2.presentation.ui.theme.redColor
 import com.example.tyb2.presentation.ui.theme.robotoFamily
 import com.example.tyb2.presentation.ui.theme.yellowColor
 import com.example.tyb2.util.Screen
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.GoogleAuthProvider
 import kotlinx.coroutines.launch
 
 
-// Вход
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun SignInScreen(
@@ -89,24 +92,30 @@ fun SignInScreen(
     var userPassword by remember { mutableStateOf("") }
 
     val state = viewModel.signInState.collectAsState(initial = null)
+    val googleSignInState = viewModel.googleSignInState.value
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
     val keyboardController = LocalSoftwareKeyboardController.current
 
-//    val launcher = rememberLauncherForActivityResult(
-//        contract = ActivityResultContracts.StartIntentSenderForResult(),
-//        onResult = { result ->
-//            if(result.resultCode == RESULT_OK) {
-//                //TODO with intent
-//                lifecycleScope.launch {
-//                    val signInResult = googleAuthUiClient.signInWithIntent(
-//                        intent = result.data ?: return@launch
-//                    )
-//                    viewModel.onSignInResult(signInResult)
-//                }
-//            }
-//        }
-//    )
+    val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+        .requestEmail()
+        .requestIdToken(context.getString(R.string.web_client_id))
+        .build()
+
+    val googleSignInClient = GoogleSignIn.getClient(context, gso)
+
+    val launcher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.StartActivityForResult()
+    ) {
+        val account = GoogleSignIn.getSignedInAccountFromIntent(it.data)
+        try {
+            val result = account.getResult(ApiException::class.java)
+            val credential = GoogleAuthProvider.getCredential(result.idToken, null)
+            viewModel.continueWithFirebase(credential)
+        } catch (e: ApiException) {
+            e.printStackTrace()
+        }
+    }
 
     LaunchedEffect(key1 = state.value?.isSuccess) {
         scope.launch {
@@ -114,6 +123,23 @@ fun SignInScreen(
                 val success = state.value?.isSuccess
                 Toast.makeText(context, "$success", Toast.LENGTH_LONG).show()
                 navController.navigate(Screen.Main.route)
+            }
+        }
+    }
+
+    LaunchedEffect(key1 = googleSignInState.success) {
+        scope.launch {
+            if (googleSignInState.success != null) {
+                Toast.makeText(context, "Sign In Success", Toast.LENGTH_LONG).show()
+                navController.navigate(Screen.Main.route)
+            }
+        }
+    }
+
+    LaunchedEffect(key1 = googleSignInState.error) {
+        scope.launch {
+            if (googleSignInState.error != "") {
+                Toast.makeText(context, googleSignInState.error, Toast.LENGTH_LONG).show()
             }
         }
     }
@@ -280,7 +306,7 @@ fun SignInScreen(
                 Spacer(modifier = Modifier.size(8.dp))
                 OutlinedButton(
                     onClick = {
-                        // TODO google auth
+                        launcher.launch(googleSignInClient.signInIntent)
                     },
                     colors = ButtonDefaults.buttonColors(
                         containerColor = MaterialTheme.colorScheme.onPrimary

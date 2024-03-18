@@ -6,7 +6,6 @@ import com.google.firebase.auth.AuthResult
 import kotlinx.coroutines.flow.Flow
 
 class UserSignInUseCase(private val repository: UserRepository) {
-    operator fun invoke(email: String, password: String): Flow<Resource<AuthResult>> {
-        return repository.loginUser(email, password)
-    }
+    operator fun invoke(email: String, password: String): Flow<Resource<AuthResult>> =
+        repository.loginUser(email, password)
 }

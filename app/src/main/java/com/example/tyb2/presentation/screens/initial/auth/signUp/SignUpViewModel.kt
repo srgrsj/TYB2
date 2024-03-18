@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tyb2.data.user.AccountData
 import com.example.tyb2.domain.user.usecases.UserUseCase
-import com.example.tyb2.util.SignInState
+import com.example.tyb2.presentation.screens.initial.auth.SignInState
 import com.example.tyb2.util.Resource
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
