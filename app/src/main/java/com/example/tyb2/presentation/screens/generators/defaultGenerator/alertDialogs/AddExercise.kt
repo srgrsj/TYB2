@@ -47,11 +47,15 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogProperties
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.commandiron.wheel_picker_compose.WheelTimePicker
 import com.example.tyb2.domain.exersice.model.ExerciseType
 import com.example.tyb2.presentation.components.MuscleBox
+import com.example.tyb2.presentation.components.TimePicker
 import com.example.tyb2.presentation.screens.generators.defaultGenerator.DefaultGeneratorViewModel
 import com.example.tyb2.presentation.ui.theme.Typography
+import com.example.tyb2.util.DateTimeUtils
 import com.example.tyb2.util.MuscleStuff
+import java.time.LocalTime
 
 @OptIn(ExperimentalMaterial3Api::class)
 @RequiresApi(Build.VERSION_CODES.O)
@@ -288,7 +292,8 @@ fun AddExerciseAlertDialog(
                             modifier = Modifier
                                 .fillMaxSize()
                         ) {
-
+                            TimePicker(value = durationOfOneCircle)
+                            Text(text = DateTimeUtils.formatDuration(durationOfOneCircle.value), color = MaterialTheme.colorScheme.onPrimary)
                         }
 
                     }

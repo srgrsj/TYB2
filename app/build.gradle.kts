@@ -76,7 +76,7 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
     //Time picker
-//    implementation("com.github.commandiron:WheelPickerCompose:1.1.11")
+    implementation("com.github.commandiron:WheelPickerCompose:1.1.11")
 
     //Videos
     implementation("io.sanghun:compose-video:1.1.1")
