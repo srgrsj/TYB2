@@ -1,5 +1,6 @@
 package com.example.tyb2.presentation.screens.generators.defaultGenerator
 
+import android.annotation.SuppressLint
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.border
@@ -13,11 +14,17 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FabPosition
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SearchBar
 import androidx.compose.material3.SearchBarDefaults
 import androidx.compose.material3.Text
@@ -42,6 +49,7 @@ import com.example.tyb2.presentation.screens.generators.defaultGenerator.alertDi
 import com.example.tyb2.presentation.ui.theme.Typography
 import com.example.tyb2.presentation.ui.theme.robotoFamily
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -49,173 +57,184 @@ fun DefaultGenerator(
     navController: NavController,
     viewModel: DefaultGeneratorViewModel = hiltViewModel()
 ) {
-    var searchBarValue by remember {
-        mutableStateOf("")
-    }
-    var workoutTitle by remember {
-        mutableStateOf("")
-    }
-
-    val showAddExerciseDialogState: Boolean by viewModel.showAddExerciseDialog.collectAsState()
-    if (showAddExerciseDialogState) {
-        AddExerciseAlertDialog(viewModel)
-    }
-
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(bottom = 52.dp)
-    ) {
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 20.dp)
-                .height(50.dp)
-        ) {
-            Box(
-                contentAlignment = Alignment.Center,
-                modifier = Modifier
-                    .fillMaxWidth()
+    Scaffold(
+        modifier = Modifier.padding(bottom = 52.dp),
+        floatingActionButtonPosition = FabPosition.End,
+        floatingActionButton = {
+            FloatingActionButton(
+                containerColor = MaterialTheme.colorScheme.onPrimary,
+                onClick = {
+                    viewModel.showAddExerciseAlertDialog()
+                },
+                elevation = FloatingActionButtonDefaults.elevation(),
             ) {
-                SearchBar(
-                    colors = SearchBarDefaults.colors(MaterialTheme.colorScheme.onPrimary),
-                    shape = RoundedCornerShape(10.dp),
-                    query = searchBarValue,
-                    onQueryChange = { searchBarValue = it },
-                    onSearch = {},
-                    active = false,
-                    placeholder = {
-                        Text(
-                            text = "Search by exercises",
-                            style = Typography.labelMedium.copy(fontSize = 16.sp),
-                            color = MaterialTheme.colorScheme.primary
-                        )
-                    },
-                    trailingIcon = {
-                        Icon(
-                            painter = painterResource(id = R.drawable.icon_search),
-                            contentDescription = "",
-                            tint = MaterialTheme.colorScheme.primary
-                        )
-                    },
-                    onActiveChange = {},
-                    modifier = Modifier
-                        .fillMaxWidth(0.7f)
-                        .height(50.dp)
-
-                ) {}
-            }
-
-            Box(
-                contentAlignment = Alignment.CenterStart,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(50.dp)
-                    .padding(start = 20.dp, top = 5.dp)
-            ) {
-                Icon(
-                    painter = painterResource(id = R.drawable.icon_left_arrow),
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.onPrimary,
-                    modifier = Modifier
-                        .scale(1.78f)
-                        .clickable {
-                            navController.popBackStack()
-                        }
-                )
+                Icon(Icons.Filled.Add, contentDescription = null)
             }
         }
+    ) {
+        var searchBarValue by remember {
+            mutableStateOf("")
+        }
+        var workoutTitle by remember {
+            mutableStateOf("")
+        }
 
+        val showAddExerciseDialogState: Boolean by viewModel.showAddExerciseDialog.collectAsState()
+        if (showAddExerciseDialogState) {
+            AddExerciseAlertDialog(viewModel)
+        }
 
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
 
-        Column {
-            Row(
+        ) {
+            Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 20.dp, start = 15.dp)
+                    .padding(top = 20.dp)
+                    .height(50.dp)
             ) {
-                Text(
-                    text = "Title",
-                    color = MaterialTheme.colorScheme.onPrimary,
-                    style = Typography.headlineMedium
-                )
+                Box(
+                    contentAlignment = Alignment.Center,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                ) {
+                    SearchBar(
+                        colors = SearchBarDefaults.colors(MaterialTheme.colorScheme.onPrimary),
+                        shape = RoundedCornerShape(10.dp),
+                        query = searchBarValue,
+                        onQueryChange = { searchBarValue = it },
+                        onSearch = {},
+                        active = false,
+                        placeholder = {
+                            Text(
+                                text = "Search by exercises",
+                                style = Typography.labelMedium.copy(fontSize = 16.sp),
+                                color = MaterialTheme.colorScheme.primary
+                            )
+                        },
+                        trailingIcon = {
+                            Icon(
+                                painter = painterResource(id = R.drawable.icon_search),
+                                contentDescription = "",
+                                tint = MaterialTheme.colorScheme.primary
+                            )
+                        },
+                        onActiveChange = {},
+                        modifier = Modifier
+                            .fillMaxWidth(0.7f)
+                            .height(50.dp)
+
+                    ) {}
+                }
+
+                Box(
+                    contentAlignment = Alignment.CenterStart,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(50.dp)
+                        .padding(start = 20.dp, top = 5.dp)
+                ) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.icon_left_arrow),
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.onPrimary,
+                        modifier = Modifier
+                            .scale(1.78f)
+                            .clickable {
+                                navController.popBackStack()
+                            }
+                    )
+                }
             }
 
-            Row(
-                modifier = Modifier
-                    .padding(top = 10.dp)
-                    .fillMaxWidth()
-            ) {
+
+
+            Column {
+//                Row(
+//                    modifier = Modifier
+//                        .fillMaxWidth()
+//                        .padding(top = 20.dp, start = 15.dp)
+//                ) {
+//                    Text(
+//                        text = "Title",
+//                        color = MaterialTheme.colorScheme.onPrimary,
+//                        style = Typography.headlineMedium
+//                    )
+//                }
+
+                Row(
+                    horizontalArrangement = Arrangement.Center,
+                    modifier = Modifier
+                        .padding(top = 10.dp)
+                        .fillMaxWidth()
+                ) {
 //                var isTitleTextFieldReadOnly by remember {
 //                    mutableStateOf(true)
 //                }
-                OutlinedTextField(
-                    value = workoutTitle,
-                    onValueChange = { workoutTitle = it },
+                    OutlinedTextField(
+                        value = workoutTitle,
+                        label = {
+                            Text(
+                                text = "Title",
+                                color = MaterialTheme.colorScheme.onPrimary
+                            )
+                        },
+                        onValueChange = { workoutTitle = it },
 //                    readOnly = isTitleTextFieldReadOnly,
-                    trailingIcon = {
-                        Icon(
-                            painter = painterResource(id = R.drawable.icon_edit),
-                            contentDescription = null,
-                            tint = MaterialTheme.colorScheme.onPrimary,
+                        trailingIcon = {
+                            Icon(
+                                painter = painterResource(id = R.drawable.icon_edit),
+                                contentDescription = null,
+                                tint = MaterialTheme.colorScheme.onPrimary,
 //                            modifier = Modifier
 //                                .clickable {
 //                                    isTitleTextFieldReadOnly = false
 //                                }
-                        )
-                    },
-                    textStyle = TextStyle(
-                        fontFamily = robotoFamily,
-                        fontWeight = FontWeight.ExtraBold,
-                        fontSize = 18.sp,
-                        letterSpacing = 0.5.sp
-                    ),
-                    colors = OutlinedTextFieldDefaults.colors(
-                        unfocusedBorderColor = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.8f),
-                        focusedBorderColor = MaterialTheme.colorScheme.onPrimary,
-                        unfocusedContainerColor = MaterialTheme.colorScheme.onBackground,
-                        focusedContainerColor = MaterialTheme.colorScheme.onBackground
-                    ),
-                    shape = RoundedCornerShape(10.dp),
+                            )
+                        },
+                        textStyle = TextStyle(
+                            fontFamily = robotoFamily,
+                            fontWeight = FontWeight.ExtraBold,
+                            fontSize = 18.sp,
+                            letterSpacing = 0.5.sp
+                        ),
+                        colors = OutlinedTextFieldDefaults.colors(
+                            unfocusedBorderColor = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.8f),
+                            focusedBorderColor = MaterialTheme.colorScheme.onPrimary,
+                            unfocusedContainerColor = MaterialTheme.colorScheme.onBackground,
+                            focusedContainerColor = MaterialTheme.colorScheme.onBackground
+                        ),
+                        shape = RoundedCornerShape(10.dp),
+                        modifier = Modifier
+                            .fillMaxWidth(0.9f)
+//                            .border(
+//                                3.dp,
+//                                MaterialTheme.colorScheme.onPrimary,
+//                                RoundedCornerShape(10.dp)
+//                            )
+                    )
+                }
+            }
+
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 30.dp)
+            ) {
+                Text(
+                    text = "Exercises",
+                    style = Typography.headlineMedium,
+                    color = MaterialTheme.colorScheme.onPrimary,
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .border(
-                            3.dp,
-                            MaterialTheme.colorScheme.onPrimary,
-                            RoundedCornerShape(10.dp)
-                        )
+                        .padding(start = 15.dp)
                 )
             }
+
+
         }
-
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 30.dp)
-        ) {
-            Text(
-                text = "Exercises",
-                style = Typography.headlineMedium,
-                color = MaterialTheme.colorScheme.onPrimary,
-                modifier = Modifier
-                    .padding(start = 15.dp)
-            )
-
-            Icon(
-                painter = painterResource(id = R.drawable.icon_circle_add),
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.onPrimary,
-                modifier = Modifier
-                    .scale(1.5f)
-                    .padding(end = 15.dp)
-                    .clickable {
-                        viewModel.showAddExerciseAlertDialog()
-                    }
-            )
-        }
-
     }
 }
 
