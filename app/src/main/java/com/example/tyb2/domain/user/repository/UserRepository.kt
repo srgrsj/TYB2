@@ -1,6 +1,8 @@
 package com.example.tyb2.domain.user.repository
 
+import android.content.Intent
 import android.content.IntentSender
+import com.example.tyb2.domain.user.model.SignInResult
 import com.example.tyb2.domain.user.model.User
 import com.example.tyb2.util.Resource
 import com.google.firebase.auth.AuthResult
@@ -14,5 +16,7 @@ interface UserRepository {
     fun singOutUser()
     suspend fun saveOnboardingIsShow()
     fun readOnboardingIsShow(): Flow<Boolean>
-//    suspend fun continueWithGoogle(): IntentSender?
+    suspend fun continueWithGoogle(): IntentSender?
+    suspend fun getContinueWithGoogleFromIntent(intent: Intent): SignInResult
+    fun getSignedInUser(): User?
 }

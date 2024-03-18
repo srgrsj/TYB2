@@ -43,13 +43,23 @@ class SignInViewModel @Inject constructor(
         AccountData.ID = Firebase.auth.currentUser?.uid
         AccountData.EMAIL = Firebase.auth.currentUser?.email
     }
+
+//    fun continueWithFirebase() {
+//        viewModelScope.launch {
+//            val signInResult = userUseCase.continueWithGoogleFromIntentUseCase.invoke(intent =)
+//            val signInResult = googleAuthUiClient.signInWithIntent(
+//                intent = result.data ?: return@launch
+//            )
+//
+//        }
+//    }
     fun onSignInResult(result: SignInResult) {
         viewModelScope.launch {
             _signInState.send(
                 SignInState(
-                isLoading = result.user != null,
-                isError = result.errorMessage
-            )
+                    isLoading = result.user != null,
+                    isError = result.errorMessage
+                )
             )
         }
     }
