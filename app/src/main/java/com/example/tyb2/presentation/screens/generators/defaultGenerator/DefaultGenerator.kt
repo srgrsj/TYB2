@@ -58,7 +58,7 @@ fun DefaultGenerator(
 
     val showAddExerciseDialogState: Boolean by viewModel.showAddExerciseDialog.collectAsState()
     if (showAddExerciseDialogState) {
-//        AddExerciseAlertDialog(viewModel)
+        AddExerciseAlertDialog(viewModel)
     }
 
     Column(
@@ -210,7 +210,9 @@ fun DefaultGenerator(
                 modifier = Modifier
                     .scale(1.5f)
                     .padding(end = 15.dp)
-
+                    .clickable {
+                        viewModel.showAddExerciseAlertDialog()
+                    }
             )
         }
 

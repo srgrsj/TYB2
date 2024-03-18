@@ -2,12 +2,15 @@ package com.example.tyb2.presentation.screens.generators.defaultGenerator.alertD
 
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -27,23 +30,24 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.tyb2.domain.exersice.model.Exercise
+import androidx.compose.ui.window.DialogProperties
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.tyb2.domain.exersice.model.ExerciseType
 import com.example.tyb2.presentation.components.MuscleBox
+import com.example.tyb2.presentation.screens.generators.defaultGenerator.DefaultGeneratorViewModel
 import com.example.tyb2.presentation.ui.theme.Typography
 import com.example.tyb2.util.MuscleStuff
 
 @OptIn(ExperimentalMaterial3Api::class)
 @RequiresApi(Build.VERSION_CODES.O)
-@Preview
+//@Preview
 @Composable
 fun AddExerciseAlertDialog(
-//    viewModel: DefaultGeneratorViewModel = hiltViewModel()
+    viewModel: DefaultGeneratorViewModel = hiltViewModel()
 ) {
     var title: String by remember { mutableStateOf("") }
     var numberOfRepetitions: String by remember { mutableStateOf("") }
@@ -60,9 +64,10 @@ fun AddExerciseAlertDialog(
 
 
     AlertDialog(
+        properties = DialogProperties(usePlatformDefaultWidth = false),
         modifier = Modifier
-            .height(525.dp)
-        ,
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.onBackground),
         onDismissRequest = {
 //            viewModel.hideAddExerciseAlertDialog()
         },
@@ -131,6 +136,48 @@ fun AddExerciseAlertDialog(
 @Composable
 fun ExerciseTypeButtonSection(
 ) {
+    var isRepetitionSelected by remember {
+        mutableStateOf(true)
+    }
+
+    val animateRepetitionSize by animateDpAsState(
+        targetValue = if (isRepetitionSelected) 0.dp else 10.dp,
+        label = "",
+        animationSpec = tween(
+            durationMillis = 500
+        )
+    )
+
+    val animateRepetitionColor by animateFloatAsState(
+        targetValue = if (isRepetitionSelected) 1f else 0.8f,
+        label = "",
+        animationSpec = tween(
+            durationMillis = 500
+        )
+    )
+
+    var isTimeSelected by remember {
+        mutableStateOf(true)
+    }
+
+    val animateTimeSize by animateDpAsState(
+        targetValue = if (isTimeSelected) 0.dp else 10.dp,
+        label = "",
+        animationSpec = tween(
+            durationMillis = 500
+        )
+    )
+
+    val animateTimeColor by animateFloatAsState(
+        targetValue = if (isTimeSelected) 1f else 0.8f,
+        label = "",
+        animationSpec = tween(
+            durationMillis = 500
+        )
+    )
+
+
+
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceAround,
@@ -141,9 +188,17 @@ fun ExerciseTypeButtonSection(
             modifier = Modifier
 //                .fillMaxHeight(0.8f)
                 .clip(RoundedCornerShape(5.dp))
-                .height(40.dp)
-                .width(80.dp)
-                .background(MaterialTheme.colorScheme.onSecondary)
+                .height(40.dp - animateRepetitionSize)
+                .width(80.dp - animateRepetitionSize)
+                .background(
+                    MaterialTheme.colorScheme.onSecondary.copy(
+                        alpha = animateRepetitionColor
+                    )
+                )
+                .clickable {
+                    isRepetitionSelected = true
+                    isTimeSelected = false
+                }
         ) {
             Text(
                 text = "Repetition"
@@ -155,9 +210,17 @@ fun ExerciseTypeButtonSection(
             modifier = Modifier
 //                .fillMaxHeight(0.8f)
                 .clip(RoundedCornerShape(5.dp))
-                .height(40.dp)
-                .width(80.dp)
-                .background(MaterialTheme.colorScheme.onSecondary)
+                .height(40.dp - animateTimeSize)
+                .width(80.dp - animateTimeSize)
+                .background(
+                    MaterialTheme.colorScheme.onSecondary.copy(
+                        alpha = animateTimeColor
+                    )
+                )
+                .clickable {
+                    isTimeSelected = true
+                    isRepetitionSelected = false
+                }
         ) {
             Text(
                 text = "Time"
