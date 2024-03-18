@@ -49,7 +49,7 @@ fun TimePicker(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
                 .clip(
-                    RoundedCornerShape(20.dp)
+                    RoundedCornerShape(15.dp)
                 )
                 .background(MaterialTheme.colorScheme.background)
         ) {
@@ -66,7 +66,7 @@ fun TimePicker(
                 },
                 selectorProperties = WheelPickerDefaults.selectorProperties(
                     color = MaterialTheme.colorScheme.background,
-                    border = BorderStroke(1.dp, Color.Black)
+                    border = BorderStroke(1.dp, MaterialTheme.colorScheme.background)
                 )
             )
             Text(
@@ -90,7 +90,7 @@ fun TimePicker(
                 },
                 selectorProperties = WheelPickerDefaults.selectorProperties(
                     color = MaterialTheme.colorScheme.background,
-                    border = BorderStroke(1.dp, Color.Black)
+                    border = BorderStroke(1.dp, MaterialTheme.colorScheme.background)
                 )
             )
         }
