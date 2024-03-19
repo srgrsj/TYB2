@@ -243,6 +243,7 @@ fun DefaultGenerator(
 
             Column(
                 modifier = Modifier
+                    .padding(top = 20.dp)
                     .verticalScroll(ScrollState(0), true)
             ) {
                 exerciseList.forEach {

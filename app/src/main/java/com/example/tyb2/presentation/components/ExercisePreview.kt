@@ -4,11 +4,10 @@ import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -82,11 +81,15 @@ fun ExercisePreview(exercise: Exercise) {
         )
     )
 
+    val interactionSource = remember { MutableInteractionSource() }
     Card(
         colors = CardDefaults.cardColors(MaterialTheme.colorScheme.primary),
         modifier = Modifier
             .fillMaxWidth()
-            .clickable {
+            .clickable(
+                interactionSource = interactionSource,
+                indication = null
+            ) {
                 isExpanded = !isExpanded
             }
     ) {
@@ -115,14 +118,26 @@ fun ExercisePreview(exercise: Exercise) {
                 }
 
                 muscleGroupList.forEach() {
-                    Box(
-                        modifier = Modifier
-                            .size(16.dp)
-                            .clip(CircleShape)
-                            .background(MuscleStuff.defineColor(it))
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(5.dp)
                     ) {
+                        Box(
+                            modifier = Modifier
+                                .size(16.dp)
+                                .clip(CircleShape)
+                                .background(MuscleStuff.defineColor(it))
+                        ) {
 
+                        }
+
+                        Text(
+                            text = MuscleStuff.defineTitle(it),
+                            style = Typography.bodyMedium,
+                            modifier = Modifier.padding(end = 10.dp)
+                        )
                     }
+
                 }
             }
 
