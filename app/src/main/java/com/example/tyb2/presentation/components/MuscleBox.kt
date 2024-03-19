@@ -21,11 +21,12 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import com.example.tyb2.presentation.screens.generators.defaultGenerator.DefaultGeneratorViewModel
 import com.example.tyb2.util.Muscle
 import com.example.tyb2.util.MuscleStuff
 
 @Composable
-fun MuscleBox(muscle: Muscle) {
+fun MuscleBox(muscle: Muscle, viewModel: DefaultGeneratorViewModel) {
     var isSelected by remember {
         mutableStateOf(false)
     }
@@ -49,7 +50,17 @@ fun MuscleBox(muscle: Muscle) {
                 RoundedCornerShape(10.dp)
             )
             .clickable {
-                isSelected = !isSelected
+                when (isSelected) {
+                    true -> {
+                        isSelected = false
+                        viewModel.removeMuscleFromMuscleList(muscle)
+                    }
+
+                    false -> {
+                        isSelected = true
+                        viewModel.saveMuscleToMuscleList(muscle)
+                    }
+                }
 
             }
     ) {

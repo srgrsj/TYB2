@@ -3,17 +3,20 @@ package com.example.tyb2.presentation.screens.generators.defaultGenerator
 import android.annotation.SuppressLint
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -42,9 +45,12 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.glance.appwidget.lazy.LazyColumn
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.tyb2.R
+import com.example.tyb2.presentation.components.ExerciseCard
+import com.example.tyb2.presentation.components.ExercisePreview
 import com.example.tyb2.presentation.screens.generators.defaultGenerator.alertDialogs.AddExerciseAlertDialog
 import com.example.tyb2.presentation.ui.theme.Typography
 import com.example.tyb2.presentation.ui.theme.robotoFamily
@@ -78,6 +84,8 @@ fun DefaultGenerator(
         var workoutTitle by remember {
             mutableStateOf("")
         }
+
+        val exerciseList by viewModel.exerciseList.collectAsState()
 
         val showAddExerciseDialogState: Boolean by viewModel.showAddExerciseDialog.collectAsState()
         if (showAddExerciseDialogState) {
@@ -233,6 +241,23 @@ fun DefaultGenerator(
                 )
             }
 
+            Column(
+                modifier = Modifier
+                    .verticalScroll(ScrollState(0), true)
+            ) {
+                exerciseList.forEach {
+                    Row(
+                        horizontalArrangement = Arrangement.Center,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                    ) {
+                        ExercisePreview(exercise = it)
+                    }
+
+                    Spacer(modifier = Modifier.height(15.dp))
+
+                }
+            }
 
         }
     }

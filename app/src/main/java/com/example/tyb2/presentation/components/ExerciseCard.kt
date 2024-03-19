@@ -35,22 +35,22 @@ import com.example.tyb2.domain.exersice.model.ExerciseType
 import com.example.tyb2.presentation.ui.theme.Typography
 import com.example.tyb2.presentation.ui.theme.redColor
 
-@Preview(device = "id:pixel_6_pro")
-@Composable
-fun testShedevroExerciseCard() {
-    ExerciseCard(
-        exercise = Exercise(
-            "Bench press",
-            "some description",
-            52,
-            52,
-            52000,
-            52233,
-            ExerciseType.TIME,
-
-            )
-    )
-}
+//@Preview(device = "id:pixel_6_pro")
+//@Composable
+//fun testShedevroExerciseCard() {
+//    ExerciseCard(
+//        exercise = Exercise(
+//            "Bench press",
+//            "some description",
+//            52,
+//            52,
+//            52000,
+//            52233,
+//            ExerciseType.TIME,
+//
+//            )
+//    )
+//}
 
 
 @Composable

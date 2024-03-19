@@ -3,9 +3,7 @@ package com.example.tyb2.presentation.components
 import android.annotation.SuppressLint
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
@@ -19,7 +17,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
@@ -39,64 +36,55 @@ fun TimePicker(
     var sec by remember { mutableStateOf(0) }
 
     Row(
-        horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
-            .fillMaxWidth()
-
+            .clip(
+                RoundedCornerShape(15.dp)
+            )
+            .background(MaterialTheme.colorScheme.background)
     ) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
+        WheelTextPicker(
+            texts = minList,
+            rowCount = 1,
+            size = DpSize(128.dp, 50.dp),
+            style = Typography.headlineMedium,
+            color = MaterialTheme.colorScheme.onPrimary,
+            onScrollFinished = { snappedIndex ->
+                min = minList[snappedIndex].toInt()
+                value.value = convertToMilliseconds(min, sec)
+                null
+            },
+            selectorProperties = WheelPickerDefaults.selectorProperties(
+                color = MaterialTheme.colorScheme.background,
+                border = BorderStroke(1.dp, MaterialTheme.colorScheme.background)
+            )
+        )
+        Text(
+            text = ":",
+            style = Typography.headlineMedium,
+            color = MaterialTheme.colorScheme.onPrimary,
             modifier = Modifier
-                .clip(
-                    RoundedCornerShape(15.dp)
-                )
-                .background(MaterialTheme.colorScheme.background)
-        ) {
-            WheelTextPicker(
-                texts = minList,
-                rowCount = 1,
-                size = DpSize(128.dp, 50.dp),
-                style = Typography.headlineMedium,
-                color = MaterialTheme.colorScheme.onPrimary,
-                onScrollFinished = { snappedIndex ->
-                    min = minList[snappedIndex].toInt()
-                    value.value = convertToMilliseconds(min, sec)
-                    null
-                },
-                selectorProperties = WheelPickerDefaults.selectorProperties(
-                    color = MaterialTheme.colorScheme.background,
-                    border = BorderStroke(1.dp, MaterialTheme.colorScheme.background)
-                )
-            )
-            Text(
-                text = ":",
-                style = Typography.headlineMedium,
-                color = MaterialTheme.colorScheme.onPrimary,
-                modifier = Modifier
-                    .padding(horizontal = 5.dp)
-            )
+                .padding(horizontal = 5.dp)
+        )
 
-            WheelTextPicker(
-                texts = secList,
-                rowCount = 1,
-                size = DpSize(128.dp, 50.dp),
-                style = Typography.headlineMedium,
-                color = MaterialTheme.colorScheme.onPrimary,
-                onScrollFinished = { snappedIndex ->
-                    sec = secList[snappedIndex].toInt()
-                    value.value = convertToMilliseconds(min, sec)
-                    null
-                },
-                selectorProperties = WheelPickerDefaults.selectorProperties(
-                    color = MaterialTheme.colorScheme.background,
-                    border = BorderStroke(1.dp, MaterialTheme.colorScheme.background)
-                )
+        WheelTextPicker(
+            texts = secList,
+            rowCount = 1,
+            size = DpSize(128.dp, 50.dp),
+            style = Typography.headlineMedium,
+            color = MaterialTheme.colorScheme.onPrimary,
+            onScrollFinished = { snappedIndex ->
+                sec = secList[snappedIndex].toInt()
+                value.value = convertToMilliseconds(min, sec)
+                null
+            },
+            selectorProperties = WheelPickerDefaults.selectorProperties(
+                color = MaterialTheme.colorScheme.background,
+                border = BorderStroke(1.dp, MaterialTheme.colorScheme.background)
             )
-        }
-
-
+        )
     }
+
 }
 
 fun generateListOfNumbers(from: Int, to: Int): List<String> {
