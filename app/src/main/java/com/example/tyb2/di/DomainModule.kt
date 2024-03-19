@@ -12,6 +12,7 @@ import com.example.tyb2.domain.user.usecases.ContinueWithGoogleUseCase
 import com.example.tyb2.domain.user.usecases.GetSignedInUserUseCase
 import com.example.tyb2.domain.user.usecases.ReadOnboardingIsShow
 import com.example.tyb2.domain.user.usecases.SaveOnboardingIsShow
+import com.example.tyb2.domain.user.usecases.UpdateProfilePictureUseCase
 import com.example.tyb2.domain.user.usecases.UserSignInUseCase
 import com.example.tyb2.domain.user.usecases.UserSignOutUseCase
 import com.example.tyb2.domain.user.usecases.UserSignUpUseCase
@@ -56,6 +57,7 @@ class DomainModule {
             readOnboardingIsShow = ReadOnboardingIsShow(userRepositoryFirebaseImpl),
             saveOnboardingIsShow = SaveOnboardingIsShow(userRepositoryFirebaseImpl),
             getSignedInUserUseCase = GetSignedInUserUseCase(userRepositoryFirebaseImpl),
-            continueWithGoogleUseCase = ContinueWithGoogleUseCase(userRepositoryFirebaseImpl)
+            continueWithGoogleUseCase = ContinueWithGoogleUseCase(userRepositoryFirebaseImpl),
+            updateProfilePictureUseCase = UpdateProfilePictureUseCase(userRepositoryFirebaseImpl)
         )
 }

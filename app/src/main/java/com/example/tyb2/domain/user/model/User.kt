@@ -6,16 +6,13 @@ import java.util.UUID
 data class User(
     val email: String,
     val id: String = UUID.randomUUID().toString(),
+//    val profilePictureUrl: String? = null,
 //    val username: String,
-//    val profilePictureUrl: String?,
 //    val categories:
 //    val achievements
 )
 
-data class SignInResult(
-    val user: User?,
-    val errorMessage: String?
-)
+
 
 data class Achievement(
     val picture: Int,

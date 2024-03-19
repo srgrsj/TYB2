@@ -2,6 +2,9 @@ package com.example.tyb2.presentation.screens.initial.auth.signUp
 
 import android.annotation.SuppressLint
 import android.widget.Toast
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -69,10 +72,12 @@ import com.example.tyb2.presentation.ui.theme.redColor
 import com.example.tyb2.presentation.ui.theme.robotoFamily
 import com.example.tyb2.presentation.ui.theme.yellowColor
 import com.example.tyb2.util.Screen
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.GoogleAuthProvider
 import kotlinx.coroutines.launch
 
-
-// Регестрация
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun SignUpScreen(
@@ -82,33 +87,68 @@ fun SignUpScreen(
     // TODO error color(if authorization failed)
     var passwordVisible by remember { mutableStateOf(false) }
     var userEmail by remember { mutableStateOf("") }
-    var userName by remember { mutableStateOf("") }
+//    var userName by remember { mutableStateOf("") }
     var userPassword by remember { mutableStateOf("") }
 
-//    val state = viewModel.signUpState.collectAsState(initial = null)
+    val googleSignInState = viewModel.googleSignInState.value
+    val state = viewModel.signUpState.collectAsState(initial = null)
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
     val keyboardController = LocalSoftwareKeyboardController.current
 
+    val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+        .requestEmail()
+        .requestIdToken(context.getString(R.string.web_client_id))
+        .build()
 
-//    LaunchedEffect(key1 = state.value?.isSuccess) {
-//        scope.launch {
-//            if (state.value?.isSuccess?.isNotEmpty() == true) {
-//                val success = state.value?.isSuccess
-//                Toast.makeText(context, "$success", Toast.LENGTH_LONG).show()
-//                navController.navigate(Screen.Main.route)
-//            }
-//        }
-//    }
-//
-//    LaunchedEffect(key1 = state.value?.isError) {
-//        scope.launch {
-//            if (state.value?.isError?.isNotEmpty() == true) {
-//                val error = state.value?.isError
-//                Toast.makeText(context, error, Toast.LENGTH_LONG).show()
-//            }
-//        }
-//    }
+    val googleSignInClient = GoogleSignIn.getClient(context, gso)
+
+    val launcher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.StartActivityForResult()
+    ) {
+        val account = GoogleSignIn.getSignedInAccountFromIntent(it.data)
+        try {
+            val result = account.getResult(ApiException::class.java)
+            val credential = GoogleAuthProvider.getCredential(result.idToken, null)
+            viewModel.continueWithFirebase(credential)
+        } catch (e: ApiException) {
+            e.printStackTrace()
+        }
+    }
+
+    LaunchedEffect(key1 = state.value?.isSuccess) {
+        scope.launch {
+            if (state.value?.isSuccess?.isNotEmpty() == true) {
+                val success = state.value?.isSuccess
+                Toast.makeText(context, "$success", Toast.LENGTH_LONG).show()
+                navController.navigate(Screen.Main.route)
+            }
+        }
+    }
+    LaunchedEffect(key1 = state.value?.isError) {
+        scope.launch {
+            if (state.value?.isError?.isNotEmpty() == true) {
+                val error = state.value?.isError
+                Toast.makeText(context, error, Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+    LaunchedEffect(key1 = googleSignInState.success) {
+        scope.launch {
+            if (googleSignInState.success != null) {
+                Toast.makeText(context, "Sign In Success", Toast.LENGTH_LONG).show()
+                navController.navigate(Screen.Main.route)
+            }
+        }
+    }
+    LaunchedEffect(key1 = googleSignInState.error) {
+        scope.launch {
+            if (googleSignInState.error != "") {
+                Toast.makeText(context, googleSignInState.error, Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+
     Scaffold(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -206,35 +246,35 @@ fun SignUpScreen(
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(bottom = 32.dp),
+                    .padding(bottom = 48.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Bottom,
             ) {
-                OutlinedTextField(
-                    value = userName,
-                    onValueChange = { userName = it },
-                    textStyle = MaterialTheme.typography.bodyMedium,
-                    placeholder = {
-                        Text(
-                            text = "Username",
-                            style = MaterialTheme.typography.labelSmall,
-                            color = MaterialTheme.colorScheme.primary.copy(0.5f)
-                        )
-                    },
-                    colors = OutlinedTextFieldDefaults.colors(
-                        focusedContainerColor = MaterialTheme.colorScheme.onPrimary,
-                        unfocusedContainerColor = MaterialTheme.colorScheme.onPrimary,
-                        focusedTextColor = MaterialTheme.colorScheme.primary,
-                        unfocusedTextColor = MaterialTheme.colorScheme.primary,
-                        focusedBorderColor = MaterialTheme.colorScheme.onPrimary,
-                        unfocusedBorderColor = MaterialTheme.colorScheme.onPrimary,
-                    ),
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
-                    shape = RoundedCornerShape(10.dp),
-                    modifier = Modifier
-                        .width(320.dp)
-                )
-                Spacer(modifier = Modifier.size(8.dp))
+//                OutlinedTextField(
+//                    value = userName,
+//                    onValueChange = { userName = it },
+//                    textStyle = MaterialTheme.typography.bodyMedium,
+//                    placeholder = {
+//                        Text(
+//                            text = "Username",
+//                            style = MaterialTheme.typography.labelSmall,
+//                            color = MaterialTheme.colorScheme.primary.copy(0.5f)
+//                        )
+//                    },
+//                    colors = OutlinedTextFieldDefaults.colors(
+//                        focusedContainerColor = MaterialTheme.colorScheme.onPrimary,
+//                        unfocusedContainerColor = MaterialTheme.colorScheme.onPrimary,
+//                        focusedTextColor = MaterialTheme.colorScheme.primary,
+//                        unfocusedTextColor = MaterialTheme.colorScheme.primary,
+//                        focusedBorderColor = MaterialTheme.colorScheme.onPrimary,
+//                        unfocusedBorderColor = MaterialTheme.colorScheme.onPrimary,
+//                    ),
+//                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
+//                    shape = RoundedCornerShape(10.dp),
+//                    modifier = Modifier
+//                        .width(320.dp)
+//                )
+//                Spacer(modifier = Modifier.size(8.dp))
                 OutlinedTextField(
                     value = userEmail,
                     onValueChange = { userEmail = it },
@@ -303,7 +343,7 @@ fun SignUpScreen(
                 Spacer(modifier = Modifier.size(8.dp))
                 OutlinedButton(
                     onClick = {
-                        // TODO google auth
+                        launcher.launch(googleSignInClient.signInIntent)
                     },
                     colors = ButtonDefaults.buttonColors(
                         containerColor = MaterialTheme.colorScheme.onPrimary
@@ -322,11 +362,10 @@ fun SignUpScreen(
                             modifier = Modifier.fillMaxSize(),
                             contentAlignment = Alignment.CenterStart
                         ) {
-                            Icon(
+                            Image(
                                 painter = painterResource(id = R.drawable.icon_google),
                                 contentDescription = null,
-                                modifier = Modifier,
-                                tint = MaterialTheme.colorScheme.primary
+                                modifier = Modifier
                             )
                             Box(
                                 modifier = Modifier.fillMaxSize(),
@@ -344,7 +383,7 @@ fun SignUpScreen(
                 Spacer(modifier = Modifier.size(8.dp))
                 OutlinedButton(
                     onClick = {
-                       //TODO viewModel.loginUser(email = userEmail, password = userPassword)
+                       viewModel.signUpUser(email = userEmail, password = userPassword)
                     },
                     colors = ButtonDefaults.buttonColors(
                         containerColor = MaterialTheme.colorScheme.onPrimary
@@ -355,7 +394,7 @@ fun SignUpScreen(
                         .height(52.dp)
                 ) {
                     Text(
-                        text = "Log in",
+                        text = "Sign up",
                         color = MaterialTheme.colorScheme.primary,
                         style = MaterialTheme.typography.bodyMedium
                     )
@@ -384,10 +423,10 @@ fun SignUpScreen(
                         style = MaterialTheme.typography.bodyMedium
                     )
                     TextButton(onClick = {
-//                        TODO navController.navigate(Screen.)
+                        navController.navigate(Screen.SIGN_IN)
                     }) {
                         Text(
-                            text = "Log in",
+                            text = "Sign up",
                             color = MaterialTheme.colorScheme.onPrimary,
                             style = TextStyle(
                                 brush = AnimatedFieldBrush()
@@ -404,11 +443,3 @@ fun SignUpScreen(
         }
     }
 }
-
-//@Preview
-//@Composable
-//private fun PreviewSignUp() {
-//    TYB2Theme {
-//        SignUpScreen()
-//    }
-//}

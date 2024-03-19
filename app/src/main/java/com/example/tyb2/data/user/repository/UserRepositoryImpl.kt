@@ -11,7 +11,6 @@ import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.preferencesDataStore
 import com.example.tyb2.R
 import com.example.tyb2.data.user.AccountData
-import com.example.tyb2.domain.user.model.SignInResult
 import com.example.tyb2.domain.user.model.User
 import com.example.tyb2.domain.user.repository.UserRepository
 import com.example.tyb2.util.Constants
@@ -36,6 +35,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.tasks.await
 import java.io.IOException
+import java.util.UUID
 import java.util.concurrent.CancellationException
 import javax.inject.Inject
 
@@ -56,6 +56,11 @@ class UserRepositoryFirebaseImpl
         user.id.let { userDatabaseReference.child(it).setValue(user) }
     }
 
+//    override suspend fun updateProfilePicture(id: String, profilePicValue: String) {
+//        val updates = HashMap<String, Any>()
+//        updates["profilePictureUrl"] = profilePicValue
+//        id.let { userDatabaseReference.child(it).updateChildren(updates) }
+//    }
     override fun loginUser(email: String, password: String): Flow<Resource<AuthResult>> {
         return flow {
             emit(Resource.Loading())
@@ -65,7 +70,6 @@ class UserRepositoryFirebaseImpl
             emit(Resource.Error(it.message.toString()))
         }
     }
-
     override fun registerUser(email: String, password: String): Flow<Resource<AuthResult>> {
         return flow {
             emit(Resource.Loading())
@@ -75,24 +79,6 @@ class UserRepositoryFirebaseImpl
             emit(Resource.Error(it.message.toString()))
         }
     }
-
-    override fun singOutUser() {
-        signInClient.signOut()
-        firebaseAuth.signOut()
-        AccountData.EMAIL = null
-        AccountData.ID = null
-    }
-
-    override suspend fun saveOnboardingIsShow() {
-        context.TYBDatastore.edit {
-            it[TYBKeys.ONBOARDING_IS_SHOW] = false
-        }
-    }
-    override fun readOnboardingIsShow(): Flow<Boolean> =
-        context.TYBDatastore.data.map {
-            it[TYBKeys.ONBOARDING_IS_SHOW] ?: true
-        }
-
     override suspend fun continueWithGoogle(credential: AuthCredential): Flow<Resource<AuthResult>> {
         return flow {
             emit(Resource.Loading())
@@ -102,13 +88,27 @@ class UserRepositoryFirebaseImpl
             emit(Resource.Error(it.message.toString()))
         }
     }
+    override fun singOutUser() {
+        signInClient.signOut()
+        firebaseAuth.signOut()
+        AccountData.EMAIL = null
+        AccountData.ID = null
+    }
     override fun getSignedInUser(): User? = firebaseAuth.currentUser?.run {
         User(
             id = uid,
             email = email.toString()
         )
     }
-
+    override suspend fun saveOnboardingIsShow() {
+        context.TYBDatastore.edit {
+            it[TYBKeys.ONBOARDING_IS_SHOW] = false
+        }
+    }
+    override fun readOnboardingIsShow(): Flow<Boolean> =
+        context.TYBDatastore.data.map {
+            it[TYBKeys.ONBOARDING_IS_SHOW] ?: true
+        }
     private fun updateProfilePicture() {
         //TODO
     }

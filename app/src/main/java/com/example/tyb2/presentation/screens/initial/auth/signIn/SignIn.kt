@@ -8,6 +8,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -79,14 +80,12 @@ import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.GoogleAuthProvider
 import kotlinx.coroutines.launch
 
-
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun SignInScreen(
     navController: NavHostController,
     viewModel: SignInViewModel = hiltViewModel()
 ) {
-    // TODO error color(if authorization failed)
     var passwordVisible by remember { mutableStateOf(false) }
     var userEmail by remember { mutableStateOf("") }
     var userPassword by remember { mutableStateOf("") }
@@ -96,6 +95,7 @@ fun SignInScreen(
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
     val keyboardController = LocalSoftwareKeyboardController.current
+//    keyboardController?.hide()
 
     val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
         .requestEmail()
@@ -126,7 +126,14 @@ fun SignInScreen(
             }
         }
     }
-
+    LaunchedEffect(key1 = state.value?.isError) {
+        scope.launch {
+            if (state.value?.isError?.isNotEmpty() == true) {
+                val error = state.value?.isError
+                Toast.makeText(context, error, Toast.LENGTH_LONG).show()
+            }
+        }
+    }
     LaunchedEffect(key1 = googleSignInState.success) {
         scope.launch {
             if (googleSignInState.success != null) {
@@ -135,20 +142,10 @@ fun SignInScreen(
             }
         }
     }
-
     LaunchedEffect(key1 = googleSignInState.error) {
         scope.launch {
             if (googleSignInState.error != "") {
                 Toast.makeText(context, googleSignInState.error, Toast.LENGTH_LONG).show()
-            }
-        }
-    }
-
-    LaunchedEffect(key1 = state.value?.isError) {
-        scope.launch {
-            if (state.value?.isError?.isNotEmpty() == true) {
-                val error = state.value?.isError
-                Toast.makeText(context, error, Toast.LENGTH_LONG).show()
             }
         }
     }
@@ -234,7 +231,7 @@ fun SignInScreen(
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(bottom = 64.dp),
+                    .padding(bottom = 48.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Bottom,
             ) {
@@ -325,11 +322,10 @@ fun SignInScreen(
                             modifier = Modifier.fillMaxSize(),
                             contentAlignment = Alignment.CenterStart
                         ) {
-                            Icon(
+                            Image(
                                 painter = painterResource(id = R.drawable.icon_google),
                                 contentDescription = null,
-                                modifier = Modifier,
-                                tint = MaterialTheme.colorScheme.primary
+                                modifier = Modifier
                             )
                             Box(
                                 modifier = Modifier.fillMaxSize(),
@@ -358,7 +354,7 @@ fun SignInScreen(
                         .height(52.dp)
                 ) {
                     Text(
-                        text = "Log in",
+                        text = "Sign in",
                         color = MaterialTheme.colorScheme.primary,
                         style = MaterialTheme.typography.bodyMedium
                     )
@@ -387,7 +383,7 @@ fun SignInScreen(
                         style = MaterialTheme.typography.bodyMedium
                     )
                     TextButton(onClick = {
-//                        TODO navController.navigate(Screen.SIGN_UP)
+                        navController.navigate(Screen.SIGN_UP)
                     }) {
                         Text(
                             text = "Register",

@@ -5,7 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tyb2.data.user.AccountData
-import com.example.tyb2.domain.user.model.SignInResult
+import com.example.tyb2.domain.user.model.User
 import com.example.tyb2.domain.user.usecases.UserUseCase
 import com.example.tyb2.presentation.screens.initial.auth.GoogleSignInState
 import com.example.tyb2.presentation.screens.initial.auth.SignInState
@@ -18,7 +18,6 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-
 
 @HiltViewModel
 class SignInViewModel @Inject constructor(
@@ -66,6 +65,14 @@ class SignInViewModel @Inject constructor(
                 }
             }
         }
+        AccountData.ID = Firebase.auth.currentUser?.uid
+        AccountData.EMAIL = Firebase.auth.currentUser?.email
+        userUseCase.addUserUseCase.invoke(
+            User(
+                id = AccountData.ID.toString(),
+                email = AccountData.EMAIL.toString()
+            )
+        )
     }
 
     fun getCurrentUser() = viewModelScope.launch {

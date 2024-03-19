@@ -10,13 +10,16 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
-    private val userUseCase: UserUseCase,
-
-    ) : ViewModel() {
+    private val userUseCase: UserUseCase
+) : ViewModel() {
     fun singOutUser() = viewModelScope.launch {
         userUseCase.userSignOutUseCase()
 
         AccountData.EMAIL = null
         AccountData.ID = null
+    }
+
+    fun getUserPicture() {
+        userUseCase.getSignedInUserUseCase.invoke()
     }
 }
