@@ -1,9 +1,11 @@
 package com.example.tyb2.presentation.screens.generators.defaultGenerator
 
 import android.annotation.SuppressLint
+import android.icu.text.CaseMap.Title
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.ScrollState
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -19,6 +21,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.FloatingActionButton
@@ -39,21 +42,26 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.glance.appwidget.lazy.LazyColumn
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.tyb2.R
-import com.example.tyb2.presentation.components.ExerciseCard
+import com.example.tyb2.domain.workout.model.Workout
+import com.example.tyb2.domain.workout.model.WorkoutSource
 import com.example.tyb2.presentation.components.ExercisePreview
 import com.example.tyb2.presentation.screens.generators.defaultGenerator.alertDialogs.AddExerciseAlertDialog
 import com.example.tyb2.presentation.ui.theme.Typography
+import com.example.tyb2.presentation.ui.theme.redColor
 import com.example.tyb2.presentation.ui.theme.robotoFamily
+import com.example.tyb2.util.Muscle
+import me.saket.swipe.SwipeAction
+import me.saket.swipe.SwipeableActionsBox
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @RequiresApi(Build.VERSION_CODES.O)
@@ -68,6 +76,7 @@ fun DefaultGenerator(
         floatingActionButtonPosition = FabPosition.End,
         floatingActionButton = {
             FloatingActionButton(
+                modifier = Modifier.padding(bottom = 52.dp),
                 containerColor = MaterialTheme.colorScheme.onPrimary,
                 onClick = {
                     viewModel.showAddExerciseAlertDialog()
@@ -78,6 +87,15 @@ fun DefaultGenerator(
             }
         }
     ) {
+        val exerciseList by viewModel.exerciseList.collectAsState()
+        val muscleList = mutableListOf<Muscle>()
+
+        exerciseList.forEach {
+            it.muscleList?.forEach() {
+                muscleList.add(it)
+            }
+        }
+
         var searchBarValue by remember {
             mutableStateOf("")
         }
@@ -85,7 +103,6 @@ fun DefaultGenerator(
             mutableStateOf("")
         }
 
-        val exerciseList by viewModel.exerciseList.collectAsState()
 
         val showAddExerciseDialogState: Boolean by viewModel.showAddExerciseDialog.collectAsState()
         if (showAddExerciseDialogState) {
@@ -241,25 +258,88 @@ fun DefaultGenerator(
                 )
             }
 
-            Column(
+            Box(
                 modifier = Modifier
-                    .padding(top = 20.dp)
-                    .verticalScroll(ScrollState(0), true)
+                    .fillMaxSize()
             ) {
-                exerciseList.forEach {
-                    Row(
-                        horizontalArrangement = Arrangement.Center,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                    ) {
-                        ExercisePreview(exercise = it)
+                Column(
+                    modifier = Modifier
+                        .align(Alignment.TopCenter)
+                        .padding(top = 20.dp, bottom = 52.dp)
+                        .verticalScroll(ScrollState(0), true)
+                ) {
+                    exerciseList.forEach {
+                        Row(
+                            horizontalArrangement = Arrangement.Center,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                        ) {
+                            val delete = SwipeAction(
+                                icon = {
+                                    Icon(
+                                        imageVector = Icons.Outlined.Delete,
+                                        contentDescription = null
+                                    )
+                                },
+                                background = redColor,
+                                isUndo = true,
+                                onSwipe = {
+                                    viewModel.removeExerciseFromExerciseList(it)
+                                },
+                            )
+
+                            SwipeableActionsBox(
+                                endActions = listOf(delete)
+                            ) {
+                                ExercisePreview(exercise = it)
+
+                            }
+
+                        }
+
+                        Spacer(modifier = Modifier.height(15.dp))
+
                     }
-
-                    Spacer(modifier = Modifier.height(15.dp))
-
                 }
-            }
 
+                Row(
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier
+                        .clip(RoundedCornerShape(10.dp))
+                        .fillMaxWidth()
+                        .align(Alignment.BottomCenter)
+                        .height(52.dp)
+                        .background(MaterialTheme.colorScheme.onBackground)
+                        .border(
+                            3.dp,
+                            MaterialTheme.colorScheme.onPrimary,
+                            RoundedCornerShape(10.dp)
+                        )
+                        .clickable {
+                            viewModel.saveWorkoutToRealtimeDatabase(Workout(
+                                title = workoutTitle,
+                                muscles = muscleList,
+                                workoutGenerationType = WorkoutSource.USER,
+                                exerciseList = exerciseList
+                            ))
+                        }
+
+                ) {
+                    Text(
+                        text = "Save",
+                        style = Typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
+                        color = MaterialTheme.colorScheme.onPrimary
+                    )
+
+                    Icon(
+                        painter = painterResource(id = R.drawable.icon_complete),
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.onPrimary
+                    )
+                }
+
+            }
         }
     }
 }

@@ -132,6 +132,7 @@ fun AddExerciseAlertDialog(
                             }
 
                             viewModel.hideAddExerciseAlertDialog()
+                            viewModel.cleanMuscleList()
 
                         },
                         elevation = FloatingActionButtonDefaults.elevation(),
