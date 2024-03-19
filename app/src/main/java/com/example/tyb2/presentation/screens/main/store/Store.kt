@@ -414,7 +414,6 @@ fun SelectableCircle(
 
             )
     )
-
     Box(
         modifier = Modifier
             .clip(CircleShape)
@@ -426,8 +425,5 @@ fun SelectableCircle(
                 MaterialTheme.colorScheme.onPrimary,
                 shape = CircleShape
             )
-
     ) {}
 }
-
-

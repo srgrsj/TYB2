@@ -8,6 +8,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.emptyPreferences
+import androidx.datastore.preferences.core.stringSetPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.example.tyb2.R
 import com.example.tyb2.data.user.AccountData
@@ -109,6 +110,7 @@ class UserRepositoryFirebaseImpl
         context.TYBDatastore.data.map {
             it[TYBKeys.ONBOARDING_IS_SHOW] ?: true
         }
+    //TODO functions for change/get user gender
     private fun updateProfilePicture() {
         //TODO
     }
@@ -118,5 +120,6 @@ val Context.TYBDatastore: DataStore<Preferences> by preferencesDataStore(Constan
 
 private object TYBKeys {
     val ONBOARDING_IS_SHOW = booleanPreferencesKey("onboarding_is_show")
-//    val IS_AUTHORIZED = booleanPreferencesKey("is_authorized")
+    val USER_GENDER = stringSetPreferencesKey("user_gender") // TODO m / w / n
+    //TODO add variables for achievements
 }
