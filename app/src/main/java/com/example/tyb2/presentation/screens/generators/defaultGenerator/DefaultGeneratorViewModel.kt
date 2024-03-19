@@ -21,7 +21,7 @@ class DefaultGeneratorViewModel @Inject constructor(
 ) : GeneratorsScreenViewModel(workoutUseCase) {
 
     private var _muscleList = MutableStateFlow(listOf<Muscle>())
-    private val muscleList: StateFlow<List<Muscle>> = _muscleList.asStateFlow()
+    val muscleList: StateFlow<List<Muscle>> = _muscleList.asStateFlow()
 
     fun saveMuscleToMuscleList(muscle: Muscle) {
         val mList = muscleList.value.toMutableList()
@@ -31,9 +31,17 @@ class DefaultGeneratorViewModel @Inject constructor(
         }
     }
 
+    fun removeMuscleFromMuscleList(muscle: Muscle) {
+        val mList = muscleList.value.toMutableList()
+        mList.remove(muscle)
+        viewModelScope.launch {
+            _muscleList.emit(mList)
+        }
+    }
+
 
     private var _exerciseList = MutableStateFlow(listOf<Exercise>())
-    private val exerciseList: StateFlow<List<Exercise>> = _exerciseList.asStateFlow()
+    val exerciseList: StateFlow<List<Exercise>> = _exerciseList.asStateFlow()
 
     fun saveExerciseToExerciseList(exercise: Exercise) {
         val eList = exerciseList.value.toMutableList()

@@ -327,7 +327,7 @@ fun WorkoutPlayback(
         ) {
             workout.exerciseList!!.forEach {
                 Spacer(modifier = Modifier.height(10.dp))
-                ExerciseCard(exercise = it)
+//                ExerciseCard(exercise = it)
             }
         }
     }
