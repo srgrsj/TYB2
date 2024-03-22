@@ -5,6 +5,8 @@ import com.example.tyb2.domain.workout.usecases.WorkoutUseCase
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.tyb2.domain.workout.readyWorkoutsData.ReadyWorkouts
+import com.example.tyb2.domain.workout.readyYogaData.ReadyYoga
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -24,22 +26,37 @@ open class WorkoutsViewModel @Inject constructor(
     private var _readyWorkoutList = MutableStateFlow(emptyList<Workout>())
     val readyWorkoutList: StateFlow<List<Workout>> = _readyWorkoutList.asStateFlow()
 
+    private var _readyYogaList = MutableStateFlow(emptyList<Workout>())
+    val readyYogaList: StateFlow<List<Workout>> = _readyYogaList.asStateFlow()
+
 
     init {
         saveWorkoutsFromRealtimeDatabaseToWorkoutList()
     }
 
-//    fun getReadyWorkouts(context: Context) {
-//        val updatedReadyWorkoutList = mutableListOf<Workout>()
-//
-//        ReadyWorkouts.values().forEach {
-//            updatedReadyWorkoutList.add(it.getLocalizedWorkout(context))
-//        }
-//
-//        viewModelScope.launch {
-//            _readyWorkoutList.emit(updatedReadyWorkoutList)
-//        }
-//    }
+    fun getReadyWorkouts(context: Context) {
+        val updatedReadyWorkoutList = mutableListOf<Workout>()
+
+        ReadyWorkouts.values().forEach {
+            updatedReadyWorkoutList.add(it.getLocalizedWorkout(context))
+        }
+
+        viewModelScope.launch {
+            _readyWorkoutList.emit(updatedReadyWorkoutList)
+        }
+    }
+
+    fun getReadyYoga(context: Context) {
+        val updatedReadyYogaList = mutableListOf<Workout>()
+
+        ReadyYoga.values().forEach {
+            updatedReadyYogaList.add(it.getLocalizedYoga(context))
+        }
+
+        viewModelScope.launch {
+            _readyWorkoutList.emit(updatedReadyYogaList)
+        }
+    }
 
     private fun saveWorkoutsFromRealtimeDatabaseToWorkoutList() {
 

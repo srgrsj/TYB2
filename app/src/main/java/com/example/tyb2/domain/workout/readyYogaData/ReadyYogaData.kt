@@ -1,4 +1,4 @@
-package com.example.tyb2.domain.workout.readyWorkoutsData
+package com.example.tyb2.domain.workout.readyYogaData
 
 import android.content.Context
 import com.example.tyb2.R
@@ -7,28 +7,28 @@ import com.example.tyb2.domain.exersice.readyExercisesData.ReadyExercises
 import com.example.tyb2.domain.workout.model.Workout
 import com.example.tyb2.domain.workout.model.WorkoutSource
 
-enum class ReadyWorkouts(val workout: Workout) {
-    WorkoutForBeginner(
+enum class ReadyYoga(val workout: Workout) {
+    YogaForBeginner(
         Workout(
             workoutGenerationType = WorkoutSource.AUTHOR
         )
     ),
-    WorkoutForIntermediate(
+    YogaForIntermediate(
         Workout(
             workoutGenerationType = WorkoutSource.AUTHOR
         )
     ),
-    WorkoutForPro(
+    YogaForPro(
         Workout(
             workoutGenerationType = WorkoutSource.AUTHOR
         )
     );
 
-    fun getLocalizedWorkout(context: Context): Workout {
+    fun getLocalizedYoga(context: Context): Workout {
         when (this) {
-            WorkoutForBeginner -> return this.workout.copy(
-                title = context.getString(R.string.beginners_workout),
-                description = context.getString(R.string.beginners_workout_description),
+            YogaForBeginner -> return this.workout.copy(
+                title = context.getString(R.string.beginners_yoga),
+                description = context.getString(R.string.beginners_yoga_description),
                 duration = 30 * 1000 * 60,
                 exerciseList = listOf(
                     ReadyExercises.PUSH_UPS.getLocalizedExercise(context).copy(
@@ -54,9 +54,9 @@ enum class ReadyWorkouts(val workout: Workout) {
                 )
             )
 
-            WorkoutForIntermediate -> return this.workout.copy(
-                title = context.getString(R.string.intermediate_workout),
-                description = context.getString(R.string.intermediate_workout_description),
+            YogaForIntermediate -> return this.workout.copy(
+                title = context.getString(R.string.intermediate_yoga),
+                description = context.getString(R.string.intermediate_yoga_description),
                 duration = 45 * 1000 * 60,
                 exerciseList = listOf(
                     ReadyExercises.DUMBBELL_PRESS.getLocalizedExercise(context).copy(
@@ -87,9 +87,9 @@ enum class ReadyWorkouts(val workout: Workout) {
                 )
             )
 
-            WorkoutForPro -> return this.workout.copy(
-                title = context.getString(R.string.experienced_workout),
-                description = context.getString(R.string.experienced_workout_description),
+            YogaForPro -> return this.workout.copy(
+                title = context.getString(R.string.experienced_yoga),
+                description = context.getString(R.string.experienced_yoga_description),
                 duration = 60 * 1000 * 60,
                 exerciseList = listOf(
                     ReadyExercises.DIPS.getLocalizedExercise(context).copy(

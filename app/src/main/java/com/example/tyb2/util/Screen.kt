@@ -37,5 +37,7 @@ sealed class Screen(
         const val SIGN_IN = "sign_in_screen"
         const val ONBOARDING = "onboarding_screen"
         const val DEFAULT_GENERATOR = "default_generator_screen"
+        const val GPT_GENERATOR = "GPT_generator_screen"
+        const val WORKOUT_PLAYBACK = "workout_playback"
     }
 }

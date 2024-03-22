@@ -152,11 +152,17 @@
     <string name="close_grip_dumbbell_press">Close-grip dumbbell press</string>
 
     <string name="beginners_workout">Beginner\'s workout</string>
+    <string name="beginners_yoga">Beginner\'s yoga</string>
     <string name="beginners_workout_description">Simple workout suitable for beginners</string>
+    <string name="beginners_yoga_description">Simple workout suitable for beginners</string>
     <string name="intermediate_workout">Intermediate-level workout</string>
+    <string name="intermediate_yoga">Intermediate-level yoga</string>
     <string name="intermediate_workout_description">Advanced-level workout</string>
+    <string name="intermediate_yoga_description">Advanced-level workout</string>
     <string name="experienced_workout">Experienced-level workout</string>
+    <string name="experienced_yoga">Experienced-level yoga</string>
     <string name="experienced_workout_description">Intense workout designed for experienced athletes</string>
+    <string name="experienced_yoga_description">Intense workout designed for experienced athletes</string>
     <string name="gpt_generator_error">The fields "Muscle groups" and "Desired duration of workout" should not be empty</string>
     <string name="create_workout">Create Workout</string>
     <string name="account">Account</string>

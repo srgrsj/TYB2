@@ -53,12 +53,19 @@ object MuscleStuff {
 
     fun defineTitle(muscleGroup: MuscleGroup): String {
         val title = when (muscleGroup) {
-            MuscleGroup.ARM -> "Arms"
-            MuscleGroup.BACK -> "Back"
-            MuscleGroup.BRACHIAL -> "Brachial"
-            MuscleGroup.CORE -> "Core"
-            MuscleGroup.LEG -> "Leg"
-            MuscleGroup.BREAST -> "Breast"
+//            MuscleGroup.ARM -> "Arms"
+//            MuscleGroup.BACK -> "Back"
+//            MuscleGroup.BRACHIAL -> "Brachial"
+//            MuscleGroup.CORE -> "Core"
+//            MuscleGroup.LEG -> "Leg"
+//            MuscleGroup.BREAST -> "Breast"
+
+            MuscleGroup.ARM -> "Руки"
+            MuscleGroup.BACK -> "Спина"
+            MuscleGroup.BRACHIAL -> "Плечи"
+            MuscleGroup.CORE -> "Пресс"
+            MuscleGroup.LEG -> "Ноги"
+            MuscleGroup.BREAST -> "Грудь"
         }
         return title
     }

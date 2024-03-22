@@ -154,11 +154,17 @@
     <string name="close_grip_dumbbell_press">Узкий жим гантелей</string>
 
     <string name="beginners_workout">Тренировка для начинающих</string>
+    <string name="beginners_yoga">Йога для начинающих</string>
     <string name="beginners_workout_description">Простая тренировка, подходящая для новичков</string>
+    <string name="beginners_yoga_description">Простая тренировка, подходящая для новичков</string>
     <string name="intermediate_workout">Тренировка средней сложности</string>
+    <string name="intermediate_yoga">Йога средней сложности</string>
     <string name="intermediate_workout_description">Тренировка для продвинутых</string>
+    <string name="intermediate_yoga_description">Тренировка для продвинутых</string>
     <string name="experienced_workout">Тренировка для опытных</string>
+    <string name="experienced_yoga">Йога для опытных</string>
     <string name="experienced_workout_description">Интенсивная тренировка, разработанная для опытных спортсменов</string>
+    <string name="experienced_yoga_description">Интенсивная тренировка, разработанная для опытных спортсменов</string>
     <string name="gpt_generator_error">Поля "Группы мышц" и "Желаемая продолжительность тренировки" не должны быть пустыми</string>
     <string name="create_workout">Создать Тренировку</string>
     <string name="account">Аккаунт</string>

@@ -20,6 +20,7 @@ import com.example.tyb2.presentation.navigation.NavGraph
 import com.example.tyb2.presentation.screens.initial.auth.signIn.SignInScreen
 import com.example.tyb2.presentation.ui.theme.TYB2Theme
 import com.example.tyb2.util.Screen
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -28,6 +29,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         installSplashScreen()
+        FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(true)
         setContent {
             TYB2Theme {
                 Application()
@@ -37,6 +39,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun Application() {

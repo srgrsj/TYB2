@@ -134,8 +134,8 @@ fun DefaultGenerator(
                         active = false,
                         placeholder = {
                             Text(
-                                text = "Search by exercises",
-                                style = Typography.labelMedium.copy(fontSize = 16.sp),
+                                text = "Поиск по упражнениям",
+                                style = Typography.labelMedium.copy(fontSize = 14.sp),
                                 color = MaterialTheme.colorScheme.primary
                             )
                         },
@@ -202,7 +202,7 @@ fun DefaultGenerator(
                         value = workoutTitle,
                         label = {
                             Text(
-                                text = "Title",
+                                text = "Название",
                                 color = MaterialTheme.colorScheme.onPrimary
                             )
                         },
@@ -250,7 +250,7 @@ fun DefaultGenerator(
                     .padding(top = 30.dp)
             ) {
                 Text(
-                    text = "Exercises",
+                    text = "Упражнения",
                     style = Typography.headlineMedium,
                     color = MaterialTheme.colorScheme.onPrimary,
                     modifier = Modifier
@@ -327,7 +327,7 @@ fun DefaultGenerator(
 
                 ) {
                     Text(
-                        text = "Save",
+                        text = "Сохранить",
                         style = Typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
                         color = MaterialTheme.colorScheme.onPrimary
                     )

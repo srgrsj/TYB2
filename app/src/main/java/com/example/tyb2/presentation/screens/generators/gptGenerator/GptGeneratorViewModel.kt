@@ -91,7 +91,7 @@ class GPTGeneratorScreenViewModel @Inject constructor(
 
                 val completion: ChatCompletion = openAI.chatCompletion(chatCompletionRequest)
 
-                val response = completion.choices.first().message?.content
+                val response = completion.choices.first().message.content
 
                 gptResponse = response ?: ""
 

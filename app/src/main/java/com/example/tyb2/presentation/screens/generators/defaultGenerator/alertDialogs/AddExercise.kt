@@ -46,6 +46,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogProperties
@@ -209,7 +210,7 @@ fun AddExerciseAlertDialog(
                                                 .padding(bottom = 10.dp, top = 20.dp)
                                         ) {
                                             Text(
-                                                text = "Repetitions",
+                                                text = stringResource(id = R.string.repetitions),
                                                 style = Typography.headlineMedium,
                                                 color = MaterialTheme.colorScheme.onPrimary
                                             )
@@ -221,7 +222,7 @@ fun AddExerciseAlertDialog(
                                             onValueChange = { title = it },
                                             label = {
                                                 Text(
-                                                    text = "Title",
+                                                    text = "Название",
                                                     style = Typography.bodyLarge,
                                                     color = MaterialTheme.colorScheme.onPrimary
                                                 )
@@ -244,7 +245,7 @@ fun AddExerciseAlertDialog(
                                             },
                                             label = {
                                                 Text(
-                                                    text = "Repetitions",
+                                                    text = stringResource(id = R.string.repetitions),
                                                     style = Typography.bodyLarge,
                                                     color = MaterialTheme.colorScheme.onPrimary
                                                 )
@@ -269,7 +270,7 @@ fun AddExerciseAlertDialog(
                                             },
                                             label = {
                                                 Text(
-                                                    text = "Circles",
+                                                    text = stringResource(id = R.string.circles),
                                                     style = Typography.bodyLarge,
                                                     color = MaterialTheme.colorScheme.onPrimary
                                                 )
@@ -312,7 +313,7 @@ fun AddExerciseAlertDialog(
                                             onValueChange = { title = it },
                                             label = {
                                                 Text(
-                                                    text = "Title",
+                                                    text = "Название",
                                                     style = Typography.bodyLarge,
                                                     color = MaterialTheme.colorScheme.onPrimary
                                                 )
@@ -369,7 +370,7 @@ fun AddExerciseAlertDialog(
                                             onValueChange = { numberOfCircles = it.toInt() },
                                             label = {
                                                 Text(
-                                                    text = "Circles",
+                                                    text = stringResource(id = R.string.circles),
                                                     style = Typography.bodyLarge,
                                                     color = MaterialTheme.colorScheme.onPrimary
                                                 )

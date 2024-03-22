@@ -57,7 +57,7 @@ fun ShedevroWorkout(
     WorkoutPlayback(
         navController = navController,
         workout = Workout(
-            title = "Title",
+            title = "Название",
             description = "Description"
         )
 //        workout = Workout(

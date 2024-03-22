@@ -90,14 +90,14 @@ dependencies {
     implementation("me.saket.swipe:swipe:1.3.0")
 
     // Ktor
-    implementation("io.ktor:ktor-client-android:2.2.4")
-    implementation("io.ktor:ktor-client-core:2.2.4")
-    implementation("io.ktor:ktor-client-json:2.2.4")
-    implementation("io.ktor:ktor-client-serialization:2.2.4")
-    implementation("io.ktor:ktor-client-serialization-jvm:2.2.4")
+    implementation("io.ktor:ktor-client-android:2.3.9")
+    implementation("io.ktor:ktor-client-core:2.3.9")
+    implementation("io.ktor:ktor-client-json:2.3.9")
+    implementation("io.ktor:ktor-client-serialization:2.3.9")
+    implementation("io.ktor:ktor-client-serialization-jvm:2.3.9")
 
     // OpenAI
-    implementation("com.aallam.openai:openai-client:3.0.0")
+    implementation("com.aallam.openai:openai-client:3.7.0")
 
     // FireBase
     implementation("com.google.firebase:firebase-storage-ktx:20.1.0")

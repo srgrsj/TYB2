@@ -25,6 +25,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.Search
@@ -35,6 +36,8 @@ import androidx.compose.material3.SearchBar
 import androidx.compose.material3.SearchBarDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -44,6 +47,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.drawscope.translate
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
@@ -53,6 +57,7 @@ import androidx.navigation.NavController
 import com.example.tyb2.R
 import com.example.tyb2.util.Screen
 import com.example.tyb2.presentation.components.workoutCards.TestShedevroCard
+import com.example.tyb2.presentation.components.workoutCards.WorkoutCard
 import com.example.tyb2.presentation.ui.theme.Typography
 import com.example.tyb2.presentation.ui.theme.blueColor
 import com.example.tyb2.presentation.ui.theme.greenColor
@@ -70,6 +75,14 @@ fun MainScreen(
 ) {
     val infiniteTransition = rememberInfiniteTransition(label = "")
     val interactionSource = remember { MutableInteractionSource() }
+    val readyWorkouts by viewModel.readyWorkoutList.collectAsState()
+    val readyYogas by viewModel.readyWorkoutList.collectAsState()
+    val context = LocalContext.current
+
+    LaunchedEffect(Unit) {
+        viewModel.getReadyWorkouts(context)
+        viewModel.getReadyYoga(context)
+    }
 
     var searchBarValue by remember {
         mutableStateOf("")
@@ -174,7 +187,7 @@ fun MainScreen(
 
                     ) {
                         Text(
-                            text = "Flow",
+                            text = "Поток",
                             style = Typography.displayLarge,
                             color = MaterialTheme.colorScheme.primary
                         )
@@ -199,7 +212,7 @@ fun MainScreen(
                     active = false,
                     placeholder = {
                         Text(
-                            text = "Search",
+                            text = "Поиск",
                             style = Typography.labelMedium,
                             color = MaterialTheme.colorScheme.primary
                         )
@@ -226,7 +239,7 @@ fun MainScreen(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = stringResource(id = R.string.workouts),
+                text = "Тренировки",
                 style = Typography.displayLarge,
                 color = MaterialTheme.colorScheme.onPrimary,
                 modifier = Modifier
@@ -246,14 +259,12 @@ fun MainScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .horizontalScroll(rememberScrollState())
-                .padding(top = 10.dp)
+                .padding(top = 10.dp, start = 5.dp)
         ) {
-            Spacer(modifier = Modifier.width(10.dp))
-            TestShedevroCard()
-            Spacer(modifier = Modifier.width(10.dp))
-            TestShedevroCard()
-            Spacer(modifier = Modifier.width(10.dp))
-            TestShedevroCard()
+            readyWorkouts.forEach() {
+                WorkoutCard(workout = it)
+                Spacer(modifier = Modifier.width(5.dp))
+            }
         }
 
         Row(
@@ -263,7 +274,7 @@ fun MainScreen(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = "Yoga",
+                text = "Йога",
                 style = Typography.displayLarge,
                 color = MaterialTheme.colorScheme.onPrimary
             )
@@ -279,14 +290,12 @@ fun MainScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .horizontalScroll(rememberScrollState())
-                .padding(top = 10.dp)
+                .padding(top = 10.dp, start = 5.dp)
         ) {
-            Spacer(modifier = Modifier.width(10.dp))
-            TestShedevroCard()
-            Spacer(modifier = Modifier.width(10.dp))
-            TestShedevroCard()
-            Spacer(modifier = Modifier.width(10.dp))
-            TestShedevroCard()
+            readyYogas.forEach {
+                WorkoutCard(workout = it)
+                Spacer(modifier = Modifier.width(5.dp))
+            }
         }
 
     }

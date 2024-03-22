@@ -86,7 +86,7 @@ fun ActivityScreen(
                 }
         ) {
             Text(
-                text = "Create workout",
+                text = "Создать тренировку",
                 color = MaterialTheme.colorScheme.onPrimary,
                 style = Typography.headlineSmall.copy(fontWeight = FontWeight.Bold)
             )
@@ -114,7 +114,7 @@ fun ActivityScreen(
                 .padding(start = 5.dp, top = 30.dp, bottom = 10.dp)
         ) {
             Text(
-                text = "Saved workouts",
+                text = "Сохраненные тренировки",
                 color = MaterialTheme.colorScheme.onPrimary,
                 style = Typography.headlineSmall.copy(fontWeight = FontWeight.Bold)
             )

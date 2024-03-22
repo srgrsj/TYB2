@@ -25,10 +25,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.tyb2.R
 import com.example.tyb2.domain.exersice.model.Exercise
 import com.example.tyb2.domain.exersice.model.ExerciseType
 import com.example.tyb2.domain.workout.model.Workout
+import com.example.tyb2.presentation.screens.main.WorkoutsViewModel
 import com.example.tyb2.presentation.ui.theme.Typography
 import com.example.tyb2.util.DateTimeUtils
 import com.example.tyb2.util.Muscle
@@ -36,7 +38,8 @@ import com.example.tyb2.util.MuscleStuff
 
 @Preview
 @Composable
-fun TestShedevroCard() {
+fun TestShedevroCard(
+) {
     WorkoutCard(
         workout = Workout(
             "Workout",
@@ -80,7 +83,9 @@ fun TestShedevroCard() {
 
 @Composable
 fun WorkoutCard(
-    workout: Workout
+    workout: Workout,
+    viewModel: WorkoutsViewModel = hiltViewModel(),
+    navigateToWorkoutPreviewScreen: ((Workout) -> Unit)? = null
 ) {
 
     val muscleList = workout.muscles!!.toMutableSet()
