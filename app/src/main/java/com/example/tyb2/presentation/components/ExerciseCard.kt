@@ -57,7 +57,7 @@ import com.example.tyb2.presentation.ui.theme.redColor
 fun ExerciseCard(exercise: Exercise) {
     val interactionSource = remember { MutableInteractionSource() }
 
-    val durationOfOneCircle = exercise.durationOfOneCircle?.toInt()!!
+    val durationOfOneCircle = exercise.durationOfOneCircle?.toInt() ?: 0
 
     var isExerciseInProgress by remember {
         mutableStateOf(false)

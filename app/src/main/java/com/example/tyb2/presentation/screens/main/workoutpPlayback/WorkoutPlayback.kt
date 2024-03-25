@@ -1,5 +1,6 @@
-package com.example.tyb2.presentation.screens.workoutpPlayback
+package com.example.tyb2.presentation.screens.main.workoutpPlayback
 
+import android.util.Log
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.VectorConverter
 import androidx.compose.animation.core.animateDpAsState
@@ -15,7 +16,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -32,6 +32,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -44,70 +45,30 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.example.tyb2.R
-import com.example.tyb2.domain.workout.model.Workout
 import com.example.tyb2.presentation.components.ExerciseCard
 import com.example.tyb2.presentation.ui.theme.Typography
 
 @Composable
-fun ShedevroWorkout(
-    navController: NavController
-) {
-    WorkoutPlayback(
-        navController = navController,
-        workout = Workout(
-            title = "Название",
-            description = "Description"
-        )
-//        workout = Workout(
-//            "Workout",
-//            "some description",
-//            4365273,
-//            false,
-//            WorkoutGenerationType.USER,
-//            listOf(
-//                Exercise(
-//                    "Exercise1",
-//                    "some description",
-//                    52,
-//                    52,
-//                    15000,
-//                    15000,
-//                    ExerciseType.REPETITION,
-//                ),
-//                Exercise(
-//                    "Exercise2",
-//                    "some description",
-//                    52,
-//                    52,
-//                    15000,
-//                    15000,
-//                    ExerciseType.REPETITION,
-//                ),
-//                Exercise(
-//                    "Exercise2",
-//                    "some description",
-//                    52,
-//                    52,
-//                    15000,
-//                    15000,
-//                    ExerciseType.REPETITION,
-//                )
-//            )
-//        )
-    )
-}
-
-@Composable
 fun WorkoutPlayback(
     navController: NavController,
-    workout: Workout
+    viewModel: WorkoutPlaybackViewModel = hiltViewModel()
 ) {
+    val workout by viewModel.currentWorkout.collectAsStateWithLifecycle()
+
     var isOnPause by remember {
         mutableStateOf(true)
     }
     val interactionSource = remember { MutableInteractionSource() }
+
+    LaunchedEffect(viewModel.currentWorkout) {
+        // This block will be executed whenever myState.value changes
+        Log.d("test", viewModel.currentWorkout.value.toString())
+        Log.d("test", "State changed")
+    }
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
@@ -126,7 +87,7 @@ fun WorkoutPlayback(
 
             ) {
                 Text(
-                    text = workout.title!!,
+                    text = workout?.title ?: "",
                     style = Typography.headlineLarge,
                     color = MaterialTheme.colorScheme.onPrimary
                 )
@@ -146,6 +107,9 @@ fun WorkoutPlayback(
                     modifier = Modifier
                         .scale(2f)
                         .padding(start = 5.dp)
+                        .clickable {
+                            navController.popBackStack()
+                        }
                 )
             }
         }
@@ -325,9 +289,9 @@ fun WorkoutPlayback(
             modifier = Modifier
                 .fillMaxSize()
         ) {
-            workout.exerciseList!!.forEach {
-                Spacer(modifier = Modifier.height(10.dp))
-//                ExerciseCard(exercise = it)
+            workout?.exerciseList?.forEach {
+//                Spacer(modifier = Modifier.height(10.dp))
+                ExerciseCard(exercise = it)
             }
         }
     }

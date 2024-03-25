@@ -22,7 +22,6 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -51,7 +50,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -62,8 +60,6 @@ import com.example.tyb2.presentation.components.animations.AnimatedFieldBrush
 import com.example.tyb2.presentation.components.curves.Curve1
 import com.example.tyb2.presentation.components.curves.Curve3
 import com.example.tyb2.presentation.components.curves.Curve4
-import com.example.tyb2.presentation.screens.initial.auth.signIn.SignInViewModel
-import com.example.tyb2.presentation.ui.theme.TYB2Theme
 import com.example.tyb2.presentation.ui.theme.blueColor
 import com.example.tyb2.presentation.ui.theme.greenColor
 import com.example.tyb2.presentation.ui.theme.orangeColor
@@ -293,6 +289,7 @@ fun SignUpScreen(
                         unfocusedTextColor = MaterialTheme.colorScheme.primary,
                         focusedBorderColor = MaterialTheme.colorScheme.onPrimary,
                         unfocusedBorderColor = MaterialTheme.colorScheme.onPrimary,
+                        cursorColor = MaterialTheme.colorScheme.onPrimary
                     ),
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
                     shape = RoundedCornerShape(10.dp),
@@ -336,6 +333,7 @@ fun SignUpScreen(
                         unfocusedTextColor = MaterialTheme.colorScheme.primary,
                         focusedBorderColor = MaterialTheme.colorScheme.onPrimary,
                         unfocusedBorderColor = MaterialTheme.colorScheme.onPrimary,
+                        cursorColor = MaterialTheme.colorScheme.onPrimary
                     ),
                     modifier = Modifier
                         .width(320.dp)

@@ -1,7 +1,6 @@
 package com.example.tyb2.presentation.screens.generators.defaultGenerator
 
 import android.annotation.SuppressLint
-import android.icu.text.CaseMap.Title
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.ScrollState
@@ -229,7 +228,8 @@ fun DefaultGenerator(
                             unfocusedBorderColor = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.8f),
                             focusedBorderColor = MaterialTheme.colorScheme.onPrimary,
                             unfocusedContainerColor = MaterialTheme.colorScheme.onBackground,
-                            focusedContainerColor = MaterialTheme.colorScheme.onBackground
+                            focusedContainerColor = MaterialTheme.colorScheme.onBackground,
+                            cursorColor = MaterialTheme.colorScheme.onPrimary,
                         ),
                         shape = RoundedCornerShape(10.dp),
                         modifier = Modifier

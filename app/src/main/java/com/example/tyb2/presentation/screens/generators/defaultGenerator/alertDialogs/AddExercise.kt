@@ -232,7 +232,8 @@ fun AddExerciseAlertDialog(
                                                 unfocusedContainerColor = MaterialTheme.colorScheme.background,
                                                 focusedLabelColor = MaterialTheme.colorScheme.background,
                                                 focusedBorderColor = MaterialTheme.colorScheme.onPrimary,
-                                                unfocusedBorderColor = MaterialTheme.colorScheme.onPrimary
+                                                unfocusedBorderColor = MaterialTheme.colorScheme.onPrimary,
+                                                cursorColor = MaterialTheme.colorScheme.onPrimary
                                             )
                                         )
 
@@ -281,7 +282,8 @@ fun AddExerciseAlertDialog(
                                                 unfocusedContainerColor = MaterialTheme.colorScheme.background,
                                                 focusedLabelColor = MaterialTheme.colorScheme.background,
                                                 focusedBorderColor = MaterialTheme.colorScheme.onPrimary,
-                                                unfocusedBorderColor = MaterialTheme.colorScheme.onPrimary
+                                                unfocusedBorderColor = MaterialTheme.colorScheme.onPrimary,
+                                                cursorColor = MaterialTheme.colorScheme.onPrimary
                                             )
                                         )
 
@@ -323,7 +325,8 @@ fun AddExerciseAlertDialog(
                                                 unfocusedContainerColor = MaterialTheme.colorScheme.background,
                                                 focusedLabelColor = MaterialTheme.colorScheme.background,
                                                 focusedBorderColor = MaterialTheme.colorScheme.onPrimary,
-                                                unfocusedBorderColor = MaterialTheme.colorScheme.onPrimary
+                                                unfocusedBorderColor = MaterialTheme.colorScheme.onPrimary,
+                                                cursorColor = MaterialTheme.colorScheme.onPrimary
                                             )
                                         )
 
@@ -381,7 +384,8 @@ fun AddExerciseAlertDialog(
                                                 unfocusedContainerColor = MaterialTheme.colorScheme.background,
                                                 focusedLabelColor = MaterialTheme.colorScheme.background,
                                                 focusedBorderColor = MaterialTheme.colorScheme.onPrimary,
-                                                unfocusedBorderColor = MaterialTheme.colorScheme.onPrimary
+                                                unfocusedBorderColor = MaterialTheme.colorScheme.onPrimary,
+                                                cursorColor = MaterialTheme.colorScheme.onPrimary
                                             )
                                         )
 

@@ -25,10 +25,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowRight
-import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -49,14 +47,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.drawscope.translate
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.tyb2.R
-import com.example.tyb2.util.Screen
-import com.example.tyb2.presentation.components.workoutCards.TestShedevroCard
 import com.example.tyb2.presentation.components.workoutCards.WorkoutCard
 import com.example.tyb2.presentation.ui.theme.Typography
 import com.example.tyb2.presentation.ui.theme.blueColor
@@ -65,6 +60,7 @@ import com.example.tyb2.presentation.ui.theme.orangeColor
 import com.example.tyb2.presentation.ui.theme.purpleColor
 import com.example.tyb2.presentation.ui.theme.redColor
 import com.example.tyb2.presentation.ui.theme.yellowColor
+import com.example.tyb2.util.Screen
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -76,7 +72,7 @@ fun MainScreen(
     val infiniteTransition = rememberInfiniteTransition(label = "")
     val interactionSource = remember { MutableInteractionSource() }
     val readyWorkouts by viewModel.readyWorkoutList.collectAsState()
-    val readyYogas by viewModel.readyWorkoutList.collectAsState()
+    val readyYogas by viewModel.readyYogaList.collectAsState()
     val context = LocalContext.current
 
     LaunchedEffect(Unit) {
@@ -262,7 +258,10 @@ fun MainScreen(
                 .padding(top = 10.dp, start = 5.dp)
         ) {
             readyWorkouts.forEach() {
-                WorkoutCard(workout = it)
+                WorkoutCard(
+                    workout = it,
+                    navController = navController,
+                    setCurrentWorkout = { viewModel.setCurrentWorkout(it) })
                 Spacer(modifier = Modifier.width(5.dp))
             }
         }
@@ -293,7 +292,10 @@ fun MainScreen(
                 .padding(top = 10.dp, start = 5.dp)
         ) {
             readyYogas.forEach {
-                WorkoutCard(workout = it)
+                WorkoutCard(
+                    workout = it,
+                    navController = navController,
+                    setCurrentWorkout = { viewModel.setCurrentWorkout(it) })
                 Spacer(modifier = Modifier.width(5.dp))
             }
         }

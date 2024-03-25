@@ -61,7 +61,7 @@ class SignInViewModel @Inject constructor(
                 }
 
                 is Resource.Error -> {
-                    _googleSignInState.value = GoogleSignInState(error = result.message!!)
+                    _googleSignInState.value = GoogleSignInState(error = result.message ?: "")
                 }
             }
         }

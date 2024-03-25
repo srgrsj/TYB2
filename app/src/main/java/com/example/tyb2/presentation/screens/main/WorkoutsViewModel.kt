@@ -1,12 +1,12 @@
 package com.example.tyb2.presentation.screens.main
 
-import com.example.tyb2.domain.workout.model.Workout
-import com.example.tyb2.domain.workout.usecases.WorkoutUseCase
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.tyb2.domain.workout.model.Workout
 import com.example.tyb2.domain.workout.readyWorkoutsData.ReadyWorkouts
 import com.example.tyb2.domain.workout.readyYogaData.ReadyYoga
+import com.example.tyb2.domain.workout.usecases.WorkoutUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -16,9 +16,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 open class WorkoutsViewModel @Inject constructor(
-    private val workoutUseCase: WorkoutUseCase
+    private val workoutUseCase: WorkoutUseCase,
 ) : ViewModel() {
     var workoutToDelete: Workout? = null
+
+
 
     private var _workoutList = MutableStateFlow(emptyList<Workout>())
     val workoutList: StateFlow<List<Workout>> = _workoutList.asStateFlow()
@@ -28,7 +30,6 @@ open class WorkoutsViewModel @Inject constructor(
 
     private var _readyYogaList = MutableStateFlow(emptyList<Workout>())
     val readyYogaList: StateFlow<List<Workout>> = _readyYogaList.asStateFlow()
-
 
     init {
         saveWorkoutsFromRealtimeDatabaseToWorkoutList()

@@ -4,7 +4,7 @@
     <string name="create_workout_section">Создание тренировки</string>
     <string name="gpt_generator_title">ИИ Генератор</string>
     <string name="muscle_groups">Группы мышц</string>
-    <string name="desired_duration">Время тренировки:</string>
+    <string name="desired_duration">Время тренировки</string>
     <string name="additional_requirements">Дополнительные требования</string>
     <string name="generate_workout">Сгенерировать тренировку!</string>
     <string name="fav_screen_title">Ваши тренировки</string>

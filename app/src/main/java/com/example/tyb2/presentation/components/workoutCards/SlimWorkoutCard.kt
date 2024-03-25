@@ -197,7 +197,7 @@ fun SlimWorkoutCard(
 //                        .fillMaxHeight(0.6f)
                         ) {
                             Text(
-                                text = workout.title!!,
+                                text = workout.title ?: "",
                                 style = Typography.bodyMedium.copy(fontWeight = FontWeight.ExtraBold),
                                 color = MaterialTheme.colorScheme.onPrimary,
                                 modifier = Modifier

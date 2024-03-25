@@ -39,5 +39,6 @@ sealed class Screen(
         const val DEFAULT_GENERATOR = "default_generator_screen"
         const val GPT_GENERATOR = "GPT_generator_screen"
         const val WORKOUT_PLAYBACK = "workout_playback"
+        const val WORKOUT_PREVIEW = "workout_preview"
     }
 }

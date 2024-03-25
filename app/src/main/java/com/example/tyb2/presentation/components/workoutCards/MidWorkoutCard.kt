@@ -109,7 +109,7 @@ fun MidWorkoutCard(
                         .fillMaxHeight(0.6f)
                 ) {
                     Text(
-                        text = workout.title!!,
+                        text = workout.title ?: "",
                         style = Typography.headlineSmall.copy(fontWeight = FontWeight.ExtraBold),
                         color = MaterialTheme.colorScheme.onPrimary,
                         modifier = Modifier

@@ -101,7 +101,10 @@ fun ActivityScreen(
         LazyRow(content = {
             createdWorkoutsLis.forEach() {
                 item {
-                    WorkoutCard(workout = it)
+                    WorkoutCard(
+                        workout = it,
+                        navController = navController,
+                        setCurrentWorkout = { viewModel.setCurrentWorkout(it) })
                     Spacer(modifier = Modifier.width(10.dp))
                 }
             }
@@ -131,7 +134,10 @@ fun ActivityScreen(
             content = {
                 createdWorkoutsLis.forEach {
                     item {
-                        WorkoutCard(workout = it)
+                        WorkoutCard(
+                            workout = it,
+                            navController = navController,
+                            setCurrentWorkout = { viewModel.setCurrentWorkout(it) })
                         Spacer(modifier = Modifier.width(10.dp))
                     }
                 }

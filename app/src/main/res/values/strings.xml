@@ -4,7 +4,7 @@
     <string name="create_workout_section">Create Workout</string>
     <string name="gpt_generator_title">AI Generator</string>
     <string name="muscle_groups">Muscle Groups</string>
-    <string name="desired_duration">Duration of training:</string>
+    <string name="desired_duration">Duration of training</string>
     <string name="additional_requirements">Additional Workout Requirements</string>
     <string name="generate_workout">Generate Workout!</string>
     <string name="fav_screen_title">Your Workouts</string>

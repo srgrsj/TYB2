@@ -104,7 +104,7 @@ fun BigWorkoutCard(workout: Workout) {
                         .fillMaxHeight(0.6f)
                 ) {
                     Text(
-                        text = workout.title!!,
+                        text = workout.title ?: "",
                         style = Typography.headlineMedium,
                         color = MaterialTheme.colorScheme.onPrimary,
                         modifier = Modifier

@@ -1,4 +1,4 @@
-package com.example.tyb2.domain.exercise.usecase
+package com.example.tyb2.domain.exersice.usecase
 
 import com.example.tyb2.domain.exersice.model.Exercise
 import com.example.tyb2.domain.exersice.repository.ExerciseRepository
