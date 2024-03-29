@@ -1,5 +1,6 @@
 package com.example.tyb2.domain.user.repository
 
+import com.example.tyb2.domain.user.model.AchievementType
 import com.example.tyb2.domain.user.model.User
 import com.example.tyb2.util.Resource
 import com.google.firebase.auth.AuthCredential
@@ -17,4 +18,5 @@ interface UserRepository {
     fun readOnboardingIsShow(): Flow<Boolean>
     suspend fun continueWithGoogle(credential: AuthCredential): Flow<Resource<AuthResult>>
     fun getSignedInUser(): User?
+    fun updateAchievement(user:User, achievementType: AchievementType)
 }

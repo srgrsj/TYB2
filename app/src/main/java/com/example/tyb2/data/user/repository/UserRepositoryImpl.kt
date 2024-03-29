@@ -12,6 +12,7 @@ import androidx.datastore.preferences.core.stringSetPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.example.tyb2.R
 import com.example.tyb2.data.user.AccountData
+import com.example.tyb2.domain.user.model.AchievementType
 import com.example.tyb2.domain.user.model.User
 import com.example.tyb2.domain.user.repository.UserRepository
 import com.example.tyb2.util.Constants
@@ -101,6 +102,21 @@ class UserRepositoryFirebaseImpl
             email = email.toString()
         )
     }
+
+    override fun updateAchievement(user: User, achievementType: AchievementType) {
+        val updatedAchievements = user.achievements.map {
+            if (it.achievementType == achievementType) {
+                it.copy(isAchieved = true)
+            } else {
+                it
+            }
+        }
+        val updatedUser = user.copy(achievements = updatedAchievements)
+        //TODO
+    }
+
+
+
     override suspend fun saveOnboardingIsShow() {
         context.TYBDatastore.edit {
             it[TYBKeys.ONBOARDING_IS_SHOW] = false
@@ -120,6 +136,29 @@ val Context.TYBDatastore: DataStore<Preferences> by preferencesDataStore(Constan
 
 private object TYBKeys {
     val ONBOARDING_IS_SHOW = booleanPreferencesKey("onboarding_is_show")
-    val USER_GENDER = stringSetPreferencesKey("user_gender") // TODO m / w / n
-    //TODO add variables for achievements
 }
+
+//title = "Первый шаг", i = 0
+//description = "Завершите свою первую тренировку",
+//achievementType = AchievementType.FIRST_TRAIN
+//),
+//title = "Гармония тела", i = 1
+//description = "Выполните тренировки на все группы мышцы",
+//achievementType = AchievementType.FULL_MUSCLES
+//),
+//title = "Стабильность - залог успеха",i = 2
+//description = "Тренируйтесь каждый день на протяжении недели",
+//achievementType = AchievementType.WEEK_TRAINING
+//),
+//title = "Вселенский баланс",i = 3
+//description = "Начните заниматься йогой",
+//achievementType = AchievementType.FIRST_YOGA
+//),
+//title = "Полной грудью",i = 4
+//description = "Попробуйте все виды йоги",
+//achievementType = AchievementType.FULL_YOGA
+//),
+//title = "Не вижу препятствий",i = 5
+//description = "Занимайтесь беспрерывно на протяжении месяца",
+//achievementType = AchievementType.MONTH_TRAINING
+//)
