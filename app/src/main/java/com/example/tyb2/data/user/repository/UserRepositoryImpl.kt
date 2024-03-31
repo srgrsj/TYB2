@@ -57,7 +57,6 @@ class UserRepositoryFirebaseImpl
     override suspend fun insertUser(user: User) {
         user.id.let { userDatabaseReference.child(it).setValue(user) }
     }
-
 //    override suspend fun updateProfilePicture(id: String, profilePicValue: String) {
 //        val updates = HashMap<String, Any>()
 //        updates["profilePictureUrl"] = profilePicValue
@@ -104,15 +103,15 @@ class UserRepositoryFirebaseImpl
     }
 
     override fun updateAchievement(user: User, achievementType: AchievementType) {
-        val updatedAchievements = user.achievements.map {
-            if (it.achievementType == achievementType) {
-                it.copy(isAchieved = true)
-            } else {
-                it
-            }
-        }
-        val updatedUser = user.copy(achievements = updatedAchievements)
-        //TODO
+//        val updatedAchievements = user.achievements.map {
+//            if (it.achievementType == achievementType) {
+//                it.copy(isAchieved = true)
+//            } else {
+//                it
+//            }
+//        }
+//        val updatedUser = user.copy(achievements = updatedAchievements)
+        //TODO updateAchievement
     }
 
 
@@ -128,7 +127,7 @@ class UserRepositoryFirebaseImpl
         }
     //TODO functions for change/get user gender
     private fun updateProfilePicture() {
-        //TODO
+        //TODO updateProfilePicture
     }
 }
 
@@ -137,28 +136,3 @@ val Context.TYBDatastore: DataStore<Preferences> by preferencesDataStore(Constan
 private object TYBKeys {
     val ONBOARDING_IS_SHOW = booleanPreferencesKey("onboarding_is_show")
 }
-
-//title = "Первый шаг", i = 0
-//description = "Завершите свою первую тренировку",
-//achievementType = AchievementType.FIRST_TRAIN
-//),
-//title = "Гармония тела", i = 1
-//description = "Выполните тренировки на все группы мышцы",
-//achievementType = AchievementType.FULL_MUSCLES
-//),
-//title = "Стабильность - залог успеха",i = 2
-//description = "Тренируйтесь каждый день на протяжении недели",
-//achievementType = AchievementType.WEEK_TRAINING
-//),
-//title = "Вселенский баланс",i = 3
-//description = "Начните заниматься йогой",
-//achievementType = AchievementType.FIRST_YOGA
-//),
-//title = "Полной грудью",i = 4
-//description = "Попробуйте все виды йоги",
-//achievementType = AchievementType.FULL_YOGA
-//),
-//title = "Не вижу препятствий",i = 5
-//description = "Занимайтесь беспрерывно на протяжении месяца",
-//achievementType = AchievementType.MONTH_TRAINING
-//)

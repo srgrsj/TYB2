@@ -32,7 +32,7 @@ import com.example.tyb2.util.Screen
 fun NavGraph(
     navController: NavHostController
 ) {
-    //TODO
+    //TODO start destination
 //    val startDestination = if (AccountData.EMAIL.isNullOrEmpty()) Screen.SIGN_IN else Screen.Main.route
     val startDestination = Screen.GPT_GENERATOR
     NavHost(

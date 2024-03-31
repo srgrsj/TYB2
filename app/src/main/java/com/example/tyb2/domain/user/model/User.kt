@@ -7,11 +7,12 @@ import java.util.UUID
 data class User(
     val email: String,
     val id: String = UUID.randomUUID().toString(),
+//    val bodyFeaturesList: List<String?> = null,
 //    val profilePictureUrl: String? = null,
 //    val username: String,
 //    val categories:
-    val achievements: List<Achievement> = userAchievementsList,
-    val userGender: String = "n" // TODO m / w / n
+//    TODO val achievements: List<Achievement> = userAchievementsList,
+//    TODO val userGenderIsMan: Boolean? = null (null - gender not chosen)
 )
 
 
@@ -24,7 +25,6 @@ data class Achievement(
 )
 
 val userAchievementsList = listOf(
-//    TODO
     Achievement(
         picture = R.drawable.achievement_blue_red,
         title = "Первый шаг",

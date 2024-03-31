@@ -60,7 +60,7 @@ fun SelectableCircle(
     color: Color,
     isSelected: Boolean
 ) {
-    // TODO pick the gender
+    // TODO make checkbox for pick gender
     val borderWidth by animateDpAsState(
         targetValue = if (isSelected) 6.dp else 0.dp,
         label = "",
@@ -80,5 +80,7 @@ fun SelectableCircle(
                 MaterialTheme.colorScheme.onPrimary,
                 shape = CircleShape
             )
-    ) {}
+    ) {
+        TODO()
+    }
 }
