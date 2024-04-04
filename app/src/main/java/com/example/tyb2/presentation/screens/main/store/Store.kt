@@ -24,6 +24,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -93,14 +94,18 @@ fun StoreScreen(
                 horizontalArrangement = Arrangement.Start,
                 modifier = Modifier.fillMaxSize()
             ) {
-                Icon(
-                    painter = painterResource(id = R.drawable.icon_left_arrow),
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.onPrimary,
-                    modifier = Modifier
-                        .scale(2f)
-                        .padding(start = 10.dp)
-                )
+                IconButton(onClick = {
+                    navController.popBackStack()
+                }) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.icon_left_arrow),
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.onPrimary,
+                        modifier = Modifier
+                            .scale(2f)
+                            .padding(start = 10.dp)
+                    )
+                }
             }
 
             Row(

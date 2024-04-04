@@ -1,6 +1,5 @@
 package com.example.tyb2.domain.user.model
 
-import androidx.datastore.preferences.core.stringSetPreferencesKey
 import com.example.tyb2.R
 import java.util.UUID
 
@@ -11,8 +10,8 @@ data class User(
 //    val profilePictureUrl: String? = null,
 //    val username: String,
 //    val categories:
-//    TODO val achievements: List<Achievement> = userAchievementsList,
-//    TODO val userGenderIsMan: Boolean? = null (null - gender not chosen)
+//   TODO val achievements: List<Achievement> = userAchievementsList,
+    val userGenderIsMan: Boolean? = null //(null - gender not chosen)
 )
 
 
@@ -21,7 +20,8 @@ data class Achievement(
     val title: String,
     val description: String,
     val isAchieved: Boolean,
-    val achievementType: AchievementType
+    val achievementType: AchievementType,
+    val process: Int,
 )
 
 val userAchievementsList = listOf(
@@ -30,42 +30,48 @@ val userAchievementsList = listOf(
         title = "Первый шаг",
         description = "Завершите свою первую тренировку",
         isAchieved = false,
-        achievementType = AchievementType.FIRST_TRAIN
+        achievementType = AchievementType.FIRST_TRAIN,
+        process = 0
     ),
     Achievement(
         picture = R.drawable.achievement_blue,
         title = "Гармония тела",
         description = "Выполните тренировки на все группы мышцы",
         isAchieved = false,
-        achievementType = AchievementType.FULL_MUSCLES
+        achievementType = AchievementType.FULL_MUSCLES,
+        process = 0
     ),
     Achievement(
         picture = R.drawable.achievement_red,
         title = "Стабильность - залог успеха",
         description = "Тренируйтесь каждый день на протяжении недели",
         isAchieved = false,
-        achievementType = AchievementType.WEEK_TRAINING
+        achievementType = AchievementType.WEEK_TRAINING,
+        process = 0
     ),
     Achievement(
         picture = R.drawable.achievement_purple,
         title = "Вселенский баланс",
         description = "Начните заниматься йогой",
         isAchieved = false,
-        achievementType = AchievementType.FIRST_YOGA
+        achievementType = AchievementType.FIRST_YOGA,
+        process = 0
     ),
     Achievement(
         picture = R.drawable.achievement_green,
         title = "Полной грудью",
         description = "Попробуйте все виды йоги",
         isAchieved = false,
-        achievementType = AchievementType.FULL_YOGA
+        achievementType = AchievementType.FULL_YOGA,
+        process = 0
     ),
     Achievement(
         picture = R.drawable.achievement_black,
         title = "Не вижу препятствий",
         description = "Занимайтесь беспрерывно на протяжении месяца",
         isAchieved = false,
-        achievementType = AchievementType.MONTH_TRAINING
+        achievementType = AchievementType.MONTH_TRAINING,
+        process = 0
     )
 )
 

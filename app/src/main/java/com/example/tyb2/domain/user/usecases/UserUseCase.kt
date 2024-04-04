@@ -9,5 +9,6 @@ data class UserUseCase(
     val saveOnboardingIsShow: SaveOnboardingIsShow,
     val continueWithGoogleUseCase: ContinueWithGoogleUseCase,
     val getSignedInUserUseCase: GetSignedInUserUseCase,
-    val updateProfilePictureUseCase: UpdateProfilePictureUseCase
+    val updateProfilePictureUseCase: UpdateProfilePictureUseCase,
+    val updateUserUseCase: UpdateUserUseCase,
 )

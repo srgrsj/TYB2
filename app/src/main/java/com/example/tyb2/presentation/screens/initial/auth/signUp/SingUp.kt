@@ -289,7 +289,6 @@ fun SignUpScreen(
                         unfocusedTextColor = MaterialTheme.colorScheme.primary,
                         focusedBorderColor = MaterialTheme.colorScheme.onPrimary,
                         unfocusedBorderColor = MaterialTheme.colorScheme.onPrimary,
-                        cursorColor = MaterialTheme.colorScheme.onPrimary
                     ),
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
                     shape = RoundedCornerShape(10.dp),
@@ -333,7 +332,6 @@ fun SignUpScreen(
                         unfocusedTextColor = MaterialTheme.colorScheme.primary,
                         focusedBorderColor = MaterialTheme.colorScheme.onPrimary,
                         unfocusedBorderColor = MaterialTheme.colorScheme.onPrimary,
-                        cursorColor = MaterialTheme.colorScheme.onPrimary
                     ),
                     modifier = Modifier
                         .width(320.dp)
@@ -424,7 +422,7 @@ fun SignUpScreen(
                         navController.navigate(Screen.SIGN_IN)
                     }) {
                         Text(
-                            text = "Sign up",
+                            text = "Log in",
                             color = MaterialTheme.colorScheme.onPrimary,
                             style = TextStyle(
                                 brush = AnimatedFieldBrush()

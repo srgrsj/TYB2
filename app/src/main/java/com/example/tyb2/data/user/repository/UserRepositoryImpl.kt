@@ -3,6 +3,7 @@ package com.example.tyb2.data.user.repository
 import android.content.Context
 import android.content.Intent
 import android.content.IntentSender
+import android.util.Log
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
@@ -114,6 +115,24 @@ class UserRepositoryFirebaseImpl
         //TODO updateAchievement
     }
 
+    override suspend fun updateUser(user: User) {
+        //TODO
+        val userId = user.id
+        val userRef = userDatabaseReference.child(userId)
+        val userData = hashMapOf<String, Any?>(
+                "id" to user.id,
+                "email" to user.email,
+                "userGenderIsMan" to user.userGenderIsMan
+            )
+//        userRef.child(userId).child("userGenderIsMan").setValue(false)
+        userRef.updateChildren(userData)
+            .addOnSuccessListener {
+                Log.d("repo", "User data updated successfully")
+            }
+            .addOnFailureListener { e ->
+                Log.e("repo", "Error updating user data", e)
+            }
+    }
 
 
     override suspend fun saveOnboardingIsShow() {

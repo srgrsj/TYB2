@@ -1,9 +1,9 @@
 package com.example.tyb2.presentation.screens.profile
 
-import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.animation.core.tween
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -26,10 +26,9 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -41,6 +40,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.tyb2.R
 import com.example.tyb2.data.user.AccountData
+import com.example.tyb2.domain.user.model.User
+import com.example.tyb2.domain.user.model.userAchievementsList
 import com.example.tyb2.presentation.components.Bubbles
 import com.example.tyb2.presentation.components.curves.Curve1
 import com.example.tyb2.presentation.components.curves.Curve2
@@ -59,6 +60,12 @@ fun ProfileScreen(
     viewModel: ProfileViewModel = hiltViewModel()
 ) {
 
+    val userData by viewModel.userData.collectAsState()
+    val currentUser = userData
+
+    LaunchedEffect(key1 = viewModel) {
+        viewModel.getUserData()
+    }
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -145,15 +152,37 @@ fun ProfileScreen(
                     //                contentScale = ContentScale.Fit
                     //            )
                     Image(
-                        painter = painterResource(id = R.drawable.pic),
+                        painter = painterResource(id = viewModel.getUserAvatar(currentUser?.userGenderIsMan)),
                         contentDescription = "Avatar",
-                        contentScale = ContentScale.Crop,
                         modifier = Modifier
                             .size(160.dp)
-                            .clip(CircleShape)
+                            // TODO save
+                            // !
+                            .clickable {
+                                Log.i(
+                                    "test",
+                                    viewModel
+                                        .getUserData()
+                                        .toString()
+                                )
+                                viewModel.updateUser(
+                                    user = User(
+                                        id = currentUser?.id.toString(),
+                                        email = currentUser?.email.toString(),
+                                        userGenderIsMan = false
+                                    )
+                                )
+                                viewModel.setAvatar()
+                                Log.i(
+                                    "test-after",
+                                    viewModel
+                                        .getUserData()
+                                        .toString()
+                                )
+                            }
                     )
                     Text(
-                        text = AccountData.EMAIL.toString(),
+                        text = AccountData.EMAIL.toString().split("@")[0],
                         color = MaterialTheme.colorScheme.onPrimary,
 //                        color = Color.Black,
                         style = MaterialTheme.typography.labelLarge
@@ -174,12 +203,12 @@ fun ProfileScreen(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    ProfileNavigationRow(
-                        icon = R.drawable.icon_achievements,
-                        title = "Достижения"
-                    ) {
-                        navController.navigate(Screen.ACHIEVEMENT_ROUTE)
-                    }
+//                    ProfileNavigationRow(
+//                        icon = R.drawable.icon_achievements,
+//                        title = "Достижения"
+//                    ) {
+//                        navController.navigate(Screen.ACHIEVEMENT_ROUTE)
+//                    }
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -201,39 +230,39 @@ fun ProfileScreen(
                             }
                             ProfileNavigationRow(
                                 icon = R.drawable.icon_calendar,
-                                title = "Календарь тренировок"
+                                title = "Сохраненные тренировки"
                             ) {
                                 navController.navigate(Screen.CALENDAR_ROUTE)
                             }
                         }
                     }
-                    Box(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .clip(RoundedCornerShape(10.dp))
-                            .background(MaterialTheme.colorScheme.onPrimary),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Column(
-                            modifier = Modifier
-                                .fillMaxWidth(),
-                            horizontalAlignment = Alignment.CenterHorizontally,
-                            verticalArrangement = Arrangement.spacedBy(2.dp)
-                        ) {
-                            ProfileNavigationRow(
-                                icon = R.drawable.icon_settings,
-                                title = "Настройки приложения"
-                            ) {
-                                navController.navigate(Screen.SETTINGS)
-                            }
-                            ProfileNavigationRow(
-                                icon = R.drawable.bottom_profile_screen_icon,
-                                title = "Параметры профиля"
-                            ) {
-                                navController.navigate(Screen.PROFILE_SETTINGS)
-                            }
-                        }
-                    }
+//                    Box(
+//                        modifier = Modifier
+//                            .fillMaxWidth()
+//                            .clip(RoundedCornerShape(10.dp))
+//                            .background(MaterialTheme.colorScheme.onPrimary),
+//                        contentAlignment = Alignment.Center
+//                    ) {
+//                        Column(
+//                            modifier = Modifier
+//                                .fillMaxWidth(),
+//                            horizontalAlignment = Alignment.CenterHorizontally,
+//                            verticalArrangement = Arrangement.spacedBy(2.dp)
+//                        ) {
+//                            ProfileNavigationRow(
+//                                icon = R.drawable.icon_settings,
+//                                title = "Настройки приложения"
+//                            ) {
+//                                navController.navigate(Screen.SETTINGS)
+//                            }
+//                            ProfileNavigationRow(
+//                                icon = R.drawable.bottom_profile_screen_icon,
+//                                title = "Параметры профиля"
+//                            ) {
+//                                navController.navigate(Screen.PROFILE_SETTINGS)
+//                            }
+//                        }
+//                    }
 
                     Button(
                         colors = ButtonDefaults.buttonColors(
@@ -309,7 +338,6 @@ fun ProfileScreen(
             }
         }
     }
-
 }
 
 

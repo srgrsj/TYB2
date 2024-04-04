@@ -5,7 +5,9 @@ import com.example.tyb2.data.exercise.repository.ExerciseRepositoryFirebaseImpl
 import com.example.tyb2.data.user.repository.UserRepositoryFirebaseImpl
 import com.example.tyb2.data.workout.repository.WorkoutRepositoryFirebaseImpl
 import com.example.tyb2.domain.app.usecase.AppUseCases
+import com.example.tyb2.domain.app.usecase.GetAvatarUseCase
 import com.example.tyb2.domain.app.usecase.GetCurrentWorkoutUseCase
+import com.example.tyb2.domain.app.usecase.SetAvatarUseCase
 import com.example.tyb2.domain.app.usecase.SetCurrentWorkoutUseCase
 import com.example.tyb2.domain.exercise.usecase.DeleteExerciseUseCase
 import com.example.tyb2.domain.exercise.usecase.ExerciseUseCase
@@ -17,6 +19,7 @@ import com.example.tyb2.domain.user.usecases.GetSignedInUserUseCase
 import com.example.tyb2.domain.user.usecases.ReadOnboardingIsShow
 import com.example.tyb2.domain.user.usecases.SaveOnboardingIsShow
 import com.example.tyb2.domain.user.usecases.UpdateProfilePictureUseCase
+import com.example.tyb2.domain.user.usecases.UpdateUserUseCase
 import com.example.tyb2.domain.user.usecases.UserSignInUseCase
 import com.example.tyb2.domain.user.usecases.UserSignOutUseCase
 import com.example.tyb2.domain.user.usecases.UserSignUpUseCase
@@ -39,7 +42,7 @@ class DomainModule {
         ExerciseUseCase(
             addExerciseUseCase = AddExerciseUseCase(exerciseRepositoryFirebaseImpl),
             getExercisesUseCase = GetExercisesUseCase(exerciseRepositoryFirebaseImpl),
-            deleteExerciseUseCase = DeleteExerciseUseCase(exerciseRepositoryFirebaseImpl)
+            deleteExerciseUseCase = DeleteExerciseUseCase(exerciseRepositoryFirebaseImpl),
         )
 
     @Provides
@@ -48,7 +51,7 @@ class DomainModule {
             addWorkoutUseCase = AddWorkoutUseCase(workoutRepositoryFirebaseImpl),
             getWorkoutsUseCase = GetWorkoutsUseCase(workoutRepositoryFirebaseImpl),
             deleteWorkoutUseCase = DeleteWorkoutUseCase(workoutRepositoryFirebaseImpl),
-            changeWorkoutFavState = ChangeWorkoutFavState(workoutRepositoryFirebaseImpl)
+            changeWorkoutFavState = ChangeWorkoutFavState(workoutRepositoryFirebaseImpl),
         )
 
     @Provides
@@ -62,13 +65,16 @@ class DomainModule {
             saveOnboardingIsShow = SaveOnboardingIsShow(userRepositoryFirebaseImpl),
             getSignedInUserUseCase = GetSignedInUserUseCase(userRepositoryFirebaseImpl),
             continueWithGoogleUseCase = ContinueWithGoogleUseCase(userRepositoryFirebaseImpl),
-            updateProfilePictureUseCase = UpdateProfilePictureUseCase(userRepositoryFirebaseImpl)
+            updateProfilePictureUseCase = UpdateProfilePictureUseCase(userRepositoryFirebaseImpl),
+            updateUserUseCase = UpdateUserUseCase(userRepositoryFirebaseImpl),
         )
 
     @Provides
     fun provideAppUseCases(appRepositoryImpl: AppRepositoryImpl): AppUseCases =
         AppUseCases(
             getCurrentWorkoutUseCase = GetCurrentWorkoutUseCase(appRepositoryImpl),
-            setCurrentWorkoutUseCase = SetCurrentWorkoutUseCase(appRepositoryImpl)
+            setCurrentWorkoutUseCase = SetCurrentWorkoutUseCase(appRepositoryImpl),
+            getAvatarUseCase = GetAvatarUseCase(appRepositoryImpl),
+            setAvatarUseCase = SetAvatarUseCase(appRepositoryImpl),
         )
 }

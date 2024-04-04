@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.tyb2.data.user.AccountData
 import com.example.tyb2.domain.workout.model.Workout
 import com.example.tyb2.presentation.screens.activity.ActivityScreen
 import com.example.tyb2.presentation.screens.generators.defaultGenerator.DefaultGenerator
@@ -33,8 +34,9 @@ fun NavGraph(
     navController: NavHostController
 ) {
     //TODO start destination
-//    val startDestination = if (AccountData.EMAIL.isNullOrEmpty()) Screen.SIGN_IN else Screen.Main.route
-    val startDestination = Screen.GPT_GENERATOR
+    val startDestination = if (AccountData.EMAIL.isNullOrEmpty()) Screen.SIGN_IN else Screen.Main.route
+//    val startDestination = Screen.GPT_GENERATOR
+//    val startDestination = Screen.Main.route
     NavHost(
         navController = navController,
         startDestination = startDestination,
@@ -43,7 +45,6 @@ fun NavGraph(
     ) {
         composable(Screen.Main.route) {
             MainScreen(navController)
-//            ProfileScreen(navController)
         }
         composable(Screen.Activity.route) {
             ActivityScreen(navController)

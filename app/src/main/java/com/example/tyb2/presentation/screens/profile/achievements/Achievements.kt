@@ -57,11 +57,11 @@ fun AchievementsScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Top
         ) {
-            ProfileNavRow(
-                navController = navController,
-                icon = R.drawable.icon_achievements,
-                title = "Достижения"
-            )
+//            ProfileNavRow(
+//                navController = navController,
+//                icon = R.drawable.icon_achievements,
+//                title = "Достижения"
+//            )
             Spacer(modifier = Modifier.height(8.dp))
             LazyColumn(
                 modifier = Modifier.fillMaxSize(),

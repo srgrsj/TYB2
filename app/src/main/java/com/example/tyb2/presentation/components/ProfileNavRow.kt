@@ -29,9 +29,10 @@ import com.example.tyb2.R
 
 @Composable
 fun ProfileNavRow(
+    img: Int,
     navController: NavHostController,
     icon: Int,
-    title: String
+    title: String,
 ) {
     Box(
         modifier = Modifier
@@ -94,13 +95,12 @@ fun ProfileNavRow(
                 }
             }
             Image(
-                painter = painterResource(id = R.drawable.pic),
+                painter = painterResource(id = img),
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .padding(start = 12.dp)
                     .size(40.dp)
-                    .clip(CircleShape)
             )
         }
     }

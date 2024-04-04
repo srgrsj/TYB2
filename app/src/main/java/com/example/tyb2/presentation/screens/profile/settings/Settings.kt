@@ -30,11 +30,11 @@ fun SettingsScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Top
         ) {
-            ProfileNavRow(
-                navController = navController,
-                icon = R.drawable.icon_settings,
-                title = "Параметры приложения"
-            )
+//            ProfileNavRow(
+//                navController = navController,
+//                icon = R.drawable.icon_settings,
+//                title = "Параметры приложения"
+//            )
         }
     }
 }

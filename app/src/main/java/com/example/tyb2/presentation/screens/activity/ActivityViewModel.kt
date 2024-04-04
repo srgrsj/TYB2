@@ -23,14 +23,12 @@ class ActivityViewModel @Inject constructor(
         }
     }
 
-
     private var _createdWorkoutList = MutableStateFlow(emptyList<Workout>())
     val createdWorkoutList: StateFlow<List<Workout>> = _createdWorkoutList.asStateFlow()
 
     init {
         saveWorkoutsFromRealtimeDatabaseToWorkoutList()
     }
-
 
     private fun saveWorkoutsFromRealtimeDatabaseToWorkoutList() {
 
@@ -41,6 +39,5 @@ class ActivityViewModel @Inject constructor(
                 }
             }
         }
-
     }
 }

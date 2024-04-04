@@ -29,7 +29,7 @@ class SignUpViewModel @Inject constructor(
     private val _googleSignInState = mutableStateOf(GoogleSignInState())
     val googleSignInState: State<GoogleSignInState> = _googleSignInState
     fun signUpUser(email: String, password: String) = viewModelScope.launch {
-        userUseCase.userSignInUseCase(email, password).collect { result ->
+        userUseCase.userSignUpUseCase(email, password).collect { result ->
             when (result) {
                 is Resource.Success -> {
                     _signUpState.send(SignInState(isSuccess = "Sign In Success"))

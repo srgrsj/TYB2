@@ -26,7 +26,7 @@ fun BottomNavigationBar(
 ) {
     val screens = listOf(
         Screen.Main,
-        Screen.Activity,
+//        Screen.Activity,
         Screen.Profile
     )
     val navBackStackEntry by navController.currentBackStackEntryAsState()

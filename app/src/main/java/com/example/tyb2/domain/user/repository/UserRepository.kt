@@ -19,4 +19,5 @@ interface UserRepository {
     suspend fun continueWithGoogle(credential: AuthCredential): Flow<Resource<AuthResult>>
     fun getSignedInUser(): User?
     fun updateAchievement(user:User, achievementType: AchievementType)
+    suspend fun updateUser(user: User)
 }

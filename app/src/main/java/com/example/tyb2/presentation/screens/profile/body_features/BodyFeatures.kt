@@ -49,7 +49,8 @@ fun BodyFeaturesScreen(
             ProfileNavRow(
                 navController = navController,
                 icon = R.drawable.icon_body_features,
-                title = "Особенности тела"
+                title = "Особенности тела",
+                img = viewModel.avatar
             )
         }
     }
