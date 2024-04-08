@@ -28,7 +28,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.currentRecomposeScope
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -53,19 +58,23 @@ import com.example.tyb2.presentation.ui.theme.purpleColor
 import com.example.tyb2.presentation.ui.theme.redColor
 import com.example.tyb2.presentation.ui.theme.yellowColor
 import com.example.tyb2.util.Screen
+import com.example.tyb2.util.getUserAvatar
 
 @Composable
 fun ProfileScreen(
     navController: NavHostController,
     viewModel: ProfileViewModel = hiltViewModel()
 ) {
+//    val userAvatarData = viewModel.userAvatar.collectAsState()
+//    val userAvatar = getUserAvatar(userAvatarData.value)
 
-    val userData by viewModel.userData.collectAsState()
-    val currentUser = userData
-
-    LaunchedEffect(key1 = viewModel) {
-        viewModel.getUserData()
-    }
+//    LaunchedEffect(key1 = viewModel.userAvatar) {
+////        val data = viewModel.getUserAvatarData()
+////        Log.i("vm change", "$data")
+//        viewModel.userAvatar.collect { avatarData ->
+//            Log.i("vm change", "$avatarData")
+//        }
+//    }
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -152,34 +161,12 @@ fun ProfileScreen(
                     //                contentScale = ContentScale.Fit
                     //            )
                     Image(
-                        painter = painterResource(id = viewModel.getUserAvatar(currentUser?.userGenderIsMan)),
+//                        painter = painterResource(id = userAvatar),
+                        painter = painterResource(id = R.drawable.profile_avatar_default),
                         contentDescription = "Avatar",
                         modifier = Modifier
                             .size(160.dp)
-                            // TODO save
-                            // !
-                            .clickable {
-                                Log.i(
-                                    "test",
-                                    viewModel
-                                        .getUserData()
-                                        .toString()
-                                )
-                                viewModel.updateUser(
-                                    user = User(
-                                        id = currentUser?.id.toString(),
-                                        email = currentUser?.email.toString(),
-                                        userGenderIsMan = false
-                                    )
-                                )
-                                viewModel.setAvatar()
-                                Log.i(
-                                    "test-after",
-                                    viewModel
-                                        .getUserData()
-                                        .toString()
-                                )
-                            }
+
                     )
                     Text(
                         text = AccountData.EMAIL.toString().split("@")[0],

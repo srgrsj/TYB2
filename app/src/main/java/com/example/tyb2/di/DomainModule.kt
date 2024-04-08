@@ -5,9 +5,9 @@ import com.example.tyb2.data.exercise.repository.ExerciseRepositoryFirebaseImpl
 import com.example.tyb2.data.user.repository.UserRepositoryFirebaseImpl
 import com.example.tyb2.data.workout.repository.WorkoutRepositoryFirebaseImpl
 import com.example.tyb2.domain.app.usecase.AppUseCases
-import com.example.tyb2.domain.app.usecase.GetAvatarUseCase
+import com.example.tyb2.domain.app.usecase.GetCurrentUserUseCase
 import com.example.tyb2.domain.app.usecase.GetCurrentWorkoutUseCase
-import com.example.tyb2.domain.app.usecase.SetAvatarUseCase
+import com.example.tyb2.domain.app.usecase.SetCurrentUserUseCase
 import com.example.tyb2.domain.app.usecase.SetCurrentWorkoutUseCase
 import com.example.tyb2.domain.exercise.usecase.DeleteExerciseUseCase
 import com.example.tyb2.domain.exercise.usecase.ExerciseUseCase
@@ -15,9 +15,11 @@ import com.example.tyb2.domain.exercise.usecase.GetExercisesUseCase
 import com.example.tyb2.domain.exersice.usecase.AddExerciseUseCase
 import com.example.tyb2.domain.user.usecases.AddUserUseCase
 import com.example.tyb2.domain.user.usecases.ContinueWithGoogleUseCase
+import com.example.tyb2.domain.user.usecases.GetAvatarUseCase
 import com.example.tyb2.domain.user.usecases.GetSignedInUserUseCase
 import com.example.tyb2.domain.user.usecases.ReadOnboardingIsShow
 import com.example.tyb2.domain.user.usecases.SaveOnboardingIsShow
+import com.example.tyb2.domain.user.usecases.SetAvatarUseCase
 import com.example.tyb2.domain.user.usecases.UpdateProfilePictureUseCase
 import com.example.tyb2.domain.user.usecases.UpdateUserUseCase
 import com.example.tyb2.domain.user.usecases.UserSignInUseCase
@@ -67,6 +69,8 @@ class DomainModule {
             continueWithGoogleUseCase = ContinueWithGoogleUseCase(userRepositoryFirebaseImpl),
             updateProfilePictureUseCase = UpdateProfilePictureUseCase(userRepositoryFirebaseImpl),
             updateUserUseCase = UpdateUserUseCase(userRepositoryFirebaseImpl),
+            getAvatarUseCase = GetAvatarUseCase(userRepositoryFirebaseImpl),
+            setAvatarUseCase = SetAvatarUseCase(userRepositoryFirebaseImpl),
         )
 
     @Provides
@@ -74,7 +78,7 @@ class DomainModule {
         AppUseCases(
             getCurrentWorkoutUseCase = GetCurrentWorkoutUseCase(appRepositoryImpl),
             setCurrentWorkoutUseCase = SetCurrentWorkoutUseCase(appRepositoryImpl),
-            getAvatarUseCase = GetAvatarUseCase(appRepositoryImpl),
-            setAvatarUseCase = SetAvatarUseCase(appRepositoryImpl),
+            getCurrentUserUseCase = GetCurrentUserUseCase(appRepositoryImpl),
+            setCurrentUserUseCase = SetCurrentUserUseCase(appRepositoryImpl),
         )
 }

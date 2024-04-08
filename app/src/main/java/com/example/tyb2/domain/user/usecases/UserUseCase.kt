@@ -11,4 +11,6 @@ data class UserUseCase(
     val getSignedInUserUseCase: GetSignedInUserUseCase,
     val updateProfilePictureUseCase: UpdateProfilePictureUseCase,
     val updateUserUseCase: UpdateUserUseCase,
+    val getAvatarUseCase: GetAvatarUseCase,
+    val setAvatarUseCase: SetAvatarUseCase,
 )

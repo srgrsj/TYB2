@@ -1,18 +1,21 @@
 package com.example.tyb2.domain.user.model
 
+import android.os.Parcelable
 import com.example.tyb2.R
+import kotlinx.parcelize.Parcelize
 import java.util.UUID
 
+@Parcelize
 data class User(
-    val email: String,
+    val email: String = "",
     val id: String = UUID.randomUUID().toString(),
-//    val bodyFeaturesList: List<String?> = null,
+    val bodyFeaturesList: List<String>? = null,
 //    val profilePictureUrl: String? = null,
 //    val username: String,
 //    val categories:
 //   TODO val achievements: List<Achievement> = userAchievementsList,
     val userGenderIsMan: Boolean? = null //(null - gender not chosen)
-)
+) : Parcelable
 
 
 data class Achievement(

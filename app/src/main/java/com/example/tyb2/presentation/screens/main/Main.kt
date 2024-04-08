@@ -199,32 +199,32 @@ fun MainScreen(
                     .fillMaxWidth(),
                 horizontalArrangement = Arrangement.Center
             ) {
-                SearchBar(
-                    colors = SearchBarDefaults.colors(MaterialTheme.colorScheme.onPrimary),
-                    shape = RoundedCornerShape(10.dp),
-                    query = searchBarValue,
-                    onQueryChange = { searchBarValue = it },
-                    onSearch = {},
-                    active = false,
-                    placeholder = {
-                        Text(
-                            text = "Поиск",
-                            style = Typography.labelMedium,
-                            color = MaterialTheme.colorScheme.primary
-                        )
-                    },
-                    trailingIcon = {
-                        Icon(
-                            painter = painterResource(id = R.drawable.icon_search),
-                            contentDescription = null,
-                            tint = MaterialTheme.colorScheme.primary
-                        )
-                    },
-                    onActiveChange = {},
-                    modifier = Modifier
-                        .fillMaxWidth(0.95f)
-
-                ) {}
+//                SearchBar(
+//                    colors = SearchBarDefaults.colors(MaterialTheme.colorScheme.onPrimary),
+//                    shape = RoundedCornerShape(10.dp),
+//                    query = searchBarValue,
+//                    onQueryChange = { searchBarValue = it },
+//                    onSearch = {},
+//                    active = false,
+//                    placeholder = {
+//                        Text(
+//                            text = "Поиск",
+//                            style = Typography.labelMedium,
+//                            color = MaterialTheme.colorScheme.primary
+//                        )
+//                    },
+//                    trailingIcon = {
+//                        Icon(
+//                            painter = painterResource(id = R.drawable.icon_search),
+//                            contentDescription = null,
+//                            tint = MaterialTheme.colorScheme.primary
+//                        )
+//                    },
+//                    onActiveChange = {},
+//                    modifier = Modifier
+//                        .fillMaxWidth(0.95f)
+//
+//                ) {}
             }
         }
 
@@ -257,7 +257,7 @@ fun MainScreen(
                 .horizontalScroll(rememberScrollState())
                 .padding(top = 10.dp, start = 5.dp)
         ) {
-            readyWorkouts.forEach() {
+            readyWorkouts.forEach {
                 WorkoutCard(
                     workout = it,
                     navController = navController,

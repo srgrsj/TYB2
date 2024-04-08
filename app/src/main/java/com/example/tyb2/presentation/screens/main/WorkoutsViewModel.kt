@@ -20,8 +20,6 @@ open class WorkoutsViewModel @Inject constructor(
 ) : ViewModel() {
     var workoutToDelete: Workout? = null
 
-
-
     private var _workoutList = MutableStateFlow(emptyList<Workout>())
     val workoutList: StateFlow<List<Workout>> = _workoutList.asStateFlow()
 

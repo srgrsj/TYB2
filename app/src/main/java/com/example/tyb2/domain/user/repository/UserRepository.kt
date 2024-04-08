@@ -2,6 +2,7 @@ package com.example.tyb2.domain.user.repository
 
 import com.example.tyb2.domain.user.model.AchievementType
 import com.example.tyb2.domain.user.model.User
+import com.example.tyb2.domain.workout.model.Workout
 import com.example.tyb2.util.Resource
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.AuthResult
@@ -17,7 +18,9 @@ interface UserRepository {
     suspend fun saveOnboardingIsShow()
     fun readOnboardingIsShow(): Flow<Boolean>
     suspend fun continueWithGoogle(credential: AuthCredential): Flow<Resource<AuthResult>>
-    fun getSignedInUser(): User?
+    suspend fun getSignedInUser(): User?
     fun updateAchievement(user:User, achievementType: AchievementType)
     suspend fun updateUser(user: User)
+    fun getUserAvatar() : Flow<String>
+    suspend fun setUserAvatar(value: String)
 }

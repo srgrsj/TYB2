@@ -1,8 +1,11 @@
 package com.example.tyb2.presentation.screens.profile.calendar
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.tyb2.R
 import com.example.tyb2.domain.app.usecase.AppUseCases
+import com.example.tyb2.domain.user.model.User
 import com.example.tyb2.domain.user.usecases.UserUseCase
 import com.example.tyb2.domain.workout.model.Workout
 import com.example.tyb2.domain.workout.usecases.WorkoutUseCase
@@ -19,14 +22,26 @@ class CalendarViewModel @Inject constructor(
     private val appUseCases: AppUseCases,
     private val workoutUseCase: WorkoutUseCase,
 ) : ViewModel() {
+
+//    private val _userData = MutableStateFlow<User?>(null)
+//    val userData: StateFlow<User?> = _userData
+
+    private val _userAvatar = MutableStateFlow<String>("n")
+    val userAvatar: StateFlow<String> = _userAvatar
+    fun getUserAvatarData() {
+        viewModelScope.launch {
+            _userAvatar.emit(userUseCase.getAvatarUseCase.invoke().toString())
+        }
+    }
+    fun setUserAvatarData(value: String) = viewModelScope.launch {
+        userUseCase.setAvatarUseCase.invoke(value)
+    }
+
     fun setCurrentWorkout(workout: Workout) {
         viewModelScope.launch {
             appUseCases.setCurrentWorkoutUseCase.invoke(workout)
         }
     }
-
-    val _avatar = appUseCases.getAvatarUseCase.invoke()
-    val avatar = _avatar.value
 
     private var _createdWorkoutList = MutableStateFlow(emptyList<Workout>())
     val createdWorkoutList: StateFlow<List<Workout>> = _createdWorkoutList.asStateFlow()
@@ -44,4 +59,15 @@ class CalendarViewModel @Inject constructor(
             }
         }
     }
+
+
+//    fun updateUser(user: User) = viewModelScope.launch {
+//        Log.i("test view model", user.toString())
+//        userUseCase.updateUserUseCase.invoke(user)
+//        _userData.value = user
+//    }
+
+//    fun setAvatar() = viewModelScope.launch {
+////        appUseCases.setCurrentUserUseCase.invoke(getUserAvatar(getUserData()?.userGenderIsMan))
+//    }
 }
