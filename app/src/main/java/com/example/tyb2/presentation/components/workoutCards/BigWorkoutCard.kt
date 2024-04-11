@@ -42,7 +42,11 @@ import com.example.tyb2.domain.workout.model.WorkoutSource
 import com.example.tyb2.presentation.screens.main.store.StoreViewModel
 import com.example.tyb2.presentation.ui.theme.Typography
 import com.example.tyb2.presentation.ui.theme.redColor
+import com.example.tyb2.util.Muscle
+import com.example.tyb2.util.MuscleGroup
+import com.example.tyb2.util.MuscleStuff
 import com.example.tyb2.util.limitToMaxLength
+import java.util.Random
 
 
 @Composable
@@ -57,7 +61,7 @@ fun BigWorkoutCard(
         modifier = Modifier
             .width(180.dp)
             .height(240.dp)
-            .border(2.dp, redColor, RoundedCornerShape(10.dp))
+            .border(2.dp, MuscleStuff.defineColor( MuscleStuff.defineGroup(workout.muscles?.first() ?: Muscle.BREAST)), RoundedCornerShape(10.dp))
     ) {
         Column(
             modifier = Modifier
@@ -115,11 +119,11 @@ fun BigWorkoutCard(
                             .height(16.dp)
                             .width(16.dp)
                             .clip(CircleShape)
-                            .background(redColor)
+                            .background(MuscleStuff.defineColor( MuscleStuff.defineGroup(workout.muscles?.first() ?: Muscle.BREAST)))
                     ) {}
 
                     Text(
-                        text = "Грудь",
+                        text = MuscleStuff.defineTitle(MuscleStuff.defineGroup(workout.muscles?.first() ?: Muscle.BREAST)),
                         color = MaterialTheme.colorScheme.onPrimary,
                         style = Typography.bodyLarge,
                         modifier = Modifier
@@ -133,7 +137,7 @@ fun BigWorkoutCard(
                 modifier = Modifier
                     .fillMaxSize()
                     .clip(RoundedCornerShape(10.dp))
-                    .background(redColor)
+                    .background(MuscleStuff.defineColor( MuscleStuff.defineGroup(workout.muscles?.first() ?: Muscle.BREAST)))
             ) {
                 Box(
                     modifier = Modifier
@@ -179,7 +183,7 @@ fun BigWorkoutCard(
                         modifier = Modifier.fillMaxSize()
                     ) {
                         Image(
-                            painter = painterResource(id = R.drawable.muscles_thoracic),
+                            painter = painterResource(id = MuscleStuff.definePicture(workout.muscles?.first() ?: Muscle.BREAST)),
                             contentDescription = null,
                             modifier = Modifier
                                 .scale(2.5f)

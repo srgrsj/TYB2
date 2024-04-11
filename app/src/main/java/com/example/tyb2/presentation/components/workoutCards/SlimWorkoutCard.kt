@@ -42,6 +42,9 @@ import com.example.tyb2.domain.workout.model.WorkoutSource
 import com.example.tyb2.presentation.screens.main.store.StoreViewModel
 import com.example.tyb2.presentation.ui.theme.Typography
 import com.example.tyb2.presentation.ui.theme.redColor
+import com.example.tyb2.util.Muscle
+import com.example.tyb2.util.MuscleGroup
+import com.example.tyb2.util.MuscleStuff
 import com.example.tyb2.util.limitToMaxLength
 
 //@Preview
@@ -100,7 +103,7 @@ fun SlimWorkoutCard(
         modifier = Modifier
             .width(180.dp)
             .height(80.dp)
-            .border(2.dp, redColor, RoundedCornerShape(10.dp))
+            .border(2.dp, MuscleStuff.defineColor( MuscleStuff.defineGroup(workout.muscles?.first() ?: Muscle.BREAST)), RoundedCornerShape(10.dp))
     ) {
         Row(
             modifier = Modifier
@@ -113,7 +116,7 @@ fun SlimWorkoutCard(
                     .clip(RoundedCornerShape(10.dp))
                     .fillMaxHeight()
                     .fillMaxWidth(0.5f)
-                    .background(redColor)
+                    .background(MuscleStuff.defineColor( MuscleStuff.defineGroup(workout.muscles?.first() ?: Muscle.BREAST)))
             ) {
                 Box(
                     modifier = Modifier
@@ -159,7 +162,7 @@ fun SlimWorkoutCard(
                         modifier = Modifier.fillMaxSize()
                     ) {
                         Image(
-                            painter = painterResource(id = R.drawable.muscles_thoracic),
+                            painter = painterResource(id = MuscleStuff.definePicture(workout.muscles?.first() ?: Muscle.BREAST)),
                             contentDescription = null,
                             modifier = Modifier
 //                                .scale(1.8f)
@@ -228,11 +231,11 @@ fun SlimWorkoutCard(
                                     .height(10.dp)
                                     .width(10.dp)
                                     .clip(CircleShape)
-                                    .background(redColor)
+                                    .background(MuscleStuff.defineColor( MuscleStuff.defineGroup(workout.muscles?.first() ?: Muscle.BREAST)))
                             ) {}
 
                             Text(
-                                text = "Грудь",
+                                text = MuscleStuff.defineTitle(MuscleStuff.defineGroup(workout.muscles?.first() ?: Muscle.BREAST)),
                                 color = MaterialTheme.colorScheme.onPrimary,
                                 style = Typography.bodySmall,
                                 modifier = Modifier
@@ -249,6 +252,7 @@ fun SlimWorkoutCard(
 
                 ) {
                     IconButton(onClick = {
+
                         viewModel.changeWorkoutFavState(workout)
                         favState = favState?.not()
                         Log.i("slim Fav state", favState.toString())

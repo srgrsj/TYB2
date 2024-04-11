@@ -50,17 +50,18 @@ class StoreViewModel @Inject constructor(
     fun sortWorkoutListByCategory(
         sortCategories: List<Muscle>,
         allCategories: Boolean,
-    ): List<Workout> {
-        if (allCategories) return readyWorkoutList.value
+    ) {
+        if (allCategories) viewModelScope.launch { _allWorkoutsList.emit(allWorkoutsList.value) }
         val sortedList = mutableListOf<Workout>()
-        readyWorkoutList.value.forEach { workout ->
+        allWorkoutsList.value.forEach { workout ->
             workout.muscles?.forEach {
                 if (sortCategories.contains(it)) sortedList.add(workout)
             }
         }
-//        Log.i("list", sortedList.toString())
-//        Log.i("category", sortCategories.toString())
-        return sortedList.distinct()
+        Log.i("Vm sorted", sortedList.toString())
+        viewModelScope.launch {
+            _allWorkoutsList.emit(sortedList)
+        }
     }
 
     fun changeWorkoutFavState(workout: Workout) {

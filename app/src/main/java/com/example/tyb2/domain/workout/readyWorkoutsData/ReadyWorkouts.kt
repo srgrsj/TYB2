@@ -6,6 +6,7 @@ import com.example.tyb2.domain.exersice.model.ExerciseType
 import com.example.tyb2.domain.exersice.readyExercisesData.ReadyExercises
 import com.example.tyb2.domain.workout.model.Workout
 import com.example.tyb2.domain.workout.model.WorkoutSource
+import com.example.tyb2.util.Muscle
 
 enum class ReadyWorkouts(val workout: Workout) {
     WorkoutForBeginner(
@@ -30,6 +31,7 @@ enum class ReadyWorkouts(val workout: Workout) {
                 title = context.getString(R.string.beginners_workout),
                 description = context.getString(R.string.beginners_workout_description),
                 duration = 30 * 1000 * 60,
+                muscles = listOf(Muscle.ARM_BICEPS, Muscle.BACK_WIDE), //TODO
                 exerciseList = listOf(
                     ReadyExercises.PUSH_UPS.getLocalizedExercise(context).copy(
                         numberOfRepetitions = 12,
@@ -58,6 +60,7 @@ enum class ReadyWorkouts(val workout: Workout) {
                 title = context.getString(R.string.intermediate_workout),
                 description = context.getString(R.string.intermediate_workout_description),
                 duration = 45 * 1000 * 60,
+                muscles = listOf(Muscle.BREAST, Muscle.BRACHIAL_FRONT), //TODO
                 exerciseList = listOf(
                     ReadyExercises.DUMBBELL_PRESS.getLocalizedExercise(context).copy(
                         numberOfRepetitions = 8,
@@ -91,6 +94,7 @@ enum class ReadyWorkouts(val workout: Workout) {
                 title = context.getString(R.string.experienced_workout),
                 description = context.getString(R.string.experienced_workout_description),
                 duration = 60 * 1000 * 60,
+                muscles = listOf(Muscle.LEG_CALF, Muscle.CORE_STRAIGHT), //TODO
                 exerciseList = listOf(
                     ReadyExercises.DIPS.getLocalizedExercise(context).copy(
                         numberOfRepetitions = 12,

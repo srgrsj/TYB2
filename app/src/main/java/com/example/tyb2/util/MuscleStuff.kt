@@ -23,8 +23,10 @@ object MuscleStuff {
         val color = when (muscleGroup) {
             MuscleGroup.BREAST -> redColor
             MuscleGroup.ARM -> orangeColor
-            MuscleGroup.LEG -> yellowColor
-            MuscleGroup.BRACHIAL -> greenColor
+            MuscleGroup.BRACHIAL -> yellowColor
+            MuscleGroup.LEG -> greenColor
+//            MuscleGroup.BRACHIAL -> greenColor
+//            MuscleGroup.LEG -> yellowColor
             MuscleGroup.BACK -> blueColor
             MuscleGroup.CORE -> purpleColor
         }

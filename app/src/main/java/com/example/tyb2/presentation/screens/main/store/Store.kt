@@ -82,6 +82,13 @@ fun StoreScreen(
     var isBlueSelected by remember { mutableStateOf(false) }
     var isPurpleSelected by remember { mutableStateOf(false) }
 
+    val allCategories by remember {
+        mutableStateOf(
+            isRedSelected || isOrangeSelected || isYellowSelected
+                    || isGreenSelected || isBlueSelected || isPurpleSelected
+        )
+    }
+
     val sortCategories = mutableListOf<Muscle>()
 
     if (isGreenSelected) sortCategories.addAll(MuscleStuff.defineMuscle(MuscleGroup.LEG))
@@ -97,6 +104,10 @@ fun StoreScreen(
     if (isYellowSelected)  sortCategories.addAll(MuscleStuff.defineMuscle(MuscleGroup.BRACHIAL))
     else sortCategories.removeAll(MuscleStuff.defineMuscle(MuscleGroup.BRACHIAL))
 
+//    var displayingWO = viewModel.sortWorkoutListByCategory(
+//        sortCategories = sortCategories,
+//        allCategories = allCategories
+//    )
 
     val readyWorkouts by viewModel.allWorkoutsList.collectAsState()
     val context = LocalContext.current
@@ -107,6 +118,7 @@ fun StoreScreen(
     }
     LaunchedEffect(key1 = sortCategories) {
         Log.i("Categories", sortCategories.toString())
+        Log.i("All", allCategories.toString())
     }
 
     Column(
@@ -413,7 +425,7 @@ fun StoreScreen(
         ) {
 
             Text(
-                text = "Фильтр",
+                text = "Лучшее",
                 color = MaterialTheme.colorScheme.onPrimary,
                 style = TextStyle(
                     fontFamily = robotoFamily,
@@ -433,6 +445,7 @@ fun StoreScreen(
             )
 
         }
+
         GridPad(
             viewModel,
             readyWorkouts
