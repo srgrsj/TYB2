@@ -32,6 +32,7 @@ import com.example.tyb2.presentation.ui.theme.Typography
 import com.example.tyb2.util.DateTimeUtils
 import com.example.tyb2.util.MuscleStuff
 import com.example.tyb2.util.Screen
+import com.example.tyb2.util.limitToMaxLength
 
 
 @Composable
@@ -141,7 +142,7 @@ fun WorkoutCard(
             Column {
                 workout.title?.let {
                     Text(
-                        text = it,
+                        text = it.limitToMaxLength(8),
                         style = Typography.titleLarge,
                         color = MaterialTheme.colorScheme.onPrimary,
                         modifier = Modifier

@@ -21,12 +21,12 @@ object MuscleStuff {
 
     fun defineColor(muscleGroup: MuscleGroup): Color {
         val color = when (muscleGroup) {
-            MuscleGroup.LEG -> greenColor
-            MuscleGroup.CORE -> purpleColor
-            MuscleGroup.BRACHIAL -> yellowColor
-            MuscleGroup.BACK -> blueColor
             MuscleGroup.BREAST -> redColor
             MuscleGroup.ARM -> orangeColor
+            MuscleGroup.LEG -> yellowColor
+            MuscleGroup.BRACHIAL -> greenColor
+            MuscleGroup.BACK -> blueColor
+            MuscleGroup.CORE -> purpleColor
         }
         return color
     }
@@ -47,6 +47,18 @@ object MuscleStuff {
             Muscle.LEG_CALF -> MuscleGroup.LEG
             Muscle.LEG_THIGHS -> MuscleGroup.LEG
             Muscle.LEG_QUADRICEPS -> MuscleGroup.LEG
+        }
+        return group
+    }
+
+    fun defineMuscle(muscleGroup: MuscleGroup): List<Muscle> {
+        val group = when (muscleGroup) {
+            MuscleGroup.BREAST -> listOf(Muscle.BREAST)
+            MuscleGroup.ARM -> listOf(Muscle.ARM_BICEPS, Muscle.ARM_FOREARM, Muscle.ARM_TRICEPS)
+            MuscleGroup.BACK -> listOf(Muscle.BACK_TRAPEZOID, Muscle.BACK_WIDE)
+            MuscleGroup.BRACHIAL -> listOf(Muscle.BRACHIAL_BACK, Muscle.BRACHIAL_FRONT)
+            MuscleGroup.CORE -> listOf(Muscle.CORE_LATERAL_ABDOMINAL, Muscle.CORE_LUMBAR,Muscle.CORE_STRAIGHT)
+            MuscleGroup.LEG -> listOf(Muscle.LEG_THIGHS, Muscle.LEG_QUADRICEPS,Muscle.LEG_CALF)
         }
         return group
     }

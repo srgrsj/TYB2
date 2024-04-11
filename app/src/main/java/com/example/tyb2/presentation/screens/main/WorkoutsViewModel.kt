@@ -18,18 +18,27 @@ open class WorkoutsViewModel @Inject constructor(
     private val workoutUseCase: WorkoutUseCase,
 ) : ViewModel() {
     var workoutToDelete: Workout? = null
-
+    /** Тренировки созданные пользователем, лежат в firebase*/
     protected var _workoutList = MutableStateFlow(emptyList<Workout>())
     val workoutList: StateFlow<List<Workout>> = _workoutList.asStateFlow()
 
+    /** Заранее подготовленные тренировки*/
     protected var _readyWorkoutList = MutableStateFlow(emptyList<Workout>())
     val readyWorkoutList: StateFlow<List<Workout>> = _readyWorkoutList.asStateFlow()
+
+    /** Тренировки, которые показываются пользователю в сторе*/
+    protected var _allWorkoutsList = MutableStateFlow(emptyList<Workout>())
+    val allWorkoutsList: StateFlow<List<Workout>> = _readyWorkoutList.asStateFlow()
 
 //    private var _readyYogaList = MutableStateFlow(emptyList<Workout>())
 //    val readyYogaList: StateFlow<List<Workout>> = _readyYogaList.asStateFlow()
 
     init {
         saveWorkoutsFromRealtimeDatabaseToWorkoutList()
+        viewModelScope.launch {
+            _allWorkoutsList.emit(workoutList.value)
+            _allWorkoutsList.emit(readyWorkoutList.value)
+        }
     }
 
     fun getReadyWorkouts(context: Context) {
@@ -43,6 +52,11 @@ open class WorkoutsViewModel @Inject constructor(
             _readyWorkoutList.emit(updatedReadyWorkoutList)
         }
     }
+
+    fun updateReadyWorkoutList() {
+
+    }
+
 //
 //    fun getReadyYoga(context: Context) {
 //        val updatedReadyYogaList = mutableListOf<Workout>()
@@ -67,19 +81,7 @@ open class WorkoutsViewModel @Inject constructor(
 
     }
 
-    fun changeWorkoutFavState(workout: Workout) {
-        val updatedWorkoutList = workoutList.value.map { existingWorkout ->
-            if (existingWorkout.id == workout.id) {
-                existingWorkout.copy(isInFav = !(existingWorkout.isInFav ?: false))
-            } else {
-                existingWorkout
-            }
-        }
-        viewModelScope.launch {
-            _workoutList.emit(updatedWorkoutList)
-            workoutUseCase.changeWorkoutFavState(workout = workout)
-        }
-    }
+
 
 
     protected fun deleteWorkoutFromRealtimeDatabase(workout: Workout) {
@@ -102,15 +104,15 @@ open class WorkoutsViewModel @Inject constructor(
     }
 
 
-    private val _showDeleteWorkoutDialog = MutableStateFlow(false)
-    val showDeleteWorkoutDialog: StateFlow<Boolean> = _showDeleteWorkoutDialog.asStateFlow()
-
-    fun showDeleteWorkoutAlertDialog() {
-        _showDeleteWorkoutDialog.value = true
-    }
-
-    fun hideDeleteWorkoutAlertDialog() {
-        _showDeleteWorkoutDialog.value = false
-    }
+//    private val _showDeleteWorkoutDialog = MutableStateFlow(false)
+//    val showDeleteWorkoutDialog: StateFlow<Boolean> = _showDeleteWorkoutDialog.asStateFlow()
+//
+//    fun showDeleteWorkoutAlertDialog() {
+//        _showDeleteWorkoutDialog.value = true
+//    }
+//
+//    fun hideDeleteWorkoutAlertDialog() {
+//        _showDeleteWorkoutDialog.value = false
+//    }
 }
 

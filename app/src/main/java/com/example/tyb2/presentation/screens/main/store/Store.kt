@@ -1,5 +1,6 @@
 package com.example.tyb2.presentation.screens.main.store
 
+import android.util.Log
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.spring
@@ -59,6 +60,9 @@ import com.example.tyb2.presentation.ui.theme.purpleColor
 import com.example.tyb2.presentation.ui.theme.redColor
 import com.example.tyb2.presentation.ui.theme.robotoFamily
 import com.example.tyb2.presentation.ui.theme.yellowColor
+import com.example.tyb2.util.Muscle
+import com.example.tyb2.util.MuscleGroup
+import com.example.tyb2.util.MuscleStuff
 
 @Preview
 @Composable
@@ -78,12 +82,31 @@ fun StoreScreen(
     var isBlueSelected by remember { mutableStateOf(false) }
     var isPurpleSelected by remember { mutableStateOf(false) }
 
-    val readyWorkouts by viewModel.readyWorkoutList.collectAsState()
+    val sortCategories = mutableListOf<Muscle>()
+
+    if (isGreenSelected) sortCategories.addAll(MuscleStuff.defineMuscle(MuscleGroup.LEG))
+    else sortCategories.removeAll(MuscleStuff.defineMuscle(MuscleGroup.LEG))
+    if (isBlueSelected) sortCategories.addAll(MuscleStuff.defineMuscle(MuscleGroup.BACK))
+    else sortCategories.removeAll(MuscleStuff.defineMuscle(MuscleGroup.BACK))
+    if (isPurpleSelected) sortCategories.addAll(MuscleStuff.defineMuscle(MuscleGroup.CORE))
+    else sortCategories.removeAll(MuscleStuff.defineMuscle(MuscleGroup.CORE))
+    if (isRedSelected)  sortCategories.addAll(MuscleStuff.defineMuscle(MuscleGroup.BREAST))
+    else  sortCategories.removeAll(MuscleStuff.defineMuscle(MuscleGroup.BREAST))
+    if (isOrangeSelected)  sortCategories.addAll(MuscleStuff.defineMuscle(MuscleGroup.ARM))
+    else sortCategories.removeAll(MuscleStuff.defineMuscle(MuscleGroup.ARM))
+    if (isYellowSelected)  sortCategories.addAll(MuscleStuff.defineMuscle(MuscleGroup.BRACHIAL))
+    else sortCategories.removeAll(MuscleStuff.defineMuscle(MuscleGroup.BRACHIAL))
+
+
+    val readyWorkouts by viewModel.allWorkoutsList.collectAsState()
     val context = LocalContext.current
 
     LaunchedEffect(Unit) {
         viewModel.getReadyWorkouts(context)
 //        viewModel.getReadyYoga(context)
+    }
+    LaunchedEffect(key1 = sortCategories) {
+        Log.i("Categories", sortCategories.toString())
     }
 
     Column(
@@ -92,7 +115,6 @@ fun StoreScreen(
             .fillMaxSize()
             .padding(bottom = 52.dp)
     ) {
-
         Box(
             modifier = Modifier
                 .padding(top = 20.dp, bottom = 40.dp)
@@ -161,7 +183,14 @@ fun StoreScreen(
                         modifier = Modifier
                             .width(85.dp)
                             .height(85.dp)
-                            .clickable { isRedSelected = !isRedSelected }
+                            .clickable {
+                                isRedSelected = !isRedSelected
+                                //TODO
+                                viewModel.sortWorkoutListByCategory(
+                                    sortCategories = sortCategories,
+                                    allCategories = false
+                                )
+                            }
                     ) {
                         Box(
                             contentAlignment = Alignment.BottomEnd,
@@ -193,7 +222,14 @@ fun StoreScreen(
                         modifier = Modifier
                             .width(85.dp)
                             .height(85.dp)
-                            .clickable { isPurpleSelected = !isPurpleSelected }
+                            .clickable {
+                                isPurpleSelected = !isPurpleSelected
+                                //TODO
+                                viewModel.sortWorkoutListByCategory(
+                                    sortCategories = sortCategories,
+                                    allCategories = false
+                                )
+                            }
                     ) {
                         Box(
                             contentAlignment = Alignment.BottomStart,
@@ -229,7 +265,15 @@ fun StoreScreen(
                         verticalAlignment = Alignment.CenterVertically,
                         modifier = Modifier
                             .width(120.dp)
-                            .clickable { isOrangeSelected = !isOrangeSelected }
+                            .clickable {
+                                isOrangeSelected = !isOrangeSelected
+                                //TODO
+                                viewModel.sortWorkoutListByCategory(
+                                    sortCategories = sortCategories,
+                                    allCategories = false
+                                )
+
+                            }
                     ) {
                         Text(
                             text = "Руки",
@@ -252,7 +296,14 @@ fun StoreScreen(
                         verticalAlignment = Alignment.CenterVertically,
                         modifier = Modifier
                             .width(120.dp)
-                            .clickable { isBlueSelected = !isBlueSelected }
+                            .clickable {
+                                isBlueSelected = !isBlueSelected
+                                //TODO
+                                viewModel.sortWorkoutListByCategory(
+                                    sortCategories = sortCategories,
+                                    allCategories = false
+                                )
+                            }
                     ) {
                         SelectableCircle(
                             color = blueColor,
@@ -275,7 +326,14 @@ fun StoreScreen(
                         modifier = Modifier
                             .width(85.dp)
                             .height(85.dp)
-                            .clickable { isYellowSelected = !isYellowSelected }
+                            .clickable {
+                                //TODO
+                                isYellowSelected = !isYellowSelected
+                                viewModel.sortWorkoutListByCategory(
+                                    sortCategories = sortCategories,
+                                    allCategories = false
+                                )
+                            }
                     ) {
                         Box(
                             contentAlignment = Alignment.TopEnd,
@@ -294,7 +352,7 @@ fun StoreScreen(
                                 .fillMaxSize()
                         ) {
                             Text(
-                                text = "Ноги",
+                                text = "Плечи",
                                 style = Typography.bodyLarge,
                                 color = MaterialTheme.colorScheme.onPrimary,
                             )
@@ -307,7 +365,14 @@ fun StoreScreen(
                         modifier = Modifier
                             .width(85.dp)
                             .height(85.dp)
-                            .clickable { isGreenSelected = !isGreenSelected }
+                            .clickable {
+                                isGreenSelected = !isGreenSelected
+                                //TODO
+                                viewModel.sortWorkoutListByCategory(
+                                    sortCategories = sortCategories,
+                                    allCategories = false
+                                )
+                            }
                     ) {
                         Box(
                             contentAlignment = Alignment.TopStart,
@@ -326,7 +391,7 @@ fun StoreScreen(
                                 .fillMaxSize()
                         ) {
                             Text(
-                                text = "Плечи",
+                                text = "Ноги",
                                 style = Typography.bodyLarge,
                                 color = MaterialTheme.colorScheme.onPrimary,
                             )
@@ -368,27 +433,17 @@ fun StoreScreen(
             )
 
         }
-//ЛИКВИДИРОВАТЬ ПРИ ПЕРВОЙ ВОЗМОЖНОСТИ!!!
-        var wList = mutableListOf<Workout>()
-        readyWorkouts.forEach {
-            wList.add(it)
-            wList.add(it)
-            wList.add(it)
-        }
-//если кто-то это вдруг увидел, простите пожалуйста
-
         GridPad(
-            wList
-
+            viewModel,
+            readyWorkouts
         )
-
-
     }
 }
 
 
 @Composable
 fun GridPad(
+    viewModel: StoreViewModel,
     workoutsList: List<Workout>
 ) {
     LazyVerticalStaggeredGrid(
@@ -404,17 +459,24 @@ fun GridPad(
         items(workoutsList.size) { index ->
             when {
                 (index % 6 == 0) or (index % 6 == 4) -> {
-                    MidWorkoutCard(workout = workoutsList[index])
+                    MidWorkoutCard(
+                        viewModel = viewModel,
+                        workout = workoutsList[index]
+                    )
                 }
 
                 (index % 6 == 1) or (index % 6 == 2) -> {
-                    //? Большая карточка
-                    BigWorkoutCard(workout = workoutsList[index])
+                    BigWorkoutCard(
+                        viewModel = viewModel,
+                        workout = workoutsList[index]
+                    )
                 }
 
                 (index % 6 == 5) or (index % 6 == 3) -> {
-                    //? Маленькая карточка
-                    SlimWorkoutCard(workout = workoutsList[index])
+                    SlimWorkoutCard(
+                        viewModel = viewModel,
+                        workout = workoutsList[index]
+                    )
                 }
             }
         }
