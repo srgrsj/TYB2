@@ -30,8 +30,6 @@ import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.SearchBar
-import androidx.compose.material3.SearchBarDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -46,12 +44,10 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.drawscope.translate
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.example.tyb2.R
 import com.example.tyb2.presentation.components.workoutCards.WorkoutCard
 import com.example.tyb2.presentation.ui.theme.Typography
 import com.example.tyb2.presentation.ui.theme.blueColor
@@ -72,12 +68,12 @@ fun MainScreen(
     val infiniteTransition = rememberInfiniteTransition(label = "")
     val interactionSource = remember { MutableInteractionSource() }
     val readyWorkouts by viewModel.readyWorkoutList.collectAsState()
-    val readyYogas by viewModel.readyYogaList.collectAsState()
+//    val readyYogas by viewModel.readyYogaList.collectAsState()
     val context = LocalContext.current
 
     LaunchedEffect(Unit) {
         viewModel.getReadyWorkouts(context)
-        viewModel.getReadyYoga(context)
+//        viewModel.getReadyYoga(context)
     }
 
     var searchBarValue by remember {
@@ -178,14 +174,14 @@ fun MainScreen(
                                 interactionSource = interactionSource,
                                 indication = null
                             ) {
-//                                navController.navigate()
+                                navController.navigate(Screen.GPT_GENERATOR)
                             }
 
                     ) {
                         Text(
                             text = "Поток",
                             style = Typography.displayLarge,
-                            color = MaterialTheme.colorScheme.primary
+                            color = MaterialTheme.colorScheme.primary.copy(alpha = littleTransparent)
                         )
                     }
 
@@ -266,39 +262,39 @@ fun MainScreen(
             }
         }
 
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(start = 5.dp, top = 15.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Text(
-                text = "Йога",
-                style = Typography.displayLarge,
-                color = MaterialTheme.colorScheme.onPrimary
-            )
-
-            Icon(
-                imageVector = Icons.Filled.KeyboardArrowRight,
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.onPrimary,
-            )
-        }
-
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .horizontalScroll(rememberScrollState())
-                .padding(top = 10.dp, start = 5.dp)
-        ) {
-            readyYogas.forEach {
-                WorkoutCard(
-                    workout = it,
-                    navController = navController,
-                    setCurrentWorkout = { viewModel.setCurrentWorkout(it) })
-                Spacer(modifier = Modifier.width(5.dp))
-            }
-        }
+//        Row(
+//            modifier = Modifier
+//                .fillMaxWidth()
+//                .padding(start = 5.dp, top = 15.dp),
+//            verticalAlignment = Alignment.CenterVertically
+//        ) {
+//            Text(
+//                text = "Йога",
+//                style = Typography.displayLarge,
+//                color = MaterialTheme.colorScheme.onPrimary
+//            )
+//
+//            Icon(
+//                imageVector = Icons.Filled.KeyboardArrowRight,
+//                contentDescription = null,
+//                tint = MaterialTheme.colorScheme.onPrimary,
+//            )
+//        }
+//
+//        Row(
+//            modifier = Modifier
+//                .fillMaxWidth()
+//                .horizontalScroll(rememberScrollState())
+//                .padding(top = 10.dp, start = 5.dp)
+//        ) {
+//            readyYogas.forEach {
+//                WorkoutCard(
+//                    workout = it,
+//                    navController = navController,
+//                    setCurrentWorkout = { viewModel.setCurrentWorkout(it) })
+//                Spacer(modifier = Modifier.width(5.dp))
+//            }
+//        }
 
     }
 

@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tyb2.domain.workout.model.Workout
 import com.example.tyb2.domain.workout.readyWorkoutsData.ReadyWorkouts
-import com.example.tyb2.domain.workout.readyYogaData.ReadyYoga
 import com.example.tyb2.domain.workout.usecases.WorkoutUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -20,14 +19,14 @@ open class WorkoutsViewModel @Inject constructor(
 ) : ViewModel() {
     var workoutToDelete: Workout? = null
 
-    private var _workoutList = MutableStateFlow(emptyList<Workout>())
+    protected var _workoutList = MutableStateFlow(emptyList<Workout>())
     val workoutList: StateFlow<List<Workout>> = _workoutList.asStateFlow()
 
-    private var _readyWorkoutList = MutableStateFlow(emptyList<Workout>())
+    protected var _readyWorkoutList = MutableStateFlow(emptyList<Workout>())
     val readyWorkoutList: StateFlow<List<Workout>> = _readyWorkoutList.asStateFlow()
 
-    private var _readyYogaList = MutableStateFlow(emptyList<Workout>())
-    val readyYogaList: StateFlow<List<Workout>> = _readyYogaList.asStateFlow()
+//    private var _readyYogaList = MutableStateFlow(emptyList<Workout>())
+//    val readyYogaList: StateFlow<List<Workout>> = _readyYogaList.asStateFlow()
 
     init {
         saveWorkoutsFromRealtimeDatabaseToWorkoutList()
@@ -44,21 +43,20 @@ open class WorkoutsViewModel @Inject constructor(
             _readyWorkoutList.emit(updatedReadyWorkoutList)
         }
     }
-
-    fun getReadyYoga(context: Context) {
-        val updatedReadyYogaList = mutableListOf<Workout>()
-
-        ReadyYoga.values().forEach {
-            updatedReadyYogaList.add(it.getLocalizedYoga(context))
-        }
-
-        viewModelScope.launch {
-            _readyWorkoutList.emit(updatedReadyYogaList)
-        }
-    }
+//
+//    fun getReadyYoga(context: Context) {
+//        val updatedReadyYogaList = mutableListOf<Workout>()
+//
+//        ReadyYoga.values().forEach {
+//            updatedReadyYogaList.add(it.getLocalizedYoga(context))
+//        }
+//
+//        viewModelScope.launch {
+//            _readyWorkoutList.emit(updatedReadyYogaList)
+//        }
+//    }
 
     private fun saveWorkoutsFromRealtimeDatabaseToWorkoutList() {
-
         workoutUseCase.getWorkoutsUseCase.invoke {
             if (it != null) {
                 viewModelScope.launch {
@@ -84,13 +82,13 @@ open class WorkoutsViewModel @Inject constructor(
     }
 
 
-    private fun deleteWorkoutFromRealtimeDatabase(workout: Workout) {
+    protected fun deleteWorkoutFromRealtimeDatabase(workout: Workout) {
         viewModelScope.launch {
             workoutUseCase.deleteWorkoutUseCase.invoke(workout = workout)
         }
     }
 
-    private fun deleteWorkoutFromWorkoutList(workout: Workout) {
+    protected fun deleteWorkoutFromWorkoutList(workout: Workout) {
         val updatedWorkoutList = workoutList.value.toMutableList()
         updatedWorkoutList.remove(workout)
         viewModelScope.launch {

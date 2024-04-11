@@ -53,7 +53,6 @@ enum class ReadyYoga(val workout: Workout) {
                     )
                 )
             )
-
             YogaForIntermediate -> return this.workout.copy(
                 title = context.getString(R.string.intermediate_yoga),
                 description = context.getString(R.string.intermediate_yoga_description),
@@ -86,7 +85,6 @@ enum class ReadyYoga(val workout: Workout) {
                     )
                 )
             )
-
             YogaForPro -> return this.workout.copy(
                 title = context.getString(R.string.experienced_yoga),
                 description = context.getString(R.string.experienced_yoga_description),
@@ -122,3 +120,68 @@ enum class ReadyYoga(val workout: Workout) {
         }
     }
 }
+//var title: String? = "",
+//var description: String? = "",
+//var duration: Long? = null,
+//var muscles: List<Muscle>? = listOf(),
+//var isInFav: Boolean? = false,
+//var workoutGenerationType: WorkoutSource? = WorkoutSource.USER,
+//var exerciseList: List<Exercise>? = listOf(),
+//val id: String? = UUID.randomUUID().toString()
+
+val listOfYoga = listOf(
+    Workout(
+        title = "Доброе утро",
+        description = "Упражнения, которые идеально подходят для пробуждения",
+        duration = 10*60 + 5*60 + 3*60,
+        exerciseList = listOf(
+            TODO()
+        ),
+        workoutGenerationType = WorkoutSource.AUTHOR
+    ),
+    Workout(
+        title = "Спокойствие",
+        description = "Идеально снимает стресс",
+        duration = (5 + 7 + 15) * 60,
+        exerciseList = listOf(
+            TODO()
+        ),
+        workoutGenerationType = WorkoutSource.AUTHOR
+    ),
+    Workout(
+        title = "Сила и гибкость",
+        description = "Упражнения, ",
+        duration = 10*60 + 5*60 + 3*60,
+        exerciseList = listOf(
+            TODO()
+        ),
+        workoutGenerationType = WorkoutSource.AUTHOR
+    ),
+    Workout(
+        title = "Доброе утро",
+        description = "Упражнения, которые идеально подходят для пробуждения",
+        duration = 10*60 + 5*60 + 3*60,
+        exerciseList = listOf(
+            TODO()
+        ),
+        workoutGenerationType = WorkoutSource.AUTHOR
+    ),
+    Workout(
+        title = "Доброе утро",
+        description = "Упражнения, которые идеально подходят для пробуждения",
+        duration = 10*60 + 5*60 + 3*60,
+        exerciseList = listOf(
+            TODO()
+        ),
+        workoutGenerationType = WorkoutSource.AUTHOR
+    ),
+    Workout(
+        title = "Доброе утро",
+        description = "Упражнения, которые идеально подходят для пробуждения",
+        duration = 10*60 + 5*60 + 3*60,
+        exerciseList = listOf(
+            TODO()
+        ),
+        workoutGenerationType = WorkoutSource.AUTHOR
+    )
+)

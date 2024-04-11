@@ -17,6 +17,7 @@ import com.aallam.openai.api.model.ModelId
 import com.aallam.openai.client.OpenAI
 import com.aallam.openai.client.OpenAIConfig
 import com.example.tyb2.R
+import com.example.tyb2.domain.app.usecase.AppUseCases
 import com.example.tyb2.domain.workout.model.Workout
 import com.example.tyb2.domain.workout.usecases.WorkoutUseCase
 import com.example.tyb2.presentation.screens.generators.GeneratorsScreenViewModel
@@ -31,11 +32,18 @@ import kotlin.time.Duration.Companion.minutes
 
 @HiltViewModel
 class GPTGeneratorScreenViewModel @Inject constructor(
-    workoutUseCase: WorkoutUseCase,
+    private val workoutUseCase: WorkoutUseCase,
+    private val appUseCases: AppUseCases
 ) : GeneratorsScreenViewModel(workoutUseCase) {
 
     private var gptQuery by mutableStateOf("")
     private var apiKey: String = ""
+
+    fun setCurrentWorkout(workout: Workout) {
+        viewModelScope.launch {
+            appUseCases.setCurrentWorkoutUseCase.invoke(workout)
+        }
+    }
 
 
     fun generateGptQuery(

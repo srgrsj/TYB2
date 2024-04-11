@@ -31,26 +31,28 @@ import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.tyb2.domain.exersice.model.Exercise
-import com.example.tyb2.domain.exersice.model.ExerciseType
 import com.example.tyb2.presentation.ui.theme.Typography
 import com.example.tyb2.presentation.ui.theme.redColor
+import com.example.tyb2.util.Muscle
 
-//@Preview(device = "id:pixel_6_pro")
-//@Composable
-//fun testShedevroExerciseCard() {
-//    ExerciseCard(
-//        exercise = Exercise(
-//            "Bench press",
-//            "some description",
-//            52,
-//            52,
-//            52000,
-//            52233,
-//            ExerciseType.TIME,
-//
-//            )
-//    )
-//}
+@Preview(device = "id:pixel_6_pro")
+@Composable
+fun testShedevroExerciseCard() {
+    ExerciseCard(
+        exercise = Exercise(
+            "Bench press",
+            "some description",
+            52,
+            52,
+            52000,
+            52233,
+            muscleList = listOf(
+                Muscle.ARM_TRICEPS, Muscle.LEG_CALF
+            )
+
+            )
+    )
+}
 
 
 @Composable

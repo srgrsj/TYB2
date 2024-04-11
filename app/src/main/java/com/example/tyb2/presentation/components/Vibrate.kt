@@ -1,5 +1,13 @@
 package com.example.tyb2.presentation.components
 
+import android.content.Context
+import android.os.Build
+import android.os.VibrationEffect
+import android.os.Vibrator
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+
 //fun Modifier.vibrate(duration: Long): Modifier {
 //    return this.then(VibrateModifier(duration))
 //}
@@ -12,6 +20,7 @@ package com.example.tyb2.presentation.components
 //        return operation(this, initial)
 //    }
 //
+//    @Composable
 //    fun triggerVibration() {
 //        val context = LocalContext.current
 //        val vibrator = context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator

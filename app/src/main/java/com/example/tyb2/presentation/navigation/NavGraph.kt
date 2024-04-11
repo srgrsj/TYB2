@@ -10,7 +10,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.tyb2.data.user.AccountData
-import com.example.tyb2.domain.workout.model.Workout
 import com.example.tyb2.presentation.screens.activity.ActivityScreen
 import com.example.tyb2.presentation.screens.generators.defaultGenerator.DefaultGenerator
 import com.example.tyb2.presentation.screens.generators.gptGenerator.GptGeneratorScreen
@@ -34,7 +33,8 @@ fun NavGraph(
     navController: NavHostController
 ) {
     //TODO start destination
-    val startDestination = if (AccountData.EMAIL.isNullOrEmpty()) Screen.SIGN_IN else Screen.Main.route
+    val startDestination =
+        if (AccountData.EMAIL.isNullOrEmpty()) Screen.SIGN_IN else Screen.Main.route
 //    val startDestination = Screen.GPT_GENERATOR
 //    val startDestination = Screen.Main.route
     NavHost(
@@ -80,14 +80,7 @@ fun NavGraph(
             DefaultGenerator(navController)
         }
         composable(Screen.GPT_GENERATOR) {
-            GptGeneratorScreen(
-                { workout: Workout ->
-                    navController.apply {
-                        currentBackStackEntry?.savedStateHandle?.set("workout", workout)
-                        navigate(Screen.WORKOUT_PREVIEW)
-                    }
-                }
-            )
+            GptGeneratorScreen(navController)
         }
         composable(Screen.WORKOUT_PLAYBACK) {
             WorkoutPlayback(navController)

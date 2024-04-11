@@ -20,14 +20,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -37,6 +37,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -76,6 +77,14 @@ fun StoreScreen(
     var isGreenSelected by remember { mutableStateOf(false) }
     var isBlueSelected by remember { mutableStateOf(false) }
     var isPurpleSelected by remember { mutableStateOf(false) }
+
+    val readyWorkouts by viewModel.readyWorkoutList.collectAsState()
+    val context = LocalContext.current
+
+    LaunchedEffect(Unit) {
+        viewModel.getReadyWorkouts(context)
+//        viewModel.getReadyYoga(context)
+    }
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -359,10 +368,18 @@ fun StoreScreen(
             )
 
         }
+//ЛИКВИДИРОВАТЬ ПРИ ПЕРВОЙ ВОЗМОЖНОСТИ!!!
+        var wList = mutableListOf<Workout>()
+        readyWorkouts.forEach {
+            wList.add(it)
+            wList.add(it)
+            wList.add(it)
+        }
+//если кто-то это вдруг увидел, простите пожалуйста
 
         GridPad(
-            listOf(
-            )
+            wList
+
         )
 
 

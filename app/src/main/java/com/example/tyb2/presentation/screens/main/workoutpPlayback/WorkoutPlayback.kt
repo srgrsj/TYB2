@@ -286,6 +286,7 @@ fun WorkoutPlayback(
             }
         }
         Column(
+            verticalArrangement = Arrangement.spacedBy(10.dp),
             modifier = Modifier
                 .fillMaxSize()
         ) {
