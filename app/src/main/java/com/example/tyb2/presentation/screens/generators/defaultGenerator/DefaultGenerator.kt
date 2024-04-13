@@ -59,6 +59,7 @@ import com.example.tyb2.presentation.ui.theme.Typography
 import com.example.tyb2.presentation.ui.theme.redColor
 import com.example.tyb2.presentation.ui.theme.robotoFamily
 import com.example.tyb2.util.Muscle
+import com.example.tyb2.util.Screen
 import me.saket.swipe.SwipeAction
 import me.saket.swipe.SwipeableActionsBox
 
@@ -89,8 +90,8 @@ fun DefaultGenerator(
         val exerciseList by viewModel.exerciseList.collectAsState()
         val muscleList = mutableListOf<Muscle>()
 
-        exerciseList.forEach {
-            it.muscleList?.forEach() {
+        exerciseList.forEach { workout ->
+            workout.muscleList?.forEach() {
                 muscleList.add(it)
             }
         }
@@ -323,6 +324,8 @@ fun DefaultGenerator(
                                 workoutGenerationType = WorkoutSource.USER,
                                 exerciseList = exerciseList
                             ))
+
+                            navController.navigate(Screen.Main.route)
                         }
 
                 ) {

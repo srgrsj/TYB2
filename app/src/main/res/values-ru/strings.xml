@@ -71,22 +71,42 @@
         data class Workout(
             var title: String? = "",
             var description: String? = "",
-            var duration: Long,
-            var exerciseList: List<Exercise> = listOf(),
+            var duration: Long? = null,
+            var muscles: List<Muscle>? = listOf(),
+            var exerciseList: List<Exercise>? = listOf(),
         )
 
         data class Exercise(
             var title: String? = "",
             var description: String? = "",
-            var numberOfRepetitions: Int,
-            var numberOfCircles: Int,
-            var durationOfOneCircle: Long,
-            var durationOfRest: Long,
-            var exerciseType: ExerciseType,
+            var numberOfRepetitions: Int? = null,
+            var numberOfCircles: Int? = null,
+            var durationOfOneCircle: Long? = null,
+            var durationOfRest: Long? = null,
+            var exerciseType: ExerciseType? = null,
+            var muscleList: List<Muscle>? = null,
         )
 
         enum class ExerciseType {
             TIME, REPETITION
+        }
+
+        enum class Muscle {
+            BREAST,
+            BACK_TRAPEZOID, BACK_WIDE,
+            ARM_FOREARM, ARM_BICEPS, ARM_TRICEPS,
+            CORE_STRAIGHT, CORE_LATERAL_ABDOMINAL, CORE_LUMBAR,
+            BRACHIAL_BACK, BRACHIAL_FRONT,
+            LEG_QUADRICEPS, LEG_THIGHS, LEG_CALF
+        }
+
+        enum class MuscleGroup {
+            BREAST,
+            BACK,
+            ARM,
+            CORE,
+            BRACHIAL,
+            LEG
         }
 
         Пояснения к полям классов:

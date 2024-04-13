@@ -89,6 +89,8 @@ fun StoreScreen(
         )
     }
 
+    val workouts by viewModel.workoutList.collectAsState()
+
     val sortCategories = mutableListOf<Muscle>()
 
     if (isGreenSelected) sortCategories.addAll(MuscleStuff.defineMuscle(MuscleGroup.LEG))
@@ -446,9 +448,11 @@ fun StoreScreen(
 
         }
 
+        val allWorkoutsList = readyWorkouts + workouts
+
         GridPad(
             viewModel,
-            readyWorkouts
+            allWorkoutsList
         )
     }
 }

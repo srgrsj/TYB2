@@ -38,7 +38,7 @@ import com.example.tyb2.util.limitToMaxLength
 @Composable
 fun WorkoutCard(
     workout: Workout,
-    setCurrentWorkout:() -> Unit ,
+    setCurrentWorkout: () -> Unit,
     navController: NavController
 ) {
 
@@ -52,6 +52,7 @@ fun WorkoutCard(
             .clickable {
                 setCurrentWorkout()
                 navController.navigate(Screen.WORKOUT_PLAYBACK)
+//                navController.navigate(Screen.WORKOUT_PREVIEW)
             }
     ) {
         Row(
@@ -74,13 +75,15 @@ fun WorkoutCard(
                     .width(96.dp)
                     .background(MaterialTheme.colorScheme.onPrimary)
             ) {
-                Image(
-                    painter = painterResource(id = R.drawable.muscles_thoracic),
-                    contentDescription = "",
-                    modifier = Modifier
-                        .padding(top = 30.dp, start = 5.dp)
-                        .scale(1.5f)
-                )
+                if (!muscleList.isNullOrEmpty()) {
+                    Image(
+                        painter = painterResource(id = MuscleStuff.definePicture(muscleList.first())),
+                        contentDescription = "",
+                        modifier = Modifier
+                            .padding(top = 30.dp, start = 5.dp)
+                            .scale(1.5f)
+                    )
+                }
 
 
                 Column(
@@ -142,7 +145,7 @@ fun WorkoutCard(
             Column {
                 workout.title?.let {
                     Text(
-                        text = it.limitToMaxLength(8),
+                        text = it.limitToMaxLength(16),
                         style = Typography.titleLarge,
                         color = MaterialTheme.colorScheme.onPrimary,
                         modifier = Modifier

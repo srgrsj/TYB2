@@ -7,63 +7,32 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.StrokeCap
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.tyb2.domain.exersice.model.Exercise
 import com.example.tyb2.presentation.ui.theme.Typography
-import com.example.tyb2.presentation.ui.theme.redColor
-import com.example.tyb2.util.Muscle
-
-@Preview(device = "id:pixel_6_pro")
-@Composable
-fun testShedevroExerciseCard() {
-    ExerciseCard(
-        exercise = Exercise(
-            "Bench press",
-            "some description",
-            52,
-            52,
-            52000,
-            52233,
-            muscleList = listOf(
-                Muscle.ARM_TRICEPS, Muscle.LEG_CALF
-            )
-
-            )
-    )
-}
 
 
 @Composable
-fun ExerciseCard(exercise: Exercise) {
+fun ExerciseCard(exercise: Exercise, isExerciseInProgress: Boolean, onClick: (() -> Unit)? = {}) {
     val interactionSource = remember { MutableInteractionSource() }
 
     val durationOfOneCircle = exercise.durationOfOneCircle?.toInt() ?: 0
 
-    var isExerciseInProgress by remember {
-        mutableStateOf(false)
-    }
 
     val progress by animateFloatAsState(
         targetValue = if (isExerciseInProgress) 1f else 0f,
@@ -105,7 +74,7 @@ fun ExerciseCard(exercise: Exercise) {
                 .clickable(
                     interactionSource = interactionSource,
                     indication = null
-                ) { isExerciseInProgress = !isExerciseInProgress }
+                ) { onClick }
 
 
         ) {
@@ -116,6 +85,7 @@ fun ExerciseCard(exercise: Exercise) {
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(start = 10.dp)
+                    .height(72.dp)
             ) {
                 exercise.title?.let {
                     Text(
@@ -124,41 +94,79 @@ fun ExerciseCard(exercise: Exercise) {
                     )
                 }
 
-                Box(
-                    contentAlignment = Alignment.Center,
+
+            }
+
+            if (!exercise.description.isNullOrEmpty()) {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier
-                        .height(72.dp)
-                        .width(72.dp)
+                        .fillMaxWidth()
+                        .height(scaleY)
                 ) {
 
-                    CircularProgressIndicator(
-                        progress = progress,
-                        color = redColor,
-                        trackColor = MaterialTheme.colorScheme.onPrimary,
-                        strokeWidth = 10.dp,
-                        strokeCap = StrokeCap.Round,
-                        modifier = Modifier
-                            .height(52.dp)
-                            .width(52.dp)
-
-                    )
-
                     Text(
-                        text = "%.0f%%".format(progress * 100),
-                        style = Typography.bodySmall
-
+                        text = exercise.description.toString(),
+                        style = Typography.labelSmall,
+                        color = MaterialTheme.colorScheme.onPrimary,
+                        modifier = Modifier
+                            .padding(start = 5.dp, end = 5.dp)
                     )
+
                 }
             }
 
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(scaleY)
-            ) {
-
-            }
+//            Column(
+//                horizontalAlignment = Alignment.CenterHorizontally,
+//                modifier = Modifier
+//                    .fillMaxWidth()
+//                    .height(scaleY)
+//            ) {
+//
+//
+//                if (exercise.exerciseType == ExerciseType.TIME) {
+//                    Box(
+//                        contentAlignment = Alignment.Center,
+//                        modifier = Modifier
+//                            .height(72.dp)
+//                            .width(72.dp)
+//                    ) {
+//
+//                        CircularProgressIndicator(
+//                            progress = progress,
+//                            color = redColor,
+//                            trackColor = MaterialTheme.colorScheme.onPrimary,
+//                            strokeWidth = 10.dp,
+//                            strokeCap = StrokeCap.Round,
+//                            modifier = Modifier
+//                                .height(52.dp)
+//                                .width(52.dp)
+//
+//                        )
+//
+//                        Text(
+//                            text = "%.0f%%".format(progress * 100),
+//                            style = Typography.bodySmall
+//
+//                        )
+//                    }
+//                }
+//
+//                if (exercise.exerciseType == ExerciseType.REPETITION) {
+//                    Text(
+//                        text = stringResource(id = R.string.repetitions) + " " + exercise.numberOfRepetitions,
+//                        style = Typography.bodyMedium,
+//                        color = MaterialTheme.colorScheme.onPrimary
+//                    )
+//
+//                    Text(
+//                        text = stringResource(id = R.string.circles) + " " + exercise.numberOfRepetitions,
+//                        style = Typography.bodyMedium,
+//                        color = MaterialTheme.colorScheme.onPrimary,
+//                        modifier = Modifier
+//                            .padding(end = 10.dp)
+//                    )
+//                }
         }
     }
 }

@@ -12,12 +12,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.tyb2.presentation.components.BottomNavigationBar
 import com.example.tyb2.presentation.navigation.NavGraph
-import com.example.tyb2.presentation.screens.initial.auth.signIn.SignInScreen
 import com.example.tyb2.presentation.ui.theme.TYB2Theme
 import com.example.tyb2.util.Screen
 import com.google.firebase.crashlytics.FirebaseCrashlytics
@@ -44,11 +42,16 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun Application() {
     val navController = rememberNavController()
-    val screensWithoutNavbar = listOf(Screen.SIGN_IN, Screen.SIGN_UP)
+    val screensWithoutNavbar =
+        listOf(Screen.SIGN_IN, Screen.SIGN_UP, Screen.WORKOUT_PLAYBACK, Screen.WORKOUT_PREVIEW)
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     Scaffold(
         modifier = Modifier.fillMaxSize(),
-        bottomBar = { if (navBackStackEntry?.destination?.route !in screensWithoutNavbar) { BottomNavigationBar(navController = navController)} }
+        bottomBar = {
+            if (navBackStackEntry?.destination?.route !in screensWithoutNavbar) {
+                BottomNavigationBar(navController = navController)
+            }
+        }
     ) {
         NavGraph(navController)
     }

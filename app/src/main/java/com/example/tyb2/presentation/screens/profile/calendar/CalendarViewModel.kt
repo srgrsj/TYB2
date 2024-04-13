@@ -1,14 +1,11 @@
 package com.example.tyb2.presentation.screens.profile.calendar
 
-import android.util.Log
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.tyb2.R
 import com.example.tyb2.domain.app.usecase.AppUseCases
-import com.example.tyb2.domain.user.model.User
 import com.example.tyb2.domain.user.usecases.UserUseCase
 import com.example.tyb2.domain.workout.model.Workout
 import com.example.tyb2.domain.workout.usecases.WorkoutUseCase
+import com.example.tyb2.presentation.screens.main.store.StoreViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -21,7 +18,7 @@ class CalendarViewModel @Inject constructor(
     private val userUseCase: UserUseCase,
     private val appUseCases: AppUseCases,
     private val workoutUseCase: WorkoutUseCase,
-) : ViewModel() {
+) : StoreViewModel(workoutUseCase, appUseCases) {
 
 //    private val _userData = MutableStateFlow<User?>(null)
 //    val userData: StateFlow<User?> = _userData

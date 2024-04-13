@@ -38,7 +38,7 @@ fun ProfileSettingsScreen(
                 navController = navController,
                 icon = R.drawable.icon_circle_add,
                 title = "Создать тренировку",
-                img = R.drawable.profile_avatar_default
+                img = R.drawable.profile_avatar_default,
             )
             Spacer(modifier = Modifier.height(8.dp))
             Column(

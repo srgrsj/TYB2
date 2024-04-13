@@ -36,22 +36,26 @@ enum class ReadyWorkouts(val workout: Workout) {
                     ReadyExercises.PUSH_UPS.getLocalizedExercise(context).copy(
                         numberOfRepetitions = 12,
                         numberOfCircles = 2,
-                        exerciseType = ExerciseType.REPETITION
+                        exerciseType = ExerciseType.REPETITION,
+                        muscleList = listOf(Muscle.LEG_CALF, Muscle.CORE_STRAIGHT)
                     ),
                     ReadyExercises.SQUATS.getLocalizedExercise(context).copy(
                         numberOfRepetitions = 12,
                         numberOfCircles = 2,
-                        exerciseType = ExerciseType.REPETITION
+                        exerciseType = ExerciseType.REPETITION,
+                        muscleList = listOf(Muscle.LEG_CALF, Muscle.CORE_STRAIGHT)
                     ),
                     ReadyExercises.PLANK.getLocalizedExercise(context).copy(
                         durationOfOneCircle = 30 * 1000,
                         numberOfCircles = 2,
-                        exerciseType = ExerciseType.TIME
+                        exerciseType = ExerciseType.TIME,
+                        muscleList = listOf(Muscle.LEG_CALF, Muscle.CORE_STRAIGHT)
                     ),
                     ReadyExercises.PULL_UPS.getLocalizedExercise(context).copy(
                         numberOfRepetitions = 5,
                         numberOfCircles = 2,
-                        exerciseType = ExerciseType.REPETITION
+                        exerciseType = ExerciseType.REPETITION,
+                        muscleList = listOf(Muscle.LEG_CALF, Muscle.CORE_STRAIGHT)
                     )
                 )
             )
@@ -65,27 +69,32 @@ enum class ReadyWorkouts(val workout: Workout) {
                     ReadyExercises.DUMBBELL_PRESS.getLocalizedExercise(context).copy(
                         numberOfRepetitions = 8,
                         numberOfCircles = 3,
-                        exerciseType = ExerciseType.REPETITION
+                        exerciseType = ExerciseType.REPETITION,
+                        muscleList = listOf(Muscle.LEG_CALF, Muscle.CORE_STRAIGHT)
                     ),
                     ReadyExercises.DUMBBELL_LATERAL_RAISES.getLocalizedExercise(context).copy(
                         numberOfRepetitions = 10,
                         numberOfCircles = 3,
-                        exerciseType = ExerciseType.REPETITION
+                        exerciseType = ExerciseType.REPETITION,
+                        muscleList = listOf(Muscle.LEG_CALF, Muscle.CORE_STRAIGHT)
                     ),
                     ReadyExercises.BENT_OVER_DUMBBELL_ROWS.getLocalizedExercise(context).copy(
                         numberOfRepetitions = 12,
                         numberOfCircles = 3,
-                        exerciseType = ExerciseType.REPETITION
+                        exerciseType = ExerciseType.REPETITION,
+                        muscleList = listOf(Muscle.LEG_CALF, Muscle.CORE_STRAIGHT)
                     ),
                     ReadyExercises.DUMBBELL_BICEP_CURLS.getLocalizedExercise(context).copy(
                         numberOfRepetitions = 10,
                         numberOfCircles = 3,
-                        exerciseType = ExerciseType.REPETITION
+                        exerciseType = ExerciseType.REPETITION,
+                        muscleList = listOf(Muscle.LEG_CALF, Muscle.CORE_STRAIGHT)
                     ),
                     ReadyExercises.REGULAR_CRUNCH.getLocalizedExercise(context).copy(
                         numberOfRepetitions = 15,
                         numberOfCircles = 3,
-                        exerciseType = ExerciseType.REPETITION
+                        exerciseType = ExerciseType.REPETITION,
+                        muscleList = listOf(Muscle.LEG_CALF, Muscle.CORE_STRAIGHT)
                     )
                 )
             )
@@ -99,27 +108,32 @@ enum class ReadyWorkouts(val workout: Workout) {
                     ReadyExercises.DIPS.getLocalizedExercise(context).copy(
                         numberOfRepetitions = 12,
                         numberOfCircles = 4,
-                        exerciseType = ExerciseType.REPETITION
+                        exerciseType = ExerciseType.REPETITION,
+                        muscleList = listOf(Muscle.LEG_CALF, Muscle.CORE_STRAIGHT)
                     ),
                     ReadyExercises.LUNGES.getLocalizedExercise(context).copy(
                         numberOfRepetitions = 10,
                         numberOfCircles = 4,
-                        exerciseType = ExerciseType.REPETITION
+                        exerciseType = ExerciseType.REPETITION,
+                        muscleList = listOf(Muscle.LEG_CALF, Muscle.CORE_STRAIGHT)
                     ),
                     ReadyExercises.HYPEREXTENSION.getLocalizedExercise(context).copy(
                         numberOfRepetitions = 12,
                         numberOfCircles = 4,
-                        exerciseType = ExerciseType.REPETITION
+                        exerciseType = ExerciseType.REPETITION,
+                        muscleList = listOf(Muscle.LEG_CALF, Muscle.CORE_STRAIGHT)
                     ),
                     ReadyExercises.LEG_RAISES.getLocalizedExercise(context).copy(
                         numberOfRepetitions = 8,
                         numberOfCircles = 4,
-                        exerciseType = ExerciseType.REPETITION
+                        exerciseType = ExerciseType.REPETITION,
+                        muscleList = listOf(Muscle.LEG_CALF, Muscle.CORE_STRAIGHT)
                     ),
                     ReadyExercises.PLANK_WITH_SHOULDER_TAPS.getLocalizedExercise(context).copy(
                         durationOfOneCircle = 30 * 1000,
                         numberOfCircles = 4,
-                        exerciseType = ExerciseType.TIME
+                        exerciseType = ExerciseType.TIME,
+                        muscleList = listOf(Muscle.LEG_CALF, Muscle.CORE_STRAIGHT)
                     )
                 )
             )

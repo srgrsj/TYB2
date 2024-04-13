@@ -1,27 +1,18 @@
 package com.example.tyb2.presentation.screens.main.store
 
 import android.util.Log
-import androidx.compose.runtime.State
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.lifecycle.viewModelScope
-import com.aallam.openai.api.moderation.Categories
 import com.example.tyb2.domain.app.usecase.AppUseCases
 import com.example.tyb2.domain.workout.model.Workout
 import com.example.tyb2.domain.workout.usecases.WorkoutUseCase
 import com.example.tyb2.presentation.screens.main.WorkoutsViewModel
 import com.example.tyb2.util.Muscle
-import com.example.tyb2.util.MuscleGroup
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class StoreViewModel @Inject constructor(
+open class StoreViewModel @Inject constructor(
     private val workoutUseCase: WorkoutUseCase,
     private val appUseCases: AppUseCases
 ) : WorkoutsViewModel(workoutUseCase) {

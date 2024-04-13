@@ -68,6 +68,7 @@ fun MainScreen(
     val infiniteTransition = rememberInfiniteTransition(label = "")
     val interactionSource = remember { MutableInteractionSource() }
     val readyWorkouts by viewModel.readyWorkoutList.collectAsState()
+    val workouts by viewModel.workoutList.collectAsState()
 //    val readyYogas by viewModel.readyYogaList.collectAsState()
     val context = LocalContext.current
 
@@ -254,6 +255,44 @@ fun MainScreen(
                 .padding(top = 10.dp, start = 5.dp)
         ) {
             readyWorkouts.forEach {
+                WorkoutCard(
+                    workout = it,
+                    navController = navController,
+                    setCurrentWorkout = { viewModel.setCurrentWorkout(it) })
+                Spacer(modifier = Modifier.width(5.dp))
+            }
+        }
+
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 5.dp, top = 30.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = "Ваши тренировки",
+                style = Typography.displayLarge,
+                color = MaterialTheme.colorScheme.onPrimary,
+                modifier = Modifier
+                    .clickable {
+                        navController.navigate(Screen.STORE)
+                    }
+            )
+
+            Icon(
+                imageVector = Icons.Filled.KeyboardArrowRight,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.onPrimary,
+            )
+        }
+
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .horizontalScroll(rememberScrollState())
+                .padding(top = 10.dp, start = 5.dp)
+        ) {
+            workouts.forEach {
                 WorkoutCard(
                     workout = it,
                     navController = navController,

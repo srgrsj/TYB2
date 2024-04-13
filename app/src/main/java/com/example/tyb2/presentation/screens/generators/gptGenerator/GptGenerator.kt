@@ -51,8 +51,10 @@ fun GptGeneratorScreen(
     LaunchedEffect(key1 = isWorkoutGenerate) {
         if (generatedWorkout != null) {
             viewModel.setCurrentWorkout(generatedWorkout)
+            print(generatedWorkout)
+            navController.navigate(Screen.WORKOUT_PREVIEW)
         }
-        navController.navigate(Screen.WORKOUT_PREVIEW)
+        
     }
 
     Column(

@@ -24,6 +24,7 @@ import com.example.tyb2.presentation.screens.profile.body_features.BodyFeaturesS
 import com.example.tyb2.presentation.screens.profile.calendar.CalendarScreen
 import com.example.tyb2.presentation.screens.profile.profile_settings.ProfileSettingsScreen
 import com.example.tyb2.presentation.screens.profile.settings.SettingsScreen
+import com.example.tyb2.presentation.screens.workoutPreview.WorkoutPreview
 import com.example.tyb2.util.Screen
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -84,6 +85,9 @@ fun NavGraph(
         }
         composable(Screen.WORKOUT_PLAYBACK) {
             WorkoutPlayback(navController)
+        }
+        composable(Screen.WORKOUT_PREVIEW) {
+            WorkoutPreview(navController)
         }
     }
 }

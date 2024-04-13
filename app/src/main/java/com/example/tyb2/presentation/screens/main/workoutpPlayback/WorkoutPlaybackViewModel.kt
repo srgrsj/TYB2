@@ -1,6 +1,5 @@
 package com.example.tyb2.presentation.screens.main.workoutpPlayback
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.example.tyb2.domain.app.usecase.AppUseCases
 import com.example.tyb2.domain.workout.model.Workout
@@ -14,8 +13,4 @@ class WorkoutPlaybackViewModel @Inject constructor(
 ) : ViewModel() {
     val currentWorkout: StateFlow<Workout?> = appUseCases.getCurrentWorkoutUseCase()
 
-    init {
-        Log.d("test", currentWorkout.value.toString())
-        print("abc")
-    }
 }

@@ -82,7 +82,8 @@ class GPTGeneratorScreenViewModel @Inject constructor(
             val openAI = OpenAI(
                 OpenAIConfig(
                     token = apiKey,
-                    timeout = Timeout(socket = 5.minutes)
+                    timeout = Timeout(socket = 5.minutes),
+//                    proxy = 
                 )
             )
 
